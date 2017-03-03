@@ -1,26 +1,30 @@
-package base.course;
+package base.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import base.data.CourseRepository;
+import base.model.Course;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/course")
-public class CourseController {
+public class CourseApiController {
 
-    @Autowired
-    private CourseRepository courseRepository;
+    private final CourseRepository courseRepository;
+
+    public CourseApiController(CourseRepository courseRepository) {
+        this.courseRepository = courseRepository;
+    }
 
     @GetMapping
-    public ArrayList<Course> listAll() {
+    public ArrayList<Course> readAll() {
         ArrayList<Course> courses = new ArrayList<>();
         courseRepository.findAll().forEach(course -> courses.add(course));
         return courses;
     }
 
     @GetMapping("{id}")
-    public Course find(@PathVariable Long id) {
+    public Course read(@PathVariable Long id) {
         return courseRepository.findOne(id);
     }
 
@@ -30,7 +34,7 @@ public class CourseController {
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
+    public void destroy(@PathVariable Long id) {
         courseRepository.delete(id);
     }
 
