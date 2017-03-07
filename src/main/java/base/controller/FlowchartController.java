@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller // so framework can recognize this as a controller class
-@RequestMapping("/")
-public class HomeController {
+@RequestMapping("/flowchart")
+public class FlowchartController {
 
     @GetMapping
-    public String index() { return "splash.html"; }
+    public String index() { return "flowchart.html"; }
 
 }
