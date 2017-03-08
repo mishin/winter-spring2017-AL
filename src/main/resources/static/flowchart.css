@@ -6,19 +6,51 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 
- body {
+body {
     overflow-x: hidden;
- }
+    background:#EEEEEE;
+}
 
- tr {
+tr {
     border:1px solid black;
- }
+}
 
- td {
-     border:1px solid black;
-     width:100px;
-     height:100px;
- }
+td {
+    border:1px solid black;
+    width:100px;
+    height:100px;
+}
+
+#header {
+    padding:0px;
+    background:#1e4d2b;
+    height:50px;
+    width: 100%;
+}
+
+#header-separator {
+    height:10px;
+}
+
+.header-item-left {
+    text-decoration:none;
+    display:inline;
+    font-size:18px;
+    vertical-align: middle;
+    color:#EEEEEE;
+    line-height: 50px;
+    padding: 10px;
+}
+
+.header-item-right {
+    text-decoration:none;
+    display:inline;
+    font-size:18px;
+    vertical-align: middle;
+    color: #EEEEEE;
+    line-height: 50px;
+    padding: 10px;
+}
 
 /* Toggle Styles */
 
@@ -42,7 +74,7 @@
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
-    background: #1e4d2b;
+    background: #DDDDDD;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -104,11 +136,11 @@
 }
 
 .sidebar-nav > .sidebar-brand a {
-    color: #999999;
+    color: black;
 }
 
 .sidebar-nav > .sidebar-brand a:hover {
-    color: #fff;
+    color: black;
     background: none;
 }
 
