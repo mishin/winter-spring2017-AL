@@ -1,0 +1,154 @@
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<script>
+ $(document).ready(function() {
+ 
+    $('.faq_question').click(function() {
+ 
+        if ($(this).parent().is('.open')){
+            $(this).closest('.faq').find('.faq_answer_container').animate({'height':'0'},500);
+            $(this).closest('.faq').removeClass('open');
+ 
+            }else{
+                var newHeight =$(this).closest('.faq').find('.faq_answer').height() +'px';
+                $(this).closest('.faq').find('.faq_answer_container').animate({'height':newHeight},500);
+                $(this).closest('.faq').addClass('open');
+            }
+ 
+    });
+ 
+});
+</script>
+
+
+<style>
+/*FAQS*/
+.faq_question {
+    margin: 0px;
+    padding: 0px 0px 5px 0px;
+    display: inline-block;
+    cursor: pointer;
+    font-weight: bold;
+}
+ 
+.faq_answer_container {
+    overflow: hidden;
+    width: 450px;
+    margin: 5px;
+}
+</style>
+
+<h3> User FAQ </h3>
+<div class="faq_container">
+   <div class="faq">
+      <div class="faq_question"> &#x25BE; How do I add a minor? </div>
+           <div class="faq_answer_container">
+              <div class="faq_answer">
+                     First, click the add minor button. The default minor classes will populate into the flow chart.
+              </div>
+           </div>        
+    </div>
+ </div>
+
+<div class="faq_container">
+   <div class="faq">
+      <div class="faq_question"> &#x25BE; How do I edit a flowchart? </div>
+           <div class="faq_answer_container">
+              <div class="faq_answer">
+                     To start editing your flowchart, click the edit button on the menu. Drag and drop the classes to the necessary locations.
+                     Click the save button and your editing session will end. If you would like to print your flowchart, click the print button on the side.
+              </div>
+           </div>        
+    </div>
+ </div>
+
+<div class="faq_container">
+   <div class="faq">
+      <div class="faq_question"> &#x25BE; How do I make a note? </div>
+           <div class="faq_answer_container">
+              <div class="faq_answer">
+                    Click on the class you would like to make a note on. Within the popup box, click on add note.
+                    Write what you need in the note. Click the Add Note button and your editing session will end
+                    Your new note will be displayed whenever you click on that class. The course will have a visual cue showing that the note has been added.
+              </div>
+           </div>        
+    </div>
+ </div>
+
+<div class="faq_container">
+   <div class="faq">
+      <div class="faq_question"> &#x25BE; How do I display the course information? </div>
+           <div class="faq_answer_container">
+              <div class="faq_answer">
+                    Click on the course of the information you would like to see. 
+                    A popup window will show up with the course name, course description, prerequisites, and term the course is typically offered.
+                    Once finished, click anywhere outside of the box and the popup box will disappear.
+              </div>
+           </div>        
+    </div>
+ </div>
+
+<div class="faq_container">
+   <div class="faq">
+      <div class="faq_question"> &#x25BE; If I have changed my major, how do I change my flowchart to represent my new major? </div>
+           <div class="faq_answer_container">
+              <div class="faq_answer">
+                    First, select the “Edit Profile” option in the sidebar of your home screen. In the editing page, change your major selection to represent your new major and save your profile.
+                    Select the option “Add New Flowchart”. You will know have a flowchart populated with courses related to your new major.
+              </div>
+           </div>        
+    </div>
+ </div>
+
+<div class="faq_container">
+   <div class="faq">
+      <div class="faq_question"> &#x25BE; How do I mark a course as complete? </div>
+           <div class="faq_answer_container">
+              <div class="faq_answer">
+                    Click the edit button on the sidebar to enter editing mode for the flowchart. Select the course you would like to mark in your flowchart. 
+                    A box with options should appear on selection. Choose to mark the course as complete.  Click the save button and your editing session will end.
+              </div>
+           </div>        
+    </div>
+ </div>
+
+<h3> Administrator FAQ </h3>
+
+<div class="faq_container">
+   <div class="faq">
+      <div class="faq_question"> &#x25BE; How do I edit a course? </div>
+           <div class="faq_answer_container">
+              <div class="faq_answer">
+                    Select the course you would like to edit. Click the edit button on the sidebar to edit the course.
+                    You will be taken to an edit screen where the course information can be changed. 
+                    Click the save button and your editing session will end.
+              </div>
+           </div>        
+    </div>
+ </div>
+
+<div class="faq_container">
+   <div class="faq">
+      <div class="faq_question"> &#x25BE; How do I edit a flowchart? </div>
+           <div class="faq_answer_container">
+              <div class="faq_answer">
+                    Select the flowchart you would like to edit. Click the edit button on the sidebar to edit the flowchart.
+                    You will be taken to an edit screen where the flowchart can be changed. Click the save button and your editing session will end.
+              </div>
+           </div>        
+    </div>
+ </div>
+
+<div class="faq_container">
+   <div class="faq">
+      <div class="faq_question"> &#x25BE; Can I view a collection of the user data? </div>
+           <div class="faq_answer_container">
+              <div class="faq_answer">
+                    Yes. On the home screen of the SLOChart page, there will be an option in the sidebar to view this information. 
+                    When you select it, you will be taken to a page that will display an amalgamation of the users’ flowchart data.
+                    No. The functionality to compile and view all the users’ data is currently not available.
+
+              </div>
+           </div>        
+    </div>
+ </div>
