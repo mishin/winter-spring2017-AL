@@ -1,0 +1,224 @@
+/*Add your CSS below!*/
+
+/*!
+ * Start Bootstrap - Simple Sidebar (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+body {
+    overflow-x: hidden;
+    background:#EEEEEE;
+}
+
+th {
+    text-align:center;
+    border-bottom:2px solid black;
+    border-left:1px solid black;
+    border-right:1px solid black;
+    border-top:1px solid #aaaaaa;
+}
+
+td {
+    border-right:1px solid #aaaaaa;
+    border-left:1px solid #aaaaaa;
+    width:100px;
+    height:100px;
+}
+
+#header {
+    padding:0px;
+    background:#1e4d2b;
+    height:50px;
+}
+
+#header a:link {
+    text-decoration:none;
+    color: #EEEEEE;
+}
+
+#header a:visited {
+    text-decoration:none;
+    color: #EEEEEE;
+}
+
+#header a:hover {
+    text-decoration:none;
+    color: #EEEEEE;
+}
+
+#header a:active {
+    text-decoration:none;
+    color: #EEEEEE;
+}
+
+.header-item-left {
+    text-decoration:none;
+    display:inline;
+    font-size:18px;
+    vertical-align: middle;
+    color:#EEEEEE;
+    line-height: 50px;
+    padding: 10px;
+}
+
+.header-item-right {
+    text-decoration:none;
+    display:inline;
+    font-size:18px;
+    vertical-align: middle;
+    color: #EEEEEE;
+    line-height: 50px;
+    padding: 10px;
+}
+
+/* Flowchart Styles */
+
+.major {
+    background-color:#ffff77;
+    text-align:center;
+    border:1px solid black;
+}
+
+.support {
+    background-color:#ffbb99;
+    text-align:center;
+    border:1px solid black;
+}
+
+.ge {
+    background-color:#99ff99;
+    text-align:center;
+    border:1px solid black;
+}
+
+.class-title {
+    font-size:.8em;
+    font-style:italic;
+    padding-bottom:5px;
+}
+
+.class-number {
+    padding-top:5px;
+    font-weight:bold;
+}
+
+/* Toggle Styles */
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #DDDDDD;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: black;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: black;
+    background: none;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 0;
+    }
+
+    #wrapper.toggled {
+        padding-left: 250px;
+    }
+
+    #sidebar-wrapper {
+        width: 0;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
