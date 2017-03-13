@@ -12,5 +12,4 @@ public class FlowchartController {
 
     @GetMapping
     public String index() { return "flowchart.html"; }
-
 }
