@@ -6,11 +6,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
-@Controller
-@RequestMapping("/")
-public class HomeController {
+@Controller // so framework can recognize this as a controller class
+@RequestMapping("/flowchart")
+public class FlowchartController {
 
     @GetMapping
-    public String index() { return "splash.html"; }
-
+    public String index() { return "flowchart.html"; }
 }
