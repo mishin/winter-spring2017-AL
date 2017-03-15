@@ -60,8 +60,5 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !gradle/wrapper/gradle-wrapper.properties
 
-*.DS_Store
+.DS_Store
 target/
-
-# Ignore applications.properties
-application.properties

@@ -39,23 +39,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .headers().cacheControl();        // disable page caching
 
         http
-            .authorizeRequests()
-                // allow anonymous resource requests
-                .antMatchers(HttpMethod.GET,"/resources/**").permitAll()
-                .antMatchers(HttpMethod.POST, authPath).permitAll() // to get auth token
-                .antMatchers(HttpMethod.POST, "/user").permitAll() // to get auth token
-                .anyRequest().authenticated();
-
-        // Custom JWT based security filter -- Check for JWT tokens
-        http
-            .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
+                .authorizeRequests()
+                .antMatchers("/**").permitAll()
+                .antMatchers(HttpMethod.POST, authPath).permitAll()
+                .antMatchers(HttpMethod.POST, "/user").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth, BaseUserDetailsService baseUserDetailsService) throws Exception {
         auth
-            .userDetailsService(baseUserDetailsService)
-            .passwordEncoder(new BCryptPasswordEncoder());
+                .userDetailsService(baseUserDetailsService)
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Bean
