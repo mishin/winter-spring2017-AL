@@ -111,7 +111,9 @@ table {
     display: block;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown-content a:hover {
+    background-color: #4f7f5e;
+}
 
 .dropdown:hover .dropdown-content {
     display: block;
