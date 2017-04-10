@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="SLOChartApp">
 
 <head>
     <title>SLOChart | Flowchart</title>
@@ -9,403 +9,282 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
     <!-- Custom CSS -->
     <link rel="stylesheet" href="flowchart.css">
-
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+    <script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.1.0.js"></script>
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 
 <body>
-<div id="header">
-    <a href="#menu-toggle" class="header-item-left" id="menu-toggle">Catalog</a>
-    <a href="#menu-toggle" class="header-item-left" id="courses-toggle">Required Courses</a>
-    <div class="dropdown">
-        <p class="header-item-left">Saved Flowcharts</p>
-        <div class="dropdown-content">
-            <a href="#">Freshman Flowchart</a>
-            <a href="#">Flowchart Number Two</a>
+    <script>
+        var app = angular.module('SLOChartApp', ['ui.bootstrap']);
+
+        function loadCourses ($scope, $http){
+            $http({
+                method : 'GET',
+                url : 'courseDb'
+            }).then(function (response) {
+                $scope.courses = response.data;
+                $scope.test = "hi";
+            });
+        }
+
+        app.controller('CatalogCtrl',
+            function ($scope, $http){
+                loadCourses($scope, $http);
+            });
+    </script>
+
+    <div id="header">
+        <a href="#menu-toggle" class="header-item-left" id="menu-toggle">Catalog</a>
+        <a href="#menu-toggle" class="header-item-left" id="courses-toggle">Required Courses</a>
+        <div class="dropdown">
+            <p class="header-item-left">Saved Flowcharts</p>
+            <div class="dropdown-content">
+                <a href="#">Freshman Flowchart</a>
+                <a href="#">Flowchart Number Two</a>
+            </div>
         </div>
-    </div>
-    <div class="dropdown">
-        <p class="header-item-left">Export</p>
-        <div class="dropdown-content">
+        <div class="dropdown">
+            <p class="header-item-left">Export</p>
+            <div class="dropdown-content">
+            </div>
         </div>
-    </div>
-    <div class="dropdown">
-        <p class="header-item-left">Save</p>
-        <div class="dropdown-content">
+        <div class="dropdown">
+            <p class="header-item-left">Save</p>
+            <div class="dropdown-content">
+            </div>
         </div>
-    </div>
-    <div class="dropdown">
-        <p class="header-item-left">Options</p>
-        <div class="dropdown-content">
-            <a href="#">Change Major</a>
-            <a href="#">Add/Change Minor</a>
-            <a href="#">Add/Change Concentration</a>
-            <a href="#">Visual Settings</a>
+        <div class="dropdown">
+            <p class="header-item-left">Options</p>
+            <div class="dropdown-content">
+                <a href="#">Change Major</a>
+                <a href="#">Add/Change Minor</a>
+                <a href="#">Add/Change Concentration</a>
+                <a href="#">Visual Settings</a>
+            </div>
         </div>
+        <span style="float:right"><p class="header-item-right">Logout jdoe@calpoly.edu</p></span>
     </div>
-    <span style="float:right"><p class="header-item-right">Logout jdoe@calpoly.edu</p></span>
-</div>
-<div id="wrapper">
+    <div id="wrapper">
 
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a href="#">
-                    Available Courses
-                </a>
-            </li>
-            <li>
-                Search:
-                <input></input>
-                <br>
-            </li>
-            <br>
-            <li class="catalogCourse">
-                <a href="#">AERO 121</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">AERO 200</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">AERO 215</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">AERO 270</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">AERO 299</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">AERO 300</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">AERO 301</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">AERO 302</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">AERO 303</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">AERO 304</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">AERO 306</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">AERO 307</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">AERO 310</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">AERO 320</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">AERO 331</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">AERO 351</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">AERO 353</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">AERO 354</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">AERO 360</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">AERO 400</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">AERO 401</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#"><span style="color:#888888">CPE 101</span></a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#"><span style="color:#888888">CPE 102</span></a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#"><span style="color:#888888">CPE 103</span></a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">CPE 225</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#"><span style="color:#888888">CPE 315</span></a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#"><span style="color:#888888">CPE 348</span></a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">CPE 349</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">CPE 357</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">CPE 225</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">CPE 225</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">CPE 225</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">CPE 225</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">CPE 225</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">CPE 225</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">CPE 225</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">CPE 225</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">CPE 225</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">CPE 225</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">CPE 225</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">CPE 225</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">CPE 225</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">CPE 225</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">CPE 225</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">CPE 225</a>
-            </li>
-            <li class="catalogCourse">
-                <a href="#">CPE 225</a>
-            </li>
-        </ul>
-    </div>
-    <!-- /#sidebar-wrapper -->
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <h3>Course Catalog</h3>
+            <div ng-controller="CatalogCtrl">
+                <table class="catalogTable">
+                    <tr ng-repeat="c in courses">
+                        <td class="{{c.educationArea}}">
+                            <span class="class-number">{{c.prefix}} {{c.number}}</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2>Editing "Freshman Flowchart"</h2>
-                    <br>
-                    <!--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>-->
-                    <table>
-                        <th>Fall 2016</th>
-                        <th>Winter 2017</th>
-                        <th>Spring 2017</th>
-                        <th>Fall 2017</th>
-                        <th>Winter 2018</th>
-                        <th>Spring 2018</th>
-                        <th>Fall 2018</th>
-                        <th>Winter 2019</th>
-                        <th>Spring 2019</th>
-                        <th>Fall 2019</th>
-                        <th>Winter 2020</th>
-                        <th>Spring 2020</th>
-                        <tr>
-                            <td class="major">
-                                <span class="class-title">Introduction to Computing</span><br>
-                                <span class="class-number">CPE 123</span>
-                            </td>
-                            <td class="major">
-                                <span class="class-title">Fundamentals of Computer Science I</span><br>
-                                <span class="class-number">CPE 101</span>
-                            </td>
-                            <td class="major">
-                                <span class="class-title">Fundamentals of Computer Science II</span><br>
-                                <span class="class-number">CPE 102</span>
-                            </td>
-                            <td class="major">
-                                <span class="class-title">Fundamentals of Computer Science III</span><br>
-                                <span class="class-number">CPE 103</span>
-                            </td>
-                            <td class="major">
-                                <span class="class-title">Discrete Structures</span><br>
-                                <span class="class-number">CPE 348</span>
-                            </td>
-                            <td class="major">
-                                <span class="class-title">Computer Architecture</span><br>
-                                <span class="class-number">CPE 315</span>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="support">
-                                <span class="class-title">Calculus I</span><br>
-                                <span class="class-number">MATH 141</span>
-                            </td>
-                            <td class="support">
-                                <span class="class-title">Chemistry I</span><br>
-                                <span class="class-number">CHEM 124</span>
-                            </td>
-                            <td class="support">
-                                <span class="class-title">Statistical Methods for Engineers</span><br>
-                                <span class="class-number">STAT 312</span>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="ge">
-                                <span class="class-title">Writing and Rhetoric</span><br>
-                                <span class="class-number">ENGL 134</span>
-                            </td>
-                            <td class="support">
-                                <span class="class-title">Calculus II</span><br>
-                                <span class="class-number">MATH 142</span>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="ge">
-                                <span class="class-title">Oral Communication</span><br>
-                                <span class="class-number">COMS 101</span>
-                            </td>
-                            <td class="support">
-                                <span class="class-title">Calculus III</span><br>
-                                <span class="class-number">MATH 143</span>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                    <br>
-                    <h4>FAQs</h4>
-                    <div class="faq_container">
-                        <div class="faq">
-                            <div class="faq_question"> &#x25BE; How do I add a minor? </div>
-                            <div class="faq_answer_container">
-                                <div class="faq_answer">
-                                    First, click the Options button, then select "Add Minor". Choose the minor that
-                                    you'd like to add, and the Required Courses section will populate with the required
-                                    courses.
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Editing "Freshman Flowchart"</h2>
+                        <br>
+                        <!--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>-->
+                        <table class="flowchartTable">
+                            <th>Fall 2016</th>
+                            <th>Winter 2017</th>
+                            <th>Spring 2017</th>
+                            <th>Fall 2017</th>
+                            <th>Winter 2018</th>
+                            <th>Spring 2018</th>
+                            <th>Fall 2018</th>
+                            <th>Winter 2019</th>
+                            <th>Spring 2019</th>
+                            <th>Fall 2019</th>
+                            <th>Winter 2020</th>
+                            <th>Spring 2020</th>
+                            <tr>
+                                <td class="major">
+                                    <span class="class-title">Introduction to Computing</span><br>
+                                    <span class="class-number">CPE 123</span>
+                                </td>
+                                <td class="major">
+                                    <span class="class-title">Fundamentals of Computer Science I</span><br>
+                                    <span class="class-number">CPE 101</span>
+                                </td>
+                                <td class="major">
+                                    <span class="class-title">Fundamentals of Computer Science II</span><br>
+                                    <span class="class-number">CPE 102</span>
+                                </td>
+                                <td class="major">
+                                    <span class="class-title">Fundamentals of Computer Science III</span><br>
+                                    <span class="class-number">CPE 103</span>
+                                </td>
+                                <td class="major">
+                                    <span class="class-title">Discrete Structures</span><br>
+                                    <span class="class-number">CPE 348</span>
+                                </td>
+                                <td class="major">
+                                    <span class="class-title">Computer Architecture</span><br>
+                                    <span class="class-number">CPE 315</span>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="support">
+                                    <span class="class-title">Calculus I</span><br>
+                                    <span class="class-number">MATH 141</span>
+                                </td>
+                                <td class="support">
+                                    <span class="class-title">Chemistry I</span><br>
+                                    <span class="class-number">CHEM 124</span>
+                                </td>
+                                <td class="support">
+                                    <span class="class-title">Statistical Methods for Engineers</span><br>
+                                    <span class="class-number">STAT 312</span>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="ge">
+                                    <span class="class-title">Writing and Rhetoric</span><br>
+                                    <span class="class-number">ENGL 134</span>
+                                </td>
+                                <td class="support">
+                                    <span class="class-title">Calculus II</span><br>
+                                    <span class="class-number">MATH 142</span>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="ge">
+                                    <span class="class-title">Oral Communication</span><br>
+                                    <span class="class-number">COMS 101</span>
+                                </td>
+                                <td class="support">
+                                    <span class="class-title">Calculus III</span><br>
+                                    <span class="class-number">MATH 143</span>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <br>
+                        <h4>FAQs</h4>
+                        <div class="faq_container">
+                            <div class="faq">
+                                <div class="faq_question"> &#x25BE; How do I add a minor? </div>
+                                <div class="faq_answer_container">
+                                    <div class="faq_answer">
+                                        First, click the Options button, then select "Add Minor". Choose the minor that
+                                        you'd like to add, and the Required Courses section will populate with the required
+                                        courses.
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="faq_container">
-                        <div class="faq">
-                            <div class="faq_question"> &#x25BE; How do I edit a flowchart? </div>
-                            <div class="faq_answer_container">
-                                <div class="faq_answer">
-                                    To edit a flowchart, click Saved Flowcharts, then select the flowchart you wish to
-                                    edit. Drag and drop the classes you wish to move to their new locations.  Click the
-                                    save button and your changes will be persisted. If you would like to print your
-                                    flowchart, click Export.
+                        <div class="faq_container">
+                            <div class="faq">
+                                <div class="faq_question"> &#x25BE; How do I edit a flowchart? </div>
+                                <div class="faq_answer_container">
+                                    <div class="faq_answer">
+                                        To edit a flowchart, click Saved Flowcharts, then select the flowchart you wish to
+                                        edit. Drag and drop the classes you wish to move to their new locations.  Click the
+                                        save button and your changes will be persisted. If you would like to print your
+                                        flowchart, click Export.
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="faq_container">
-                        <div class="faq">
-                            <div class="faq_question"> &#x25BE; How do I display the course information? </div>
-                            <div class="faq_answer_container">
-                                <div class="faq_answer">
-                                    Open the Catalog menu, then select the course you wish to view information for.
-                                    A popup window will display with the course name, course description, prerequisites,
-                                    and term the course is typically offered.  Once finished, click anywhere outside of
-                                    the box and the popup box will disappear.
+                        <div class="faq_container">
+                            <div class="faq">
+                                <div class="faq_question"> &#x25BE; How do I display the flowchart information? </div>
+                                <div class="faq_answer_container">
+                                    <div class="faq_answer">
+                                        Open the Catalog menu, then select the flowchart you wish to view information for.
+                                        A popup window will display with the flowchart name, flowchart description, prerequisites,
+                                        and term the flowchart is typically offered.  Once finished, click anywhere outside of
+                                        the box and the popup box will disappear.
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="faq_container">
-                        <div class="faq">
-                            <div class="faq_question"> &#x25BE; How do I make a note? </div>
-                            <div class="faq_answer_container">
-                                <div class="faq_answer">
-                                    Click on the class you would like to make a note on. Within the popup box, click on add note.
-                                    Write what you need in the note. Click the Add Note button and your editing session will end
-                                    Your new note will be displayed whenever you click on that class. The course will have a visual cue showing that the note has been added.
+                        <div class="faq_container">
+                            <div class="faq">
+                                <div class="faq_question"> &#x25BE; How do I make a note? </div>
+                                <div class="faq_answer_container">
+                                    <div class="faq_answer">
+                                        Click on the class you would like to make a note on. Within the popup box, click on add note.
+                                        Write what you need in the note. Click the Add Note button and your editing session will end
+                                        Your new note will be displayed whenever you click on that class. The flowchart will have a visual cue showing that the note has been added.
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="faq_container">
-                        <div class="faq">
-                            <div class="faq_question"> &#x25BE; If I have changed my major, how do I change my flowchart to represent my new major? </div>
-                            <div class="faq_answer_container">
-                                <div class="faq_answer">
-                                    First, select the “Edit Profile” option in the sidebar of your home screen. In the editing page, change your major selection to represent your new major and save your profile.
-                                    Select the option “Add New Flowchart”. You will know have a flowchart populated with courses related to your new major.
+                        <div class="faq_container">
+                            <div class="faq">
+                                <div class="faq_question"> &#x25BE; If I have changed my major, how do I change my flowchart to represent my new major? </div>
+                                <div class="faq_answer_container">
+                                    <div class="faq_answer">
+                                        First, select the “Edit Profile” option in the sidebar of your home screen. In the editing page, change your major selection to represent your new major and save your profile.
+                                        Select the option “Add New Flowchart”. You will know have a flowchart populated with courses related to your new major.
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="faq_container">
-                        <div class="faq">
-                            <div class="faq_question"> &#x25BE; How do I mark a course as complete? </div>
-                            <div class="faq_answer_container">
-                                <div class="faq_answer">
-                                    Click the edit button on the sidebar to enter editing mode for the flowchart. Select the course you would like to mark in your flowchart.
-                                    A box with options should appear on selection. Choose to mark the course as complete.  Click the save button and your editing session will end.
+                        <div class="faq_container">
+                            <div class="faq">
+                                <div class="faq_question"> &#x25BE; How do I mark a flowchart as complete? </div>
+                                <div class="faq_answer_container">
+                                    <div class="faq_answer">
+                                        Click the edit button on the sidebar to enter editing mode for the flowchart. Select the flowchart you would like to mark in your flowchart.
+                                        A box with options should appear on selection. Choose to mark the flowchart as complete.  Click the save button and your editing session will end.
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -413,49 +292,48 @@
                 </div>
             </div>
         </div>
+        <!-- /#page-content-wrapper -->
+
     </div>
-    <!-- /#page-content-wrapper -->
+    <!-- /#wrapper -->
 
-</div>
-<!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
-<!-- Menu Toggle Script -->
-<script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
+    <!-- Menu Toggle Script -->
+    <script>
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <script>
+     $(document).ready(function() {
+
+        $('.faq_question').click(function() {
+
+            if ($(this).parent().is('.open')){
+                $(this).closest('.faq').find('.faq_answer_container').animate({'height':'0'},500);
+                $(this).closest('.faq').removeClass('open');
+
+                }else{
+                    var newHeight =$(this).closest('.faq').find('.faq_answer').height() +'px';
+                    $(this).closest('.faq').find('.faq_answer_container').animate({'height':newHeight},500);
+                    $(this).closest('.faq').addClass('open');
+                }
+
+        });
+
     });
-</script>
+    </script>
 
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-
-<script>
- $(document).ready(function() {
-
-    $('.faq_question').click(function() {
-
-        if ($(this).parent().is('.open')){
-            $(this).closest('.faq').find('.faq_answer_container').animate({'height':'0'},500);
-            $(this).closest('.faq').removeClass('open');
-
-            }else{
-                var newHeight =$(this).closest('.faq').find('.faq_answer').height() +'px';
-                $(this).closest('.faq').find('.faq_answer_container').animate({'height':newHeight},500);
-                $(this).closest('.faq').addClass('open');
-            }
-
-    });
-
-});
-</script>
-
-</body>
+    </body>
 
 </html>
