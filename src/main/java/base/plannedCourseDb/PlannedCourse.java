@@ -1,7 +1,5 @@
 package base.plannedCourseDb;
 
-import base.courseDb.Course;
-
 import javax.persistence.*;
 
 /**

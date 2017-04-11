@@ -12,5 +12,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class StudentController {
 
     @GetMapping
-    public String flowchart() { return "flowchart.html"; }
+    public String flowchart() { return "studentPage.html"; }
 }
