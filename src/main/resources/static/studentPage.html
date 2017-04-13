@@ -115,28 +115,40 @@
                             <th>Spring 2020</th>
                             <tr>
                                 <td class="major">
-                                    <span class="class-title">Introduction to Computing</span><br>
-                                    <span class="class-number">CPE 123</span>
+                                    <span class="event" id="1" draggable="true">
+                                        <span class="class-title">Introduction to Computing</span><br>
+                                        <span class="class-number">CPE 123</span>
+                                    </span>
                                 </td>
                                 <td class="major">
-                                    <span class="class-title">Fundamentals of Computer Science I</span><br>
-                                    <span class="class-number">CPE 101</span>
+                                    <span class="event" id="2" draggable="true">
+                                        <span class="class-title">Fundamentals of Computer Science I</span><br>
+                                        <span class="class-number">CPE 101</span>
+                                    </span>
                                 </td>
                                 <td class="major">
-                                    <span class="class-title">Fundamentals of Computer Science II</span><br>
-                                    <span class="class-number">CPE 102</span>
+                                    <span class="event" id="3" draggable="true">
+                                        <span class="class-title">Fundamentals of Computer Science II</span><br>
+                                        <span class="class-number">CPE 102</span>
+                                    </span>
                                 </td>
                                 <td class="major">
-                                    <span class="class-title">Fundamentals of Computer Science III</span><br>
-                                    <span class="class-number">CPE 103</span>
+                                    <span class="event" id="4" draggable="true">
+                                        <span class="class-title">Fundamentals of Computer Science III</span><br>
+                                        <span class="class-number">CPE 103</span>
+                                    </span>
                                 </td>
                                 <td class="major">
-                                    <span class="class-title">Discrete Structures</span><br>
-                                    <span class="class-number">CPE 348</span>
+                                    <span class="event" id="5" draggable="true">
+                                        <span class="class-title">Discrete Structures</span><br>
+                                        <span class="class-number">CPE 348</span>
+                                    </span>
                                 </td>
                                 <td class="major">
-                                    <span class="class-title">Computer Architecture</span><br>
-                                    <span class="class-number">CPE 315</span>
+                                    <span class="event" id="6" draggable="true">
+                                        <span class="class-title">Computer Architecture</span><br>
+                                        <span class="class-number">CPE 315</span>
+                                    </span>
                                 </td>
                                 <td></td>
                                 <td></td>
@@ -147,16 +159,22 @@
                             </tr>
                             <tr>
                                 <td class="support">
-                                    <span class="class-title">Calculus I</span><br>
-                                    <span class="class-number">MATH 141</span>
+                                    <span class="event" id="7" draggable="true">
+                                        <span class="class-title">Calculus I</span><br>
+                                        <span class="class-number">MATH 141</span>
+                                    </span>
                                 </td>
                                 <td class="support">
-                                    <span class="class-title">Chemistry I</span><br>
-                                    <span class="class-number">CHEM 124</span>
+                                    <span class="event" id="8" draggable="true">
+                                        <span class="class-title">Chemistry I</span><br>
+                                        <span class="class-number">CHEM 124</span>
+                                    </span>
                                 </td>
                                 <td class="support">
-                                    <span class="class-title">Statistical Methods for Engineers</span><br>
-                                    <span class="class-number">STAT 312</span>
+                                    <span class="event" id="9" draggable="true">
+                                        <span class="class-title">Statistical Methods for Engineers</span><br>
+                                        <span class="class-number">STAT 312</span>
+                                    </span>
                                 </td>
                                 <td></td>
                                 <td></td>
@@ -170,12 +188,16 @@
                             </tr>
                             <tr>
                                 <td class="ge">
-                                    <span class="class-title">Writing and Rhetoric</span><br>
-                                    <span class="class-number">ENGL 134</span>
+                                    <span class="event" id="10" draggable="true">
+                                        <span class="class-title">Writing and Rhetoric</span><br>
+                                        <span class="class-number">ENGL 134</span>
+                                    </span>
                                 </td>
                                 <td class="support">
-                                    <span class="class-title">Calculus II</span><br>
-                                    <span class="class-number">MATH 142</span>
+                                    <span class="event" id="11" draggable="true">
+                                        <span class="class-title">Calculus II</span><br>
+                                        <span class="class-number">MATH 142</span>
+                                    </span>
                                 </td>
                                 <td></td>
                                 <td></td>
@@ -190,12 +212,16 @@
                             </tr>
                             <tr>
                                 <td class="ge">
-                                    <span class="class-title">Oral Communication</span><br>
-                                    <span class="class-number">COMS 101</span>
+                                    <span class="event" id="12" draggable="true">
+                                        <span class="class-title">Oral Communication</span><br>
+                                        <span class="class-number">COMS 101</span>
+                                    </span>
                                 </td>
                                 <td class="support">
-                                    <span class="class-title">Calculus III</span><br>
-                                    <span class="class-number">MATH 143</span>
+                                    <span class="event" id="13" draggable="true">
+                                        <span class="class-title">Calculus III</span><br>
+                                        <span class="class-number">MATH 143</span>
+                                    </span>
                                 </td>
                                 <td></td>
                                 <td></td>
@@ -332,6 +358,24 @@
         });
 
     });
+    </script>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+            $('.event').on("dragstart", function (event) {
+                  var dt = event.originalEvent.dataTransfer;
+                  dt.setData('Text', $(this).attr('id'));
+                });
+            $('table td').on("dragenter dragover drop", function (event) {
+               event.preventDefault();
+               if (event.type === 'drop') {
+                  var data = event.originalEvent.dataTransfer.getData('Text',$(this).attr('id'));
+                  de=$('#'+data).detach();
+                  de.appendTo($(this));
+               };
+           });
+    })
     </script>
 
     </body>
