@@ -15,9 +15,9 @@ public class PlannedCourse implements Serializable {
 
     public PlannedCourse() {}
 
-    public PlannedCourse(String studentId, String courseId, String quarter) {
-        this.setStudentId(studentId);
-        this.setCourseId(courseId);
+    public PlannedCourse(Long studentId, Long courseId, String quarter) {
+        this.studentId = studentId;
+        this.courseId = courseId;
         this.quarter = quarter;
     }
 
@@ -29,20 +29,20 @@ public class PlannedCourse implements Serializable {
         this.id = id;
     }
 
-    public String getStudentId() {
-        return studentId.toString();
+    public Long getStudentId() {
+        return studentId;
     }
 
-    public void setStudentId(String studentId) {
-        this.studentId = Long.parseLong(studentId);
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
     }
 
-    public String getCourseId() {
-        return courseId.toString();
+    public Long getCourseId() {
+        return courseId;
     }
 
-    public void setCourseId(String courseId) {
-        this.courseId = Long.parseLong(courseId);
+    public void setCourseId(Long courseId) {
+        this.courseId = courseId;
     }
 
     public String getQuarter() {

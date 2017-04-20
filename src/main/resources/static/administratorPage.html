@@ -3,33 +3,50 @@
 <head>
     <title>SLOChart | Administration</title>
     <meta charset="UTF-8">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="studentPage.css">
+    <!-- Angular CSS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+    <script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.1.0.js"></script>
+
 </head>
 <body>
 
         <script>
             var app = angular.module('CatalogApp', ['ui.bootstrap']);
 
-            function loadCourses ($scope, $http){
+            function loadPlannedCourseInformation($scope, $http) {
+                console.log("2: " + $scope.plannedCourseIds);
+                angular.forEach($scope.plannedCourseIds, function(item) {
+                    console.log(item.courseId + ": " + item.quarter);
+                });
+            }
+
+            function loadPlannedCourses ($scope, $http){
                 $http({
                      method : 'GET',
                      url : 'plannedCourseDb/studentId/1'
                     }).then(function (response) {
-                         $scope.courses = response.data;
-                         $scope.test = "hi";
+                         $scope.plannedCourseIds = response.data;
+                         console.log(response.data);
                 });
+                console.log("1: " + $scope.plannedCourseIds[0]);
+
+                loadPlannedCourseInformation(scope, http);
             }
 
-            app.controller('CatalogCtrl',
-                           function ($scope, $http){
-                               loadCourses($scope, $http);
-                           });
+            app.controller('PlannedCourseCtrl', function ($scope, $http){
+                loadPlannedCourses($scope, $http);
+                console.log("there");
+            });
+
         </script>
-        <div ng-controller="CatalogCtrl">
+        <div ng-controller="PlannedCourseCtrl">
             <h3>Course Catalog</h3>
                 <table>
-                    <tr>$scope.test</tr>
-                    <tr ng-repeat="c in courses">
-                        <td class={{c.educationArea}}>
+                    <tr ng-repeat="c in plannedCourseIds">
+                        <td>
                             <span class="class-title">{{c.studentId}}</span><br><br>
                             <span class="class-number">{{c.courseId}} {{c.quarter}}</span>
                         </td>

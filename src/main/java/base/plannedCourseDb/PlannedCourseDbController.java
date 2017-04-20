@@ -52,6 +52,7 @@ public class PlannedCourseDbController {
         if (plannedCourse == null) {
             return null;
         } else {
+            plannedCourse.setStudentId(input.getStudentId());
             plannedCourse.setCourseId(input.getCourseId());
             plannedCourse.setQuarter(input.getQuarter());
             return plannedCourseRepository.save(plannedCourse);
