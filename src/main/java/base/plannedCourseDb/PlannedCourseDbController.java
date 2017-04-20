@@ -30,10 +30,15 @@ public class PlannedCourseDbController {
         return plannedCourseRepository.findOne(id);
     }
 
+    @GetMapping("studentId/{id}")
+    public Iterable<PlannedCourse> findByStudentId(@PathVariable Long id) {
+        return plannedCourseRepository.findByStudentId(id);
+    }
+
     @PostMapping
     public PlannedCourse create(@RequestBody PlannedCourse input) {
         return plannedCourseRepository
-                .save(new PlannedCourse(input.getCourseId(), input.getQuarter()));
+                .save(new PlannedCourse(input.getStudentId(), input.getCourseId(), input.getQuarter()));
     }
 
     @DeleteMapping("{id}")

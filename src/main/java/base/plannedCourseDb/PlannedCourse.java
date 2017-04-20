@@ -1,22 +1,22 @@
 package base.plannedCourseDb;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-/**
- * Created by Lauren on 4/6/2017.
- */
 @Entity
-public class PlannedCourse {
+public class PlannedCourse implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
+    private Long studentId;
     private Long courseId;
     private String quarter;
 
     public PlannedCourse() {}
 
-    public PlannedCourse(String courseId, String quarter) {
+    public PlannedCourse(String studentId, String courseId, String quarter) {
+        this.setStudentId(studentId);
         this.setCourseId(courseId);
         this.quarter = quarter;
     }
@@ -27,6 +27,14 @@ public class PlannedCourse {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getStudentId() {
+        return studentId.toString();
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = Long.parseLong(studentId);
     }
 
     public String getCourseId() {

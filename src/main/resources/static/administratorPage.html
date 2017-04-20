@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="CatalogApp">
 <head>
     <title>SLOChart | Administration</title>
     <meta charset="UTF-8">
 </head>
-    <body>
-        <p>Administration Page Coming Soon!</p>
+<body>
+
+        <script>
+            var app = angular.module('CatalogApp', ['ui.bootstrap']);
+
+            function loadCourses ($scope, $http){
+                $http({
+                     method : 'GET',
+                     url : 'plannedCourseDb/studentId/1'
+                    }).then(function (response) {
+                         $scope.courses = response.data;
+                         $scope.test = "hi";
+                });
+            }
+
+            app.controller('CatalogCtrl',
+                           function ($scope, $http){
+                               loadCourses($scope, $http);
+                           });
+        </script>
+        <div ng-controller="CatalogCtrl">
+            <h3>Course Catalog</h3>
+                <table>
+                    <tr>$scope.test</tr>
+                    <tr ng-repeat="c in courses">
+                        <td class={{c.educationArea}}>
+                            <span class="class-title">{{c.studentId}}</span><br><br>
+                            <span class="class-number">{{c.courseId}} {{c.quarter}}</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
     </body>
 </html>
