@@ -12,52 +12,6 @@
 
 </head>
     <body>
-        <script>
-            var app = angular.module('CatalogApp', ['ui.bootstrap']);
-
-            function loadFromCatalog($scope, $http, data) {
-                angular.forEach(data, function(obj) {
-                    console.log("q: " + obj.quarter);
-                    $http({
-                        method: 'GET',
-                        url : 'catalogDb/' + obj.courseId + '',
-                    }).then(function (response) {
-                        response.data.quarter = obj.quarter;
-                        console.log("response: " + response.data.quarter);
-                        $scope.plannedCourses.push(response.data);
-                    });
-                });
-            }
-
-            function loadPlannedCourses($scope, $http){
-                $scope.plannedCourses = [];
-                $http({
-                    method : 'GET',
-                    url : 'plannedCourseDb/studentId/1'
-                }).then(function (response) {
-                    loadFromCatalog($scope, $http, response.data);
-                });
-            }
-
-            app.controller('PlannedCourseCtrl', function ($scope, $http){
-                loadPlannedCourses($scope, $http);
-            });
-
-        </script>
-        <div ng-controller="PlannedCourseCtrl">
-            <h3>Planned Courses</h3>
-            <table>
-                <tr ng-repeat="c in plannedCourses" ng-if="c.quarter == 1">
-                    <td>
-                        <div class="course {{c.educationArea}}">
-                            <span class="event" id="{{c.prefix}}{{c.number}}" draggable="true">
-                                <span class="title">{{c.title}}</span>
-                                <span class="class-number">{{c.prefix}} {{c.number}}</span>
-                            </span>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
+        Administrator Page Coming Soon!
     </body>
 </html>

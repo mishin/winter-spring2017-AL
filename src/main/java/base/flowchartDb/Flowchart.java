@@ -1,10 +1,7 @@
 package base.flowchartDb;
 
-import base.courseDb.Course;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by Lauren on 4/6/2017.

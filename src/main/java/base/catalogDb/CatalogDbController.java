@@ -1,4 +1,4 @@
-package base.courseDb;
+package base.catalogDb;
 
 /**
  * Created by Lauren on 4/6/2017.

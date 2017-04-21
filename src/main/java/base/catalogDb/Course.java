@@ -2,7 +2,7 @@
  * Created by Lauren on 4/6/2017.
  */
 
-package base.courseDb;
+package base.catalogDb;
 
 import java.io.Serializable;
 
