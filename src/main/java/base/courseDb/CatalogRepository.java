@@ -5,6 +5,6 @@ package base.courseDb;
  */
 import org.springframework.data.repository.CrudRepository;
 
-public interface CourseRepository extends CrudRepository<Course, Long> {
+public interface CatalogRepository extends CrudRepository<Course, Long> {
 
 }

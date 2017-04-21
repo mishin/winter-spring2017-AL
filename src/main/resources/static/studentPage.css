@@ -86,19 +86,19 @@ table.catalogTable td {
     height:30px;
 }
 
-table.catalogTable td.MAJOR {
+table.catalogTable td.major {
     background-color:#ffff77;
     text-align:center;
     border:1px solid black;
 }
 
-table.catalogTable td.SUPPORT {
+table.catalogTable td.support {
     background-color:#ffbb99;
     text-align:center;
     border:1px solid black;
 }
 
-table.catalogTable td.GE {
+table.catalogTable td.ge {
     background-color:#99ff99;
     text-align:center;
     border:1px solid black;

@@ -30,7 +30,7 @@
         function loadCourses ($scope, $http){
             $http({
                 method : 'GET',
-                url : 'courseDb'
+                url : 'catalogDb'
             }).then(function (response) {
                 $scope.courses = response.data;
                 $scope.test = "hi";
