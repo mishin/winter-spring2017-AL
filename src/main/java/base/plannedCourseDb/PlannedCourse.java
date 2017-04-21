@@ -11,14 +11,16 @@ public class PlannedCourse implements Serializable {
     private Long id;
     private Long studentId;
     private Long courseId;
-    private String quarter;
+    private Integer quarter; //1-fall 2-winter 3-spring 4-summer
+    private Integer year; //1-freshman, 2-sophomore, etc...
 
     public PlannedCourse() {}
 
-    public PlannedCourse(Long studentId, Long courseId, String quarter) {
+    public PlannedCourse(Long studentId, Long courseId, Integer quarter, Integer year) {
         this.studentId = studentId;
         this.courseId = courseId;
         this.quarter = quarter;
+        this.year = year;
     }
 
     public Long getId() {
@@ -45,11 +47,19 @@ public class PlannedCourse implements Serializable {
         this.courseId = courseId;
     }
 
-    public String getQuarter() {
+    public Integer getQuarter() {
         return quarter;
     }
 
-    public void setQuarter(String quarter) {
+    public void setQuarter(Integer quarter) {
         this.quarter = quarter;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
     }
 }

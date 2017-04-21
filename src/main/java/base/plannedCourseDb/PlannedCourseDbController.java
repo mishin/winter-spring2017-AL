@@ -38,7 +38,8 @@ public class PlannedCourseDbController {
     @PostMapping
     public PlannedCourse create(@RequestBody PlannedCourse input) {
         return plannedCourseRepository
-                .save(new PlannedCourse(input.getStudentId(), input.getCourseId(), input.getQuarter()));
+                .save(new PlannedCourse(input.getStudentId(), input.getCourseId(),
+                        input.getQuarter(), input.getYear()));
     }
 
     @DeleteMapping("{id}")
@@ -55,6 +56,7 @@ public class PlannedCourseDbController {
             plannedCourse.setStudentId(input.getStudentId());
             plannedCourse.setCourseId(input.getCourseId());
             plannedCourse.setQuarter(input.getQuarter());
+            plannedCourse.setYear(input.getYear());
             return plannedCourseRepository.save(plannedCourse);
         }
     }

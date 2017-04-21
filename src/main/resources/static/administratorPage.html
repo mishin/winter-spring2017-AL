@@ -11,20 +11,19 @@
     <script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.1.0.js"></script>
 
 </head>
-<body>
-
+    <body>
         <script>
             var app = angular.module('CatalogApp', ['ui.bootstrap']);
 
             function loadFromCatalog($scope, $http, data) {
-                console.log("courseId0: " + data[0].courseId);
                 angular.forEach(data, function(obj) {
-                    console.log("courseId: " + obj.courseId);
+                    console.log("q: " + obj.quarter);
                     $http({
                         method: 'GET',
                         url : 'catalogDb/' + obj.courseId + '',
                     }).then(function (response) {
-                        console.log("response: " + response.data.prefix);
+                        response.data.quarter = obj.quarter;
+                        console.log("response: " + response.data.quarter);
                         $scope.plannedCourses.push(response.data);
                     });
                 });
@@ -48,11 +47,14 @@
         <div ng-controller="PlannedCourseCtrl">
             <h3>Planned Courses</h3>
             <table>
-                <tr ng-repeat="c in plannedCourses track by $index">
-                    <td class="{{c.educationArea}}">
-                        <span class="class-title">{{c.title}}: </span>
-                        <span class="class-number">{{c.prefix}} {{c.number}}</span>
-                        <br>
+                <tr ng-repeat="c in plannedCourses" ng-if="c.quarter == 1">
+                    <td>
+                        <div class="course {{c.educationArea}}">
+                            <span class="event" id="{{c.prefix}}{{c.number}}" draggable="true">
+                                <span class="title">{{c.title}}</span>
+                                <span class="class-number">{{c.prefix}} {{c.number}}</span>
+                            </span>
+                        </div>
                     </td>
                 </tr>
             </table>

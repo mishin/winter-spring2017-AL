@@ -22,7 +22,6 @@ public class Course implements Serializable {
     private String title;
     private String educationArea;
     private Integer numUnits;
-    private String quarter = null;
 
     public Course (){};
 
@@ -77,12 +76,4 @@ public class Course implements Serializable {
     public Integer getNumUnits() { return this.numUnits; }
 
     public void setNumUnits(Integer numUnits) { this.numUnits = numUnits; }
-
-    public String getQuarter() {
-        return this.quarter;
-    }
-
-    public void setQuarter(String quarter) {
-        this.quarter = quarter;
-    }
 }
