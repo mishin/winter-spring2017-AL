@@ -305,8 +305,12 @@
     <!-- /#page-content-wrapper -->
     <!-- /#wrapper -->
 
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
     <!-- Bootstrap Core JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
     <!-- Menu Toggle Script -->
     <script>
@@ -314,16 +318,17 @@
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
-     </script>
+    </script>
 
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
     <script>
-         $(document).ready(function() {
+        $(document).ready(function() {
             $('.faq_question').click(function() {
                 if ($(this).parent().is('.open')){
                     $(this).closest('.faq').find('.faq_answer_container').animate({'height':'0'},500);
                     $(this).closest('.faq').removeClass('open');
-                    }else{
+                    } else{
                         var newHeight =$(this).closest('.faq').find('.faq_answer').height() +'px';
                         $(this).closest('.faq').find('.faq_answer_container').animate({'height':newHeight},500);
                         $(this).closest('.faq').addClass('open');
@@ -332,59 +337,57 @@
         });
     </script>
 
-    <!-- Drag and Drop -->
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-            $( function() {
-                $( "#quarter1, #quarter2, #quarter3, #quarter4, #quarter5, #quarter6, #quarter7, #quarter8, #quarter9, #quarter10, #quarter11, #quarter12" ).sortable({
-                    connectWith: ".flowchartQuarter"
-                }).disableSelection();
-            });
+        $( function() {
+            $( "#quarter1, #quarter2, #quarter3, #quarter4, #quarter5, #quarter6, #quarter7, #quarter8, #quarter9, #quarter10, #quarter11, #quarter12" ).sortable({
+                connectWith: ".flowchartQuarter",
+                placeholder: "coursePlaceholder"
+            }).disableSelection();
+        });
     </script>
-
-    <!-- AngularJS -->
     <script>
-            var app = angular.module('SLOChartApp', ['ui.bootstrap']);
-            function loadCatalogCourses ($scope, $http){
-                $http({
-                    method : 'GET',
-                    url : 'catalogDb'
-                }).then(function (response) {
-                    $scope.catalogCourses = response.data;
-                });
-            }
-
-            function loadPlannedCoursesFromCatalog($scope, $http, data) {
-                angular.forEach(data, function(obj) {
-                    $http({
-                        method: 'GET',
-                        url : 'catalogDb/' + obj.courseId + '',
-                    }).then(function (response) {
-                        response.data.quarter = obj.quarter;
-                        response.data.year = obj.year;
-                        $scope.plannedCourses.push(response.data);
-                    });
-                });
-            }
-
-            function loadPlannedCourses($scope, $http){
-                $scope.plannedCourses = [];
-                $http({
-                    method : 'GET',
-                    url : 'plannedCourseDb/studentId/1'
-                }).then(function (response) {
-                    loadPlannedCoursesFromCatalog($scope, $http, response.data);
-                });
-            }
-
-            app.controller('CatalogCtrl', function ($scope, $http){
-                loadCatalogCourses($scope, $http);
+        var app = angular.module('SLOChartApp', ['ui.bootstrap']);
+        function loadCatalogCourses ($scope, $http){
+            $http({
+                method : 'GET',
+                url : 'catalogDb'
+            }).then(function (response) {
+                $scope.catalogCourses = response.data;
             });
+        }
 
-            app.controller('FlowchartCtrl', function ($scope, $http) {
-                loadPlannedCourses($scope, $http);
+        function loadPlannedCoursesFromCatalog($scope, $http, data) {
+            angular.forEach(data, function(obj) {
+                $http({
+                    method: 'GET',
+                    url : 'catalogDb/' + obj.courseId + '',
+                }).then(function (response) {
+                    response.data.quarter = obj.quarter;
+                    response.data.year = obj.year;
+                    $scope.plannedCourses.push(response.data);
+                });
             });
+        }
+
+        function loadPlannedCourses($scope, $http){
+            $scope.plannedCourses = [];
+            $http({
+                method : 'GET',
+                url : 'plannedCourseDb/studentId/1'
+            }).then(function (response) {
+                loadPlannedCoursesFromCatalog($scope, $http, response.data);
+            });
+        }
+
+        app.controller('CatalogCtrl', function ($scope, $http){
+            loadCatalogCourses($scope, $http);
+        });
+
+        app.controller('FlowchartCtrl', function ($scope, $http) {
+            loadPlannedCourses($scope, $http);
+        });
     </script>
 </body>
 </html>
