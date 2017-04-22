@@ -5,9 +5,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
-/**
- * Created by Lauren on 4/6/2017.
- */
 @CrossOrigin
 @RestController
 @RequestMapping("/plannedCourseDb")
