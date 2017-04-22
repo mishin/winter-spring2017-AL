@@ -16,6 +16,8 @@
     <script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.1.0.js"></script>
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- JQuery CSS -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -25,285 +27,274 @@
 </head>
 
 <body>
-<div id="header">
-    <a href="#menu-toggle" class="header-item-left" id="menu-toggle">Catalog</a>
-    <a href="#menu-toggle" class="header-item-left" id="courses-toggle">Required Courses</a>
-    <div class="dropdown">
-        <p class="header-item-left">Saved Flowcharts</p>
-        <div class="dropdown-content">
-            <a href="#">Freshman Flowchart</a>
-            <a href="#">Flowchart Number Two</a>
+    <div id="header">
+        <a href="#menu-toggle" class="header-item-left" id="menu-toggle">Catalog</a>
+        <a href="#menu-toggle" class="header-item-left" id="courses-toggle">Required Courses</a>
+        <div class="dropdown">
+            <p class="header-item-left">Saved Flowcharts</p>
+            <div class="dropdown-content">
+                <a href="#">Freshman Flowchart</a>
+                <a href="#">Flowchart Number Two</a>
+            </div>
         </div>
-    </div>
-    <div class="dropdown">
-        <p class="header-item-left">Export</p>
-        <div class="dropdown-content">
+        <div class="dropdown">
+            <p class="header-item-left">Export</p>
+            <div class="dropdown-content">
+            </div>
         </div>
-    </div>
-    <div class="dropdown">
-        <p class="header-item-left">Save</p>
-        <div class="dropdown-content">
+        <div class="dropdown">
+            <p class="header-item-left">Save</p>
+            <div class="dropdown-content">
+            </div>
         </div>
-    </div>
-    <div class="dropdown">
-        <p class="header-item-left">Options</p>
-        <div class="dropdown-content">
-            <a href="#">Change Major</a>
-            <a href="#">Add/Change Minor</a>
-            <a href="#">Add/Change Concentration</a>
-            <a href="#">Visual Settings</a>
+        <div class="dropdown">
+            <p class="header-item-left">Options</p>
+            <div class="dropdown-content">
+                <a href="#">Change Major</a>
+                <a href="#">Add/Change Minor</a>
+                <a href="#">Add/Change Concentration</a>
+                <a href="#">Visual Settings</a>
+            </div>
         </div>
+        <span style="float:right"><p class="header-item-right">Logout jdoe@calpoly.edu</p></span>
     </div>
-    <span style="float:right"><p class="header-item-right">Logout jdoe@calpoly.edu</p></span>
-</div>
-<div id="wrapper">
+    <div id="wrapper">
 
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-        <h3>Course Catalog</h3>
-        <div ng-controller="CatalogCtrl">
-            <table class="catalogTable">
-                <tr ng-repeat="c in catalogCourses">
-                    <td class="{{c.educationArea}}">
-                        <span class="class-number">{{c.prefix}} {{c.number}}</span>
-                    </td>
-                </tr>
-            </table>
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <h3>Course Catalog</h3>
+            <div ng-controller="CatalogCtrl">
+                <table class="catalogTable">
+                    <tr ng-repeat="c in catalogCourses">
+                        <td class="{{c.educationArea}}">
+                            <span class="class-number">{{c.prefix}} {{c.number}}</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-    </div>
-    <!-- /#sidebar-wrapper -->
+        <!-- /#sidebar-wrapper -->
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div ng-controller="FlowchartCtrl">
-                    <h2>Editing "Freshman Flowchart"</h2>
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div ng-controller="FlowchartCtrl">
+                        <h2>Editing "Freshman Flowchart"</h2>
+                        <br>
+
+                        <div class="flowchart">
+                            <div class="year">
+                                <h1>Freshman</h1>
+                                <div class="flowchartQuarterColumn">
+                                    <h1>Fall</h1>
+                                    <ul id="quarter1" class="flowchartQuarter">
+                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses" ng-if="c.year == 1 && c.quarter == 1">
+                                            {{c.title}}
+                                            <br>
+                                            {{c.prefix}} {{c.number}}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="flowchartQuarterColumn">
+                                    <h1>Winter</h1>
+                                    <ul id="quarter2" class="flowchartQuarter">
+                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses" ng-if="c.year == 1 && c.quarter == 2">
+                                            {{c.title}}
+                                            <br>
+                                            {{c.prefix}} {{c.number}}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="flowchartQuarterColumn">
+                                    <h1>Spring</h1>
+                                    <ul id="quarter3" class="flowchartQuarter">
+                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses" ng-if="c.year == 1 && c.quarter == 3">
+                                            {{c.title}}
+                                            <br>
+                                            {{c.prefix}} {{c.number}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="year">
+                                <h1>Sophomore</h1>
+                                <div class="flowchartQuarterColumn">
+                                    <h1>Fall</h1>
+                                    <ul id="quarter4" class="flowchartQuarter">
+                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses" ng-if="c.year == 2 && c.quarter == 1">
+                                            {{c.title}}
+                                            <br>
+                                            {{c.prefix}} {{c.number}}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="flowchartQuarterColumn">
+                                    <h1>Winter</h1>
+                                    <ul id="quarter5" class="flowchartQuarter">
+                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses" ng-if="c.year == 2 && c.quarter == 2">
+                                            {{c.title}}
+                                            <br>
+                                            {{c.prefix}} {{c.number}}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="flowchartQuarterColumn">
+                                    <h1>Spring</h1>
+                                    <ul id="quarter6" class="flowchartQuarter">
+                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses" ng-if="c.year == 2 && c.quarter == 3">
+                                            {{c.title}}
+                                            <br>
+                                            {{c.prefix}} {{c.number}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="year">
+                                <h1>Junior</h1>
+                                <div class="flowchartQuarterColumn">
+                                    <h1>Fall</h1>
+                                    <ul id="quarter7" class="flowchartQuarter">
+                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses" ng-if="c.year == 3 && c.quarter == 1">
+                                            {{c.title}}
+                                            <br>
+                                            {{c.prefix}} {{c.number}}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="flowchartQuarterColumn">
+                                    <h1>Winter</h1>
+                                    <ul id="quarter8" class="flowchartQuarter">
+                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses" ng-if="c.year == 3 && c.quarter == 2">
+                                            {{c.title}}
+                                            <br>
+                                            {{c.prefix}} {{c.number}}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="flowchartQuarterColumn">
+                                    <h1>Spring</h1>
+                                    <ul id="quarter9" class="flowchartQuarter">
+                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses" ng-if="c.year == 3 && c.quarter == 3">
+                                            {{c.title}}
+                                            <br>
+                                            {{c.prefix}} {{c.number}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="year">
+                                <h1>Senior</h1>
+                                <div class="flowchartQuarterColumn">
+                                    <h1>Fall</h1>
+                                    <ul id="quarter10" class="flowchartQuarter">
+                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses" ng-if="c.year == 4 && c.quarter == 1">
+                                            {{c.title}}
+                                            <br>
+                                            {{c.prefix}} {{c.number}}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="flowchartQuarterColumn">
+                                    <h1>Winter</h1>
+                                    <ul id="quarter11" class="flowchartQuarter">
+                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses" ng-if="c.year == 4 && c.quarter == 2">
+                                            {{c.title}}
+                                            <br>
+                                            {{c.prefix}} {{c.number}}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="flowchartQuarterColumn">
+                                    <h1>Spring</h1>
+                                    <ul id="quarter12" class="flowchartQuarter">
+                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses" ng-if="c.year == 4 && c.quarter == 3">
+                                            {{c.title}}
+                                            <br>
+                                            {{c.prefix}} {{c.number}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>-->
                     <br>
-
-                    <div class="flowchart">
-                        <div class="year">
-                            <h1>Freshman</h1>
-                            <div class="flowchartQuarter">
-                                <h1>Fall</h1>
-                                <div ng-repeat="c in plannedCourses" ng-if="c.year == 1 && c.quarter == 1">
-                                    <div class="course {{c.educationArea}}">
-                                        <span class="event" id="{{c.prefix}}{{c.number}}" draggable="true">
-                                            <span class="title">{{c.title}}</span>
-                                            <span class="class-number">{{c.prefix}} {{c.number}}</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flowchartQuarter">
-                                <h1>Winter</h1>
-                                <div ng-repeat="c in plannedCourses" ng-if="c.year == 1 && c.quarter == 2">
-                                    <div class="course {{c.educationArea}}">
-                                        <span class="event" id="{{c.prefix}}{{c.number}}" draggable="true">
-                                            <span class="title">{{c.title}}</span>
-                                            <span class="class-number">{{c.prefix}} {{c.number}}</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flowchartQuarter">
-                                <h1>Spring</h1>
-                                <div ng-repeat="c in plannedCourses" ng-if="c.year == 1 && c.quarter == 3">
-                                    <div class="course {{c.educationArea}}">
-                                        <span class="event" id="{{c.prefix}}{{c.number}}" draggable="true">
-                                            <span class="title">{{c.title}}</span>
-                                            <span class="class-number">{{c.prefix}} {{c.number}}</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="year">
-                            <h1>Sophomore</h1>
-                            <div class="flowchartQuarter">
-                                <h1>Fall</h1>
-                                <div ng-repeat="c in plannedCourses" ng-if="c.year == 2 && c.quarter == 1">
-                                    <div class="course {{c.educationArea}}">
-                                        <span class="event" id="{{c.prefix}}{{c.number}}" draggable="true">
-                                            <span class="title">{{c.title}}</span>
-                                            <span class="class-number">{{c.prefix}} {{c.number}}</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flowchartQuarter">
-                                <h1>Winter</h1>
-                                <div ng-repeat="c in plannedCourses" ng-if="c.year == 2 && c.quarter == 2">
-                                    <div class="course {{c.educationArea}}">
-                                        <span class="event" id="{{c.prefix}}{{c.number}}" draggable="true">
-                                            <span class="title">{{c.title}}</span>
-                                            <span class="class-number">{{c.prefix}} {{c.number}}</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flowchartQuarter">
-                                <h1>Spring</h1>
-                                <div ng-repeat="c in plannedCourses" ng-if="c.year == 2 && c.quarter == 3">
-                                    <div class="course {{c.educationArea}}">
-                                        <span class="event" id="{{c.prefix}}{{c.number}}" draggable="true">
-                                            <span class="title">{{c.title}}</span>
-                                            <span class="class-number">{{c.prefix}} {{c.number}}</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="year">
-                            <h1>Junior</h1>
-                            <div class="flowchartQuarter">
-                                <h1>Fall</h1>
-                                <div ng-repeat="c in plannedCourses" ng-if="c.year == 3 && c.quarter == 1">
-                                    <div class="course {{c.educationArea}}">
-                                        <span class="event" id="{{c.prefix}}{{c.number}}" draggable="true">
-                                            <span class="title">{{c.title}}</span>
-                                            <span class="class-number">{{c.prefix}} {{c.number}}</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flowchartQuarter">
-                                <h1>Winter</h1>
-                                <div ng-repeat="c in plannedCourses" ng-if="c.year == 3 && c.quarter == 2">
-                                    <div class="course {{c.educationArea}}">
-                                        <span class="event" id="{{c.prefix}}{{c.number}}" draggable="true">
-                                            <span class="title">{{c.title}}</span>
-                                            <span class="class-number">{{c.prefix}} {{c.number}}</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flowchartQuarter">
-                                <h1>Spring</h1>
-                                <div ng-repeat="c in plannedCourses" ng-if="c.year == 3 && c.quarter == 3">
-                                    <div class="course {{c.educationArea}}">
-                                        <span class="event" id="{{c.prefix}}{{c.number}}" draggable="true">
-                                            <span class="title">{{c.title}}</span>
-                                            <span class="class-number">{{c.prefix}} {{c.number}}</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="year">
-                            <h1>Senior</h1>
-                            <div class="flowchartQuarter">
-                                <h1>Fall</h1>
-                                <div ng-repeat="c in plannedCourses" ng-if="c.year == 4 && c.quarter == 1">
-                                    <div class="course {{c.educationArea}}">
-                                        <span class="event" id="{{c.prefix}}{{c.number}}" draggable="true">
-                                            <span class="title">{{c.title}}</span>
-                                            <span class="class-number">{{c.prefix}} {{c.number}}</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flowchartQuarter">
-                                <h1>Winter</h1>
-                                <div ng-repeat="c in plannedCourses" ng-if="c.year == 4 && c.quarter == 2">
-                                    <div class="course {{c.educationArea}}">
-                                        <span class="event" id="{{c.prefix}}{{c.number}}" draggable="true">
-                                            <span class="title">{{c.title}}</span>
-                                            <span class="class-number">{{c.prefix}} {{c.number}}</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flowchartQuarter">
-                                <h1>Spring</h1>
-                                <div ng-repeat="c in plannedCourses" ng-if="c.year == 4 && c.quarter == 3">
-                                    <div class="course {{c.educationArea}}">
-                                        <span class="event" id="{{c.prefix}}{{c.number}}" draggable="true">
-                                            <span class="title">{{c.title}}</span>
-                                            <span class="class-number">{{c.prefix}} {{c.number}}</span>
-                                        </span>
-                                    </div>
+                    <h4>FAQs</h4>
+                    <div class="faq_container">
+                        <div class="faq">
+                            <div class="faq_question"> &#x25BE; How do I add a minor? </div>
+                            <div class="faq_answer_container">
+                                <div class="faq_answer">
+                                    First, click the Options button, then select "Add Minor". Choose the minor that
+                                    you'd like to add, and the Required Courses section will populate with the required
+                                    courses.
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>-->
-                <br>
-                <h4>FAQs</h4>
-                <div class="faq_container">
-                    <div class="faq">
-                        <div class="faq_question"> &#x25BE; How do I add a minor? </div>
-                        <div class="faq_answer_container">
-                            <div class="faq_answer">
-                                First, click the Options button, then select "Add Minor". Choose the minor that
-                                you'd like to add, and the Required Courses section will populate with the required
-                                courses.
+
+                    <div class="faq_container">
+                        <div class="faq">
+                            <div class="faq_question"> &#x25BE; How do I edit a flowchart? </div>
+                            <div class="faq_answer_container">
+                                <div class="faq_answer">
+                                    To edit a flowchart, click Saved Flowcharts, then select the flowchart you wish to
+                                    edit. Drag and drop the classes you wish to move to their new locations.  Click the
+                                    save button and your changes will be persisted. If you would like to print your
+                                    flowchart, click Export.
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="faq_container">
-                    <div class="faq">
-                        <div class="faq_question"> &#x25BE; How do I edit a flowchart? </div>
-                        <div class="faq_answer_container">
-                            <div class="faq_answer">
-                                To edit a flowchart, click Saved Flowcharts, then select the flowchart you wish to
-                                edit. Drag and drop the classes you wish to move to their new locations.  Click the
-                                save button and your changes will be persisted. If you would like to print your
-                                flowchart, click Export.
+                    <div class="faq_container">
+                        <div class="faq">
+                            <div class="faq_question"> &#x25BE; How do I display the flowchart information? </div>
+                            <div class="faq_answer_container">
+                                <div class="faq_answer">
+                                    Open the Catalog menu, then select the flowchart you wish to view information for.
+                                    A popup window will display with the flowchart name, flowchart description, prerequisites,
+                                    and term the flowchart is typically offered.  Once finished, click anywhere outside of
+                                    the box and the popup box will disappear.
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="faq_container">
-                    <div class="faq">
-                        <div class="faq_question"> &#x25BE; How do I display the flowchart information? </div>
-                        <div class="faq_answer_container">
-                            <div class="faq_answer">
-                                Open the Catalog menu, then select the flowchart you wish to view information for.
-                                A popup window will display with the flowchart name, flowchart description, prerequisites,
-                                and term the flowchart is typically offered.  Once finished, click anywhere outside of
-                                the box and the popup box will disappear.
+                    <div class="faq_container">
+                        <div class="faq">
+                            <div class="faq_question"> &#x25BE; How do I make a note? </div>
+                            <div class="faq_answer_container">
+                                <div class="faq_answer">
+                                    Click on the class you would like to make a note on. Within the popup box, click on add note.
+                                    Write what you need in the note. Click the Add Note button and your editing session will end
+                                    Your new note will be displayed whenever you click on that class. The flowchart will have a visual cue showing that the note has been added.
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="faq_container">
-                    <div class="faq">
-                        <div class="faq_question"> &#x25BE; How do I make a note? </div>
-                        <div class="faq_answer_container">
-                            <div class="faq_answer">
-                                Click on the class you would like to make a note on. Within the popup box, click on add note.
-                                Write what you need in the note. Click the Add Note button and your editing session will end
-                                Your new note will be displayed whenever you click on that class. The flowchart will have a visual cue showing that the note has been added.
+                    <div class="faq_container">
+                        <div class="faq">
+                            <div class="faq_question"> &#x25BE; If I have changed my major, how do I change my flowchart to represent my new major? </div>
+                            <div class="faq_answer_container">
+                                <div class="faq_answer">
+                                    First, select the “Edit Profile” option in the sidebar of your home screen. In the editing page, change your major selection to represent your new major and save your profile.
+                                    Select the option “Add New Flowchart”. You will know have a flowchart populated with courses related to your new major.
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="faq_container">
-                    <div class="faq">
-                        <div class="faq_question"> &#x25BE; If I have changed my major, how do I change my flowchart to represent my new major? </div>
-                        <div class="faq_answer_container">
-                            <div class="faq_answer">
-                                First, select the “Edit Profile” option in the sidebar of your home screen. In the editing page, change your major selection to represent your new major and save your profile.
-                                Select the option “Add New Flowchart”. You will know have a flowchart populated with courses related to your new major.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq_container">
-                    <div class="faq">
-                        <div class="faq_question"> &#x25BE; How do I mark a flowchart as complete? </div>
-                        <div class="faq_answer_container">
-                            <div class="faq_answer">
-                                Click the edit button on the sidebar to enter editing mode for the flowchart. Select the flowchart you would like to mark in your flowchart.
-                                A box with options should appear on selection. Choose to mark the flowchart as complete.  Click the save button and your editing session will end.
+                    <div class="faq_container">
+                        <div class="faq">
+                            <div class="faq_question"> &#x25BE; How do I mark a flowchart as complete? </div>
+                            <div class="faq_answer_container">
+                                <div class="faq_answer">
+                                    Click the edit button on the sidebar to enter editing mode for the flowchart. Select the flowchart you would like to mark in your flowchart.
+                                    A box with options should appear on selection. Choose to mark the flowchart as complete.  Click the save button and your editing session will end.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -311,106 +302,89 @@
             </div>
         </div>
     </div>
-</div>
-<!-- /#page-content-wrapper -->
+    <!-- /#page-content-wrapper -->
+    <!-- /#wrapper -->
 
-</div>
-<!-- /#wrapper -->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-<!-- Menu Toggle Script -->
-<script>
+    <!-- Menu Toggle Script -->
+    <script>
         $("#menu-toggle").click(function(e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
+     </script>
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script>
+         $(document).ready(function() {
+            $('.faq_question').click(function() {
+                if ($(this).parent().is('.open')){
+                    $(this).closest('.faq').find('.faq_answer_container').animate({'height':'0'},500);
+                    $(this).closest('.faq').removeClass('open');
+                    }else{
+                        var newHeight =$(this).closest('.faq').find('.faq_answer').height() +'px';
+                        $(this).closest('.faq').find('.faq_answer_container').animate({'height':newHeight},500);
+                        $(this).closest('.faq').addClass('open');
+                    }
+            });
+        });
     </script>
 
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-
-<script>
-     $(document).ready(function() {
-        $('.faq_question').click(function() {
-            if ($(this).parent().is('.open')){
-                $(this).closest('.faq').find('.faq_answer_container').animate({'height':'0'},500);
-                $(this).closest('.faq').removeClass('open');
-                }else{
-                    var newHeight =$(this).closest('.faq').find('.faq_answer').height() +'px';
-                    $(this).closest('.faq').find('.faq_answer_container').animate({'height':newHeight},500);
-                    $(this).closest('.faq').addClass('open');
-                }
-        });
-    });
-</script>
-
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-            $('.event').on("dragstart", function (event) {
-                  var dt = event.originalEvent.dataTransfer;
-                  dt.setData('Text', $(this).attr('id'));
-                });
-            $('table td').on("dragenter dragover drop", function (event) {
-               event.preventDefault();
-               if (event.type === 'drop') {
-                  var data = event.originalEvent.dataTransfer.getData('Text',$(this).attr('id'));
-                  de=$('#'+data).detach();
-                  de.appendTo($(this));
-               };
-           });
-    })
-</script>
-
-<script>
-        var app = angular.module('SLOChartApp', ['ui.bootstrap']);
-        function loadCatalogCourses ($scope, $http){
-            $http({
-                method : 'GET',
-                url : 'catalogDb'
-            }).then(function (response) {
-                $scope.catalogCourses = response.data;
+    <!-- Drag and Drop -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+            $( function() {
+                $( "#quarter1, #quarter2, #quarter3, #quarter4, #quarter5, #quarter6, #quarter7, #quarter8, #quarter9, #quarter10, #quarter11, #quarter12" ).sortable({
+                    connectWith: ".flowchartQuarter"
+                }).disableSelection();
             });
-        }
+    </script>
 
-        function loadPlannedCoursesFromCatalog($scope, $http, data) {
-            angular.forEach(data, function(obj) {
+    <!-- AngularJS -->
+    <script>
+            var app = angular.module('SLOChartApp', ['ui.bootstrap']);
+            function loadCatalogCourses ($scope, $http){
                 $http({
-                    method: 'GET',
-                    url : 'catalogDb/' + obj.courseId + '',
+                    method : 'GET',
+                    url : 'catalogDb'
                 }).then(function (response) {
-                    response.data.quarter = obj.quarter;
-                    response.data.year = obj.year;
-                    $scope.plannedCourses.push(response.data);
+                    $scope.catalogCourses = response.data;
                 });
+            }
+
+            function loadPlannedCoursesFromCatalog($scope, $http, data) {
+                angular.forEach(data, function(obj) {
+                    $http({
+                        method: 'GET',
+                        url : 'catalogDb/' + obj.courseId + '',
+                    }).then(function (response) {
+                        response.data.quarter = obj.quarter;
+                        response.data.year = obj.year;
+                        $scope.plannedCourses.push(response.data);
+                    });
+                });
+            }
+
+            function loadPlannedCourses($scope, $http){
+                $scope.plannedCourses = [];
+                $http({
+                    method : 'GET',
+                    url : 'plannedCourseDb/studentId/1'
+                }).then(function (response) {
+                    loadPlannedCoursesFromCatalog($scope, $http, response.data);
+                });
+            }
+
+            app.controller('CatalogCtrl', function ($scope, $http){
+                loadCatalogCourses($scope, $http);
             });
-        }
 
-        function loadPlannedCourses($scope, $http){
-            $scope.plannedCourses = [];
-            $http({
-                method : 'GET',
-                url : 'plannedCourseDb/studentId/1'
-            }).then(function (response) {
-                loadPlannedCoursesFromCatalog($scope, $http, response.data);
+            app.controller('FlowchartCtrl', function ($scope, $http) {
+                loadPlannedCourses($scope, $http);
             });
-        }
-
-        app.controller('CatalogCtrl', function ($scope, $http){
-            loadCatalogCourses($scope, $http);
-        });
-
-        app.controller('FlowchartCtrl', function ($scope, $http) {
-            loadPlannedCourses($scope, $http);
-        });
-
-</script>
-
+    </script>
 </body>
-
 </html>
