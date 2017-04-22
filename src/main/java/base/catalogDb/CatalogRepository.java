@@ -1,10 +1,10 @@
-package base.courseDb;
+package base.catalogDb;
 
 /**
  * Created by Lauren on 4/6/2017.
  */
 import org.springframework.data.repository.CrudRepository;
 
-public interface CourseRepository extends CrudRepository<Course, Long> {
+public interface CatalogRepository extends CrudRepository<Course, Long> {
 
 }

@@ -1,24 +1,26 @@
 package base.plannedCourseDb;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-/**
- * Created by Lauren on 4/6/2017.
- */
 @Entity
-public class PlannedCourse {
+public class PlannedCourse implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
+    private Long studentId;
     private Long courseId;
-    private String quarter;
+    private Integer quarter; //1-fall 2-winter 3-spring 4-summer
+    private Integer year; //1-freshman, 2-sophomore, etc...
 
     public PlannedCourse() {}
 
-    public PlannedCourse(String courseId, String quarter) {
-        this.setCourseId(courseId);
+    public PlannedCourse(Long studentId, Long courseId, Integer quarter, Integer year) {
+        this.studentId = studentId;
+        this.courseId = courseId;
         this.quarter = quarter;
+        this.year = year;
     }
 
     public Long getId() {
@@ -29,19 +31,35 @@ public class PlannedCourse {
         this.id = id;
     }
 
-    public String getCourseId() {
-        return courseId.toString();
+    public Long getStudentId() {
+        return studentId;
     }
 
-    public void setCourseId(String courseId) {
-        this.courseId = Long.parseLong(courseId);
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
     }
 
-    public String getQuarter() {
+    public Long getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(Long courseId) {
+        this.courseId = courseId;
+    }
+
+    public Integer getQuarter() {
         return quarter;
     }
 
-    public void setQuarter(String quarter) {
+    public void setQuarter(Integer quarter) {
         this.quarter = quarter;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
     }
 }
