@@ -4,6 +4,8 @@ package base.courseDb;
  * Created by Lauren on 4/6/2017.
  */
 
+import com.mongodb.client.MongoCollection;
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +37,10 @@ public class CourseDbController {
     public Course create(@RequestBody Course input) {
         return courseRepository
                 .save(new Course(input.getPrefix(), input.getNumber(), input.getTitle(), input.getEducationArea()));
+    }
+
+    public Course addCourse(Document course) {
+        MongoCollection<Document> courseList = MongoController.db.getCollection("songs");
     }
 
     @DeleteMapping("{id}")
