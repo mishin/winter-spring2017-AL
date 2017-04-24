@@ -5,9 +5,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
-/**
- * Created by Lauren on 4/6/2017.
- */
 @CrossOrigin
 @RestController
 @RequestMapping("/plannedCourseDb")
@@ -30,10 +27,16 @@ public class PlannedCourseDbController {
         return plannedCourseRepository.findOne(id);
     }
 
+    @GetMapping("studentId/{id}")
+    public Iterable<PlannedCourse> findByStudentId(@PathVariable Long id) {
+        return plannedCourseRepository.findByStudentId(id);
+    }
+
     @PostMapping
     public PlannedCourse create(@RequestBody PlannedCourse input) {
         return plannedCourseRepository
-                .save(new PlannedCourse(input.getCourseId(), input.getQuarter()));
+                .save(new PlannedCourse(input.getStudentId(), input.getCourseId(),
+                        input.getQuarter(), input.getYear()));
     }
 
     @DeleteMapping("{id}")
@@ -47,8 +50,10 @@ public class PlannedCourseDbController {
         if (plannedCourse == null) {
             return null;
         } else {
+            plannedCourse.setStudentId(input.getStudentId());
             plannedCourse.setCourseId(input.getCourseId());
             plannedCourse.setQuarter(input.getQuarter());
+            plannedCourse.setYear(input.getYear());
             return plannedCourseRepository.save(plannedCourse);
         }
     }

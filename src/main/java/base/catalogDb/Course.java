@@ -2,7 +2,7 @@
  * Created by Lauren on 4/6/2017.
  */
 
-package base.courseDb;
+package base.catalogDb;
 
 import java.io.Serializable;
 
@@ -18,17 +18,19 @@ public class Course implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String prefix;
-    private String number;
+    private Integer number;
     private String title;
-    private EducationArea educationArea;
+    private String educationArea;
+    private Integer numUnits;
 
     public Course (){};
 
-    public Course(String prefix, String number, String title, String educationArea) {
+    public Course(String prefix, Integer number, String title, String educationArea, Integer numUnits) {
         this.prefix = prefix;
         this.number = number;
         this.title = title;
-        this.setEducationArea(educationArea);
+        this.educationArea = educationArea;
+        this.numUnits = numUnits;
     }
 
     public Long getId() {
@@ -47,11 +49,11 @@ public class Course implements Serializable {
         this.prefix = prefix;
     }
 
-    public String getNumber() {
+    public Integer getNumber() {
         return this.number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
@@ -64,24 +66,14 @@ public class Course implements Serializable {
     }
 
     public String getEducationArea() {
-        if (this.educationArea.equals(EducationArea.MAJOR))
-            return "MAJOR";
-        else if (this.educationArea.equals(EducationArea.SUPPORT))
-            return "SUPPORT";
-        else if (this.educationArea.equals(EducationArea.GE))
-            return "GE";
-        else
-            return "NONE";
+        return this.educationArea;
     }
 
     public void setEducationArea(String educationArea) {
-        if (educationArea.equals("MAJOR"))
-            this.educationArea = EducationArea.MAJOR;
-        else if (educationArea.equals("SUPPORT"))
-            this.educationArea = EducationArea.SUPPORT;
-        else if (educationArea.equals("GE"))
-            this.educationArea = EducationArea.GE;
-        else
-            this.educationArea = EducationArea.NONE;
+        this.educationArea = educationArea;
     }
+
+    public Integer getNumUnits() { return this.numUnits; }
+
+    public void setNumUnits(Integer numUnits) { this.numUnits = numUnits; }
 }

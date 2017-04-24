@@ -26,51 +26,99 @@ body {
 
 /* Flowchart Table CSS */
 
-table.flowchartTable {
-    border-bottom:1px solid #aaaaaa;
+.flowchart {
+    background-color: #EEEEEE;
+    height: 600px;
+  /* hardcoded width but we can set it with javascript or server side to depend on the number of years/quarters */
+    width: 1208px;
+    box-sizing: border-box;
+    font-family: Helvetica;
 }
 
-table.flowchartTable th {
-    text-align:center;
-    border-bottom:2px solid black;
-    border-left:1px solid black;
-    border-right:1px solid black;
-    border-top:1px solid black;
+.year, .flowchartQuarterColumn {
+    float: left;
+    display: inline-block;
+    box-sizing: border-box;
 }
 
-table.flowchartTable td {
-    padding:2px;
-    border-right:1px solid #aaaaaa;
-    border-left:1px solid #aaaaaa;
-    width:100px;
+.year {
+    border: 1px solid black;
+    height: 100%;
+}
+
+.flowchartQuarterColumn {
+    width: 100px;
+    height: calc(100% - 23px);
+    border: 1px solid gray;
+}
+
+.flowchartQuarter {
+    border: 0 0 0 0;
+    padding: 0 0 0 0;
+    margin: 0;
+    min-height: 100%;
+    box-sizing: border-box;
+    list-style-type: none;
+}
+
+.flowchartQuarter li {
+    border: 0 0 0 0;
+    padding: 0 0 0 0;
+    box-sizing: border-box;
+}
+
+.course {
+    height: 100px;
+    text-align: center;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.course.major {
+    background-color: #ffff77;
+}
+.course.support {
+    background-color: #ffbb99;
+}
+.course.ge {
+    background-color: #99ff99;
+}
+
+.coursePlaceholder {
     height:100px;
+    width:100px;
 }
 
-table.flowchartTable td.major {
-    background-color:#ffff77;
-    text-align:center;
-    border:1px solid black;
+.flowchart h1 {
+    margin: 0;
+    padding: 2px;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-table.flowchartTable td.support {
-    background-color:#ffbb99;
-    text-align:center;
-    border:1px solid black;
+.year h1 {
+    font-size: 1.1em;
+    border: 1px solid white;
+    background-color: black;
+    color: white;
 }
 
-table.flowchartTable td.ge {
-    background-color:#99ff99;
-    text-align:center;
-    border:1px solid black;
+.flowchartQuarterColumn h1 {
+    font-size: 1em;
+    border: 1px solid black;
+    background-color: white;
+    color: black;
 }
 
-table.flowchartTable * .class-title {
+.flowchartTable * .class-title {
     font-size:.8em;
     font-style:italic;
     padding-bottom:5px;
 }
 
-table.flowchartTable * .class-number {
+.flowchartTable * .class-number {
     padding-top:5px;
     font-weight:bold;
 }
@@ -86,19 +134,19 @@ table.catalogTable td {
     height:30px;
 }
 
-table.catalogTable td.MAJOR {
+table.catalogTable td.major {
     background-color:#ffff77;
     text-align:center;
     border:1px solid black;
 }
 
-table.catalogTable td.SUPPORT {
+table.catalogTable td.support {
     background-color:#ffbb99;
     text-align:center;
     border:1px solid black;
 }
 
-table.catalogTable td.GE {
+table.catalogTable td.ge {
     background-color:#99ff99;
     text-align:center;
     border:1px solid black;

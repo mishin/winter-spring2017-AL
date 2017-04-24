@@ -1,4 +1,4 @@
-package base.courseDb;
+package base.catalogDb;
 
 /**
  * Created by Lauren on 4/6/2017.
@@ -13,16 +13,16 @@ import java.util.ArrayList;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/courseDb")
-public class CourseDbController {
+@RequestMapping("/catalogDb")
+public class CatalogDbController {
 
     @Autowired
-    private CourseRepository courseRepository;
+    private CatalogRepository catalogRepository;
 
     @GetMapping
     public ArrayList<Course> listAll() {
         ArrayList<Course> items = new ArrayList<Course>();
-        for (Course item : courseRepository.findAll()) {
+        for (Course item : catalogRepository.findAll()) {
             items.add(item);
         }
         return items;
@@ -30,13 +30,14 @@ public class CourseDbController {
 
     @GetMapping("{id}")
     public Course find(@PathVariable Long id) {
-        return courseRepository.findOne(id);
+        return catalogRepository.findOne(id);
     }
 
     @PostMapping
     public Course create(@RequestBody Course input) {
-        return courseRepository
-                .save(new Course(input.getPrefix(), input.getNumber(), input.getTitle(), input.getEducationArea()));
+        return catalogRepository
+                .save(new Course(input.getPrefix(), input.getNumber(), input.getTitle(),
+                        input.getEducationArea(), input.getNumUnits()));
     }
 
     public Course addCourse(Document course) {
@@ -45,12 +46,12 @@ public class CourseDbController {
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
-        courseRepository.delete(id);
+        catalogRepository.delete(id);
     }
 
     @PutMapping("{id}")
     public Course update(@PathVariable Long id, @RequestBody Course input) {
-        Course course = courseRepository.findOne(id);
+        Course course = catalogRepository.findOne(id);
         if (course == null) {
             return null;
         } else {
@@ -58,7 +59,8 @@ public class CourseDbController {
             course.setPrefix(input.getPrefix());
             course.setTitle(input.getTitle());
             course.setEducationArea(input.getEducationArea());
-            return courseRepository.save(course);
+            course.setNumUnits(input.getNumUnits());
+            return catalogRepository.save(course);
         }
     }
 }
