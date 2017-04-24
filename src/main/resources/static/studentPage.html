@@ -89,7 +89,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Fall</h1>
                                     <ul id="quarter1" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses" ng-if="c.year == 1 && c.quarter == 1">
+                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 1">
                                             {{c.title}}
                                             <br>
                                             {{c.prefix}} {{c.number}}
@@ -99,7 +99,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Winter</h1>
                                     <ul id="quarter2" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses" ng-if="c.year == 1 && c.quarter == 2">
+                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 2">
                                             {{c.title}}
                                             <br>
                                             {{c.prefix}} {{c.number}}
@@ -109,7 +109,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Spring</h1>
                                     <ul id="quarter3" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses" ng-if="c.year == 1 && c.quarter == 3">
+                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 3">
                                             {{c.title}}
                                             <br>
                                             {{c.prefix}} {{c.number}}
@@ -343,7 +343,13 @@
         $( function() {
             $( "#quarter1, #quarter2, #quarter3, #quarter4, #quarter5, #quarter6, #quarter7, #quarter8, #quarter9, #quarter10, #quarter11, #quarter12" ).sortable({
                 connectWith: ".flowchartQuarter",
-                placeholder: "coursePlaceholder"
+                placeholder: "coursePlaceholder",
+                receive: function(event, ui) {
+                    console.log("receive");
+                    console.log(event);
+                    console.log(event.target);
+                    console.log(ui);
+                }
             }).disableSelection();
         });
     </script>
@@ -364,8 +370,9 @@
                     method: 'GET',
                     url : 'catalogDb/' + obj.courseId + '',
                 }).then(function (response) {
-                    response.data.quarter = obj.quarter;
                     response.data.year = obj.year;
+                    response.data.quarter = obj.quarter;
+                    response.data.position = obj.position;
                     $scope.plannedCourses.push(response.data);
                 });
             });
