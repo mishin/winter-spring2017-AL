@@ -4,7 +4,10 @@ package base.catalogDb;
  * Created by Lauren on 4/6/2017.
  */
 
+import base.mongoDb.MongoController;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +36,14 @@ public class CatalogDbController {
         return catalogRepository.findOne(id);
     }
 
+    public Course findCourse(Long id) {
+        MongoDatabase db = MongoController.getDatabase();
+        MongoCollection<Document> courseList = db.getCollection("Course");
+        Document docId = new Document("Long", id);
+        MongoCursor<Document> cursor = courseList.find(docId).iterator();
+        return cursor.next();
+    }
+
     @PostMapping
     public Course create(@RequestBody Course input) {
         return catalogRepository
@@ -40,8 +51,11 @@ public class CatalogDbController {
                         input.getEducationArea(), input.getNumUnits()));
     }
 
+    //Adds a document configured to course structure to the MongoDB Course collection
     public Course addCourse(Document course) {
-        MongoCollection<Document> courseList = MongoController.db.getCollection("songs");
+        MongoDatabase db = MongoController.getDatabase();
+        MongoCollection<Document> courseList = db.getCollection("Course");
+        courseList.insertOne(course);
     }
 
     @DeleteMapping("{id}")
