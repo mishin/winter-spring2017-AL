@@ -3,7 +3,7 @@ jdk:
  - oraclejdk8
 addons:
   sonarqube:
-    organization: "AlphaLeader" # the key of the org you chose at step #3
+    # organization: "AlphaLeader" # the key of the org you chose at step #3
     token:
       secure: 5b17735859009b6ad66e7af710e9a7a424a04563 # encrypted value of your token
     branches:

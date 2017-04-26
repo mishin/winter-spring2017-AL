@@ -10,7 +10,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 
 public class MongoController {
-    private static final String USER_URI = "mongodb://heroku_d6c78867:m2t990uta0dlc2p9ear688bvkl@ds155820.mlab.com:55820/heroku_d6c78867";
+    private static final String USER_URI = "mongodb://heroku_c1vgg6jm:813gekflqs9sest76p1gu94h77@ds121171.mlab.com:21171/heroku_c1vgg6jm";
     private static MongoClient client;
     private static MongoDatabase db;
 
