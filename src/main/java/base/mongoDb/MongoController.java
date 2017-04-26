@@ -10,20 +10,20 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 
 public class MongoController {
-    private static final String USER_URI "mongodb://heroku_d6c78867:m2t990uta0dlc2p9ear688bvkl@ds155820.mlab.com:55820/heroku_d6c78867";
+    private static final String USER_URI = "mongodb://heroku_d6c78867:m2t990uta0dlc2p9ear688bvkl@ds155820.mlab.com:55820/heroku_d6c78867";
     private static MongoClient client;
     private static MongoDatabase db;
 
-    public void loginMongo() {
-        client = new MongoClient(uri);
-        db = client.getDatabase(uri.getDatabase());
+    public static void loginMongo() {
+        client = new MongoClient(USER_URI);
+        db = client.getDatabase(USER_URI);
     }
 
-    public void logoutMongo() {
+    public static void logoutMongo() {
         client.close();
     }
 
-    public MongoDatabase getDatabase(){
+    public static MongoDatabase getDatabase(){
         return db;
     }
 }

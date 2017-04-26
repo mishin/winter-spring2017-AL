@@ -1,0 +1,5 @@
+projectKey=alphakey
+serverUrl=http://localhost:9000
+dashboardUrl=http://localhost:9000/dashboard/index/alphakey
+ceTaskId=AVupARVa1Et29ozRFmQr
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AVupARVa1Et29ozRFmQr

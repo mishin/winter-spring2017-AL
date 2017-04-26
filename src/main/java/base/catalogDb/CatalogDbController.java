@@ -36,13 +36,13 @@ public class CatalogDbController {
         return catalogRepository.findOne(id);
     }
 
-    public Course findCourse(Long id) {
+    /*public Course findCourse(Long id) {
         MongoDatabase db = MongoController.getDatabase();
         MongoCollection<Document> courseList = db.getCollection("Course");
         Document docId = new Document("Long", id);
         MongoCursor<Document> cursor = courseList.find(docId).iterator();
         return cursor.next();
-    }
+    }*/
 
     @PostMapping
     public Course create(@RequestBody Course input) {
@@ -52,11 +52,11 @@ public class CatalogDbController {
     }
 
     //Adds a document configured to course structure to the MongoDB Course collection
-    public Course addCourse(Document course) {
+    /*public Course addCourse(Document course) {
         MongoDatabase db = MongoController.getDatabase();
         MongoCollection<Document> courseList = db.getCollection("Course");
         courseList.insertOne(course);
-    }
+    }*/
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
