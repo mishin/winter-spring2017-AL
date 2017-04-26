@@ -14,5 +14,5 @@ install:
  - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script:
  # the following command line builds the project, runs the tests with coverage and then execute the SonarQube analysis
- - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
- # - sonar-scanner
+ # - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+ - sonar-scanner

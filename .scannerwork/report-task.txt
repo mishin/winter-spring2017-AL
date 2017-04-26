@@ -1,5 +1,5 @@
-projectKey=org.springframework:gs-spring-boot
+projectKey=alpha.leader
 serverUrl=http://localhost:9000
-dashboardUrl=http://localhost:9000/dashboard/index/org.springframework:gs-spring-boot
-ceTaskId=AVurI5nzL1HA6raNZNDg
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AVurI5nzL1HA6raNZNDg
+dashboardUrl=http://localhost:9000/dashboard/index/alpha.leader
+ceTaskId=AVurLMu7Hhh8lto5puFX
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AVurLMu7Hhh8lto5puFX
