@@ -27,7 +27,7 @@
 </head>
 
 <body>
-    <div id="header">
+    <div id="header" ng-controller="HeaderCtrl">
         <a href="#menu-toggle" class="header-item-left" id="menu-toggle">Catalog</a>
         <a href="#menu-toggle" class="header-item-left" id="courses-toggle">Required Courses</a>
         <div class="dropdown">
@@ -42,11 +42,7 @@
             <div class="dropdown-content">
             </div>
         </div>
-        <div class="dropdown">
-            <p class="header-item-left">Save</p>
-            <div class="dropdown-content">
-            </div>
-        </div>
+        <a class="header-item-left" ng-click="savePlannedCourses()">Save</a>
         <div class="dropdown">
             <p class="header-item-left">Options</p>
             <div class="dropdown-content">
@@ -394,6 +390,15 @@
 
         app.controller('FlowchartCtrl', function ($scope, $http) {
             loadPlannedCourses($scope, $http);
+        });
+
+        app.controller('HeaderCtrl', function ($scope, $http) {
+            $scope.savePlannedCourses = function() {
+                $scope.savedCourses = [];
+                var quarters = document.getElementsByClassName("flowchartQuarter");
+                console.log(quarters);
+                // TODO
+            };
         });
     </script>
 </body>
