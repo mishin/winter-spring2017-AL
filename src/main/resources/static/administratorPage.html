@@ -1,19 +1,78 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="CatalogApp">
-<head>
-    <title>SLOChart | Administration</title>
-    <meta charset="UTF-8">
+<html lang="en">
+    <head>
+        <title>SLOChart | Administrator</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="administratorPage.css">
-    <!-- Angular CSS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
-    <script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.1.0.js"></script>
-    <!-- JQuery CSS -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="administratorPage.css">
+        <!-- Angular CSS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+        <script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.1.0.js"></script>
+        <!-- Bootstrap Core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- JQuery CSS -->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
 
-</head>
     <body>
-        Admin Page Coming Soon!
+        <div id="header">
+            <a href="#menu-toggle" class="header-item-left" id="catalog-toggle">Catalog</a>
+            <a href="#menu-toggle" class="header-item-left" id="majors-toggle">Majors</a>
+            <a class="header-item-left">Options</a>
+            <span style="float:right"><p class="header-item-right">Logout admin@calpoly.edu</p></span>
+        </div>
+        <div id="wrapper">
+
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <h3>Course Catalog</h3>
+                <div ng-controller="CatalogCtrl">
+                    <table class="catalogTable">
+                        <tr ng-repeat="c in catalogCourses">
+                            <td class="{{c.educationArea}}">
+                                <span class="class-number">{{c.prefix}} {{c.number}}</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- /#sidebar-wrapper -->
+
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+        <!-- /#wrapper -->
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <!-- Menu Toggle Script -->
+        <script>
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+        </script>
+
     </body>
 </html>
