@@ -6,9 +6,6 @@ addons:
     organization: "308309" # the key of the org you chose at step #3
     token:
       secure: 5d8f23498479617e32a0a4cf16c3c41aeeb253b7 # encrypted value of your token
-    branches:
-      - master
-      - Calvin-Mongo
 install:
  - mvn -N io.takari:maven:wrapper
  - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
