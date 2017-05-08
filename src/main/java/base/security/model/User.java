@@ -1,11 +1,11 @@
 package base.security.model;
 
-import java.io.Serializable;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.Email;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import javax.persistence.*;
+    import java.io.Serializable;
+    import org.hibernate.validator.constraints.NotEmpty;
+    import org.hibernate.validator.constraints.Email;
+    import org.springframework.security.core.authority.SimpleGrantedAuthority;
+    import org.springframework.security.core.userdetails.UserDetails;
+    import javax.persistence.*;
 
 @Entity
 @Table(name = "users") // 'user' is a keyword in Postgres
