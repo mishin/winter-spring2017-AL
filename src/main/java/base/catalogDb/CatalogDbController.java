@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/catalogDb")
+@RequestMapping("/Course")
 public class CatalogDbController {
 
     @Autowired
@@ -27,7 +27,7 @@ public class CatalogDbController {
     }
 
     @GetMapping("{id}")
-    public Course find(@PathVariable Long id) {
+    public Course find(@PathVariable String id) {
         return catalogRepository.findOne(id);
     }
 
@@ -39,12 +39,12 @@ public class CatalogDbController {
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable String id) {
         catalogRepository.delete(id);
     }
 
     @PutMapping("{id}")
-    public Course update(@PathVariable Long id, @RequestBody Course input) {
+    public Course update(@PathVariable String id, @RequestBody Course input) {
         Course course = catalogRepository.findOne(id);
         if (course == null) {
             return null;

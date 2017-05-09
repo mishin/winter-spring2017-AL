@@ -4,6 +4,10 @@
 
 package base.catalogDb;
 
+import org.springframework.data.mongodb.core.index.IndexDirection;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -12,20 +16,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@Document(collection = "Course")
 public class Course implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
+    //Id is string in MongoDB
+    private String id;
+    //Organizes documents by prefix and number
+    @Indexed(direction = IndexDirection.ASCENDING)
     private String prefix;
-    private Integer number;
+    @Indexed(direction = IndexDirection.ASCENDING)
+    private int number;
     private String title;
     private String educationArea;
-    private Integer numUnits;
+    private int numUnits;
 
     public Course (){};
 
-    public Course(String prefix, Integer number, String title, String educationArea, Integer numUnits) {
+    public Course(String prefix, int number, String title, String educationArea, int numUnits) {
         this.prefix = prefix;
         this.number = number;
         this.title = title;
@@ -33,11 +42,11 @@ public class Course implements Serializable {
         this.numUnits = numUnits;
     }
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -49,11 +58,11 @@ public class Course implements Serializable {
         this.prefix = prefix;
     }
 
-    public Integer getNumber() {
+    public int getNumber() {
         return this.number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(int number) {
         this.number = number;
     }
 
@@ -73,7 +82,7 @@ public class Course implements Serializable {
         this.educationArea = educationArea;
     }
 
-    public Integer getNumUnits() { return this.numUnits; }
+    public int getNumUnits() { return this.numUnits; }
 
-    public void setNumUnits(Integer numUnits) { this.numUnits = numUnits; }
+    public void setNumUnits(int numUnits) { this.numUnits = numUnits; }
 }
