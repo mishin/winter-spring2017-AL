@@ -3,8 +3,8 @@ package base.security.model;
 /**
  * Created by Marthxander on 5/8/2017.
  */
-import base.course.Course;
-import base.security.CurrentUser;
+import base.catalogDb.Course;
+import base.security.model.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.security.core.Authentication;

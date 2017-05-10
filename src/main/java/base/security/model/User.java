@@ -70,11 +70,11 @@ public class User implements Serializable {
     }
 
     // Setters
-    public void setFirstname(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public void setLastname(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
