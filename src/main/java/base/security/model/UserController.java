@@ -49,7 +49,7 @@ public class UserController  {
     user.setFirstName(reqUser.getFirstName());
     user.setLastName(reqUser.getLastName());
     user.setPassword(new BCryptPasswordEncoder().encode(reqUser.getPassword()));
-    user.setId(id) = System.currentTimeMillis();
+    user.setId(System.currentTimeMillis());
     return userRepository.save(user);
   }
 

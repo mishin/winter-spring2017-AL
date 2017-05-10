@@ -1,6 +1,18 @@
-contact.html
-<div class="jumbotron text-center">
-<h1>Contact Page</h1>
+<body id="signUpPage">
+<h1 id="signUpTitle"> SLOCHART Account</h1>
 
-<p>{{ message }}</p>
+<div ng-controller="createAccountCtrl">
+  <div class ="newAccountBody-div" >
+    <h1 id="body"></h1>
+    <input ng-model="user.firstName" placeholder="First Name" class="txt-input" />
+    <input ng-model="user.lastName" placeholder="Last Name" class="txt-input" />
+    <input ng-model="user.email" placeholder="Email" class="txt-input" />
+    <input ng-model="user.password" placeholder="Password" class="password-input" />
+
+    <button id="signUpBtn" ng-click="save(user)" class="button">Create Account</button>
+
+
+  </div>
 </div>
+</body>
+</html>

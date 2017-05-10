@@ -38,6 +38,27 @@
         //need login function. Lead to Student and Admin pages.
     });
 
-    scotchApp.controller('contactController', function($scope) {
-        $scope.message = 'Contact us! This is just a demo.';
+    scotchApp.controller('contactController', function($scope, $http) {
+        $scope.save = function(user) {
+          		var postRequest = {
+          			method: 'POST',
+          			url:(window.location.hostname === 'localhost' ?
+        				'http://localhost:8080/user' :
+        				'https://cp-alphaleader.herokuapp.com/user'),
+        			data: {
+        				firstName: $scope.user.firstName,
+        				lastName: $scope.user.lastName,
+        				email: $scope.user.email,
+        				password: $scope.user.password,
+        			}
+          		}
+          		$http(postRequest).then(function success(response) {
+          	    window.location.href = '/student';
+        		}, function error(response) {
+        			console.error('error:');
+        			console.error(response.data.message);
+        		});
+          	};
+
+        });
     });
