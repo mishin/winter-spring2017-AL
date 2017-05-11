@@ -128,6 +128,18 @@ public class JwtTokenUtil implements Serializable {
         .compact();
   }
 
+  private String generateAudience(Device device) {
+    String audience = AUDIENCE_UNKNOWN;
+    if (device.isNormal()) {
+      audience = AUDIENCE_WEB;
+    } else if (device.isTablet()) {
+      audience = AUDIENCE_TABLET;
+    } else if (device.isMobile()) {
+      audience = AUDIENCE_MOBILE;
+    }
+    return audience;
+  }
+
   public Boolean canTokenBeRefreshed(String token, Date lastPasswordReset) {
     final Date created = getCreatedDateFromToken(token);
     return !isCreatedBeforeLastPasswordReset(created, lastPasswordReset)
