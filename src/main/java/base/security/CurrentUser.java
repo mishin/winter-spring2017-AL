@@ -1,5 +1,3 @@
-package base.security.model;
-
 /*
  * Copyright 2002-2013 the original author or authors.
  *
@@ -15,11 +13,13 @@ package base.security.model;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-    import org.springframework.security.core.Authentication;
-    import org.springframework.security.core.annotation.AuthenticationPrincipal;
-    import org.springframework.security.core.context.SecurityContextHolder;
+package base.security;
 
-    import java.lang.annotation.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import java.lang.annotation.*;
 
 /**
  * Annotate Spring MVC method arguments with this annotation to indicate you

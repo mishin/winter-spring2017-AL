@@ -58,7 +58,6 @@
         			console.error('error:');
         			console.error(response.data.message);
         		});
-          	};
+        };
 
-        });
     });
