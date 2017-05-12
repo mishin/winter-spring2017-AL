@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="AdministratorApp">
     <head>
         <title>SLOChart | Administrator</title>
         <meta charset="utf-8">
@@ -37,7 +37,7 @@
             <!-- Sidebar -->
             <div id="sidebar-wrapper">
                 <h3>Course Catalog</h3>
-                <div ng-controller="CatalogCtrl">
+                <div>
                     <table class="catalogTable">
                         <tr ng-repeat="c in catalogCourses">
                             <td class="{{c.educationArea}}">
@@ -53,27 +53,28 @@
             <div id="page-content-wrapper">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class = "catalogSection">
-                            <form>
+                        <div class="catalogSection" ng-controller="AddCatalogCourseCtrl">
+                            <form ng-submit="addCatalogCourse()">
                                 <fieldset>
                                     <legend>Add Catalog Course</legend>
                                     Course Id:<br>
-                                    <input type="text" name="courseId"><br>
+                                    <input type="text" ng-model="courseId" name="courseId"><br>
                                     Prefix:<br>
-                                    <input type="text" name="prefix"><br>
+                                    <input type="text" ng-model="prefix" name="prefix"><br>
                                     Number:<br>
-                                    <input type="text" name="number"><br>
+                                    <input type="text" ng-model="number" name="number"><br>
                                     Title:<br>
-                                    <input type="text" name="title"><br>
+                                    <input type="text" ng-model="title" name="title"><br>
                                     Education Area:<br>
-                                    <input type="text" name="educationArea"><br>
+                                    <input type="text" ng-model="educationArea" name="educationArea"><br>
                                     Number of Units:<br>
-                                    <input type="text" name="numUnits"><br><br>
+                                    <input type="text" ng-model="numUnits" name="numUnits"><br><br>
                                     <input type="submit" value="Add">
+                                    <p>{{addMessage}}</p>
                                 </fieldset>
                             </form>
                         </div>
-                        <div class = "catalogSection">
+                        <div class="catalogSection">
                             <form>
                                 <fieldset>
                                     <legend>Edit Catalog Course</legend>
@@ -93,7 +94,7 @@
                                 </fieldset>
                             </form>
                         </div>
-                        <div class = "catalogSection">
+                        <div class="catalogSection">
                             <form>
                                 <fieldset>
                                     <legend>Delete Catalog Course</legend>
@@ -122,6 +123,40 @@
                 $("#wrapper").toggleClass("toggled");
             });
         </script>
+        <script>
+        var app = angular.module('AdministratorApp', []);
 
+        app.controller('AddCatalogCourseCtrl', function ($scope, $http){
+            $scope.addMessage = "";
+            $scope.addCatalogCourse = function() {
+                console.log(this.courseId);
+                if ($.isNumeric(this.courseId) && $.isNumeric(this.number) && $.isNumeric(this.numUnits)) {
+                    $http({
+                        method : 'POST',
+                        url : 'catalogcourses',
+                        data: {
+                            courseId: this.courseId,
+                            prefix: this.prefix,
+                            number: this.number,
+                            title: this.title,
+                            educationArea: this.educationArea,
+                            numUnits: this.numUnits
+                        }
+                    }).then(function (response) {
+                        console.log("check response to see if the backend says its all cool");
+                        console.log("then give user either error or confirmation");
+                        console.log(response.status);
+                        if (response.status < 300) {
+                            $scope.addMessage = "Course " + response.data.prefix + " " + response.data.number + " successfully added.";
+                        }
+                        else {
+                            $scope.addMessage = "There was an error adding course " + response.data.prefix + " " + response.data.number + ".";
+                        }
+                    });
+                }
+            }
+        });
+
+    </script>
     </body>
 </html>

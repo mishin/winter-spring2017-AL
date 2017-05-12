@@ -2,13 +2,11 @@
  * Created by Lauren on 4/6/2017.
  */
 
-package base.catalogDb;
+package base.catalogCourseDb;
 
 import java.io.Serializable;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity

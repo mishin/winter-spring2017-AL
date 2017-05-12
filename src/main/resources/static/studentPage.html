@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="SLOChartApp">
+<html lang="en" ng-app="StudentApp">
 
 <head>
     <title>SLOChart | Student</title>
@@ -65,7 +65,7 @@
             <h3>Course Catalog</h3>
             <div ng-controller="CatalogCtrl">
                 <table class="catalogTable">
-                    <tr ng-repeat="c in catalogCourses">
+                    <tr ng-repeat="c in catalogCourses | orderBy:['prefix', 'number']">
                         <td class="{{c.educationArea}}">
                             <span class="class-number">{{c.prefix}} {{c.number}}</span>
                         </td>
@@ -348,7 +348,8 @@
         });
     </script>
     <script>
-        var app = angular.module('SLOChartApp', ['ui.bootstrap']);
+        var app = angular.module('StudentApp', ['ui.bootstrap']);
+
         function loadCatalogCourses ($scope, $http){
             $http({
                 method : 'GET',
@@ -361,25 +362,40 @@
         }
 
         function loadPlannedCoursesFromCatalog($scope, $http, data) {
-            angular.forEach(data, function(obj) {
-                $http({
-                    method: 'GET',
-                    url : 'catalogDb/' + obj.courseId + '',
-                }).then(function (response) {
-                    response.data.quarter = obj.quarter;
-                    response.data.year = obj.year;
-                    $scope.plannedCourses.push(response.data);
+            $http({
+                method : 'GET',
+                url : 'catalogcourses'
+            }).then(function (response) {
+                angular.forEach(data, function(plannedCourse) {
+                    angular.forEach(response.data._embedded.catalogcourses, function(catalogCourse) {
+                        console.log(catalogCourse.courseId == plannedCourse.courseId);
+                        if(catalogCourse.courseId == plannedCourse.courseId) {
+                            catalogCourse.year = plannedCourse.year;
+                            catalogCourse.quarter = plannedCourse.quarter;
+                            catalogCourse.position = plannedCourse.position;
+
+                            $scope.plannedCourses.push(catalogCourse);
+                        }
+                    });
                 });
+
+                console.log("planned courses");
+                console.log($scope.plannedCourses);
             });
         }
 
+
         function loadPlannedCourses($scope, $http){
             $scope.plannedCourses = [];
-            $http({
-                method : 'GET',
-                url : 'plannedCourseDb/studentId/1'
-            }).then(function (response) {
-                loadPlannedCoursesFromCatalog($scope, $http, response.data);
+            $http.get("/flowcharts")
+            .then(function (response) {
+                console.log("move this to the back end later");
+                console.log(response.data._embedded.flowcharts);
+                angular.forEach(response.data._embedded.flowcharts, function(flowchart) {
+                    if(flowchart.studentId == 1) {
+                        loadPlannedCoursesFromCatalog($scope, $http, flowchart.plannedCourses);
+                    }
+                });
             });
         }
 
