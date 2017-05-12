@@ -1,26 +1,15 @@
 language: java
 jdk:
-  - oraclejdk8
-# By default TravisCi will call gradlew check'
-# script:
+ - oraclejdk8
+addons:
+  sonarqube:
+    organization: "308309" # the key of the org you chose at step #3
+    token:
+      secure: 5d8f23498479617e32a0a4cf16c3c41aeeb253b7 # encrypted value of your token
+install:
+ - mvn -N io.takari:maven:wrapper
+ - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script:
-  - ./gradlew clean build -i --continue
-
-notifications:
-  # Email notifications are disabled to not annoy anybody.
-  # See http://about.travis-ci.org/docs/user/build-configuration/ to learn more
-  # about configuring notification recipients and more.
-  # webhooks:
-  email: false
-# services:
-
-before_install:
-  - chmod +x gradlew
-
-before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+ # the following command line builds the project, runs the tests with coverage and then execute the SonarQube analysis
+ # - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+ - sonar-scanner

@@ -33,6 +33,8 @@ Deployment Diagram V1.0
 - Version Control: github
 - Project Management: Trello
 - Prototyping: Invision
+- Code Style Check: TravisCI
+- Code Quality Check: SonarQube
 - Team Chat: Slack
 
 ## 6.	Project Breakdown, Timeline and Milestones
@@ -54,3 +56,7 @@ Deployment Diagram V1.0
 ## 7.	Risks and Uncertainties
 
 One uncertainty is what access to Cal Poly's API we will have access to, and therefore how easy it will be to get information on classes required for majors, prerequisites, etc.  Another uncertainty is how fleshed-out we will be able to make the mobile version, if we mostly focus on the desktop version.  Furthermore, since we are planning on introducing a not insignificant amount of new features, a risk is that we will not be able to complete everything in the time that we have.
+
+## 8. Implementation of DevOPs
+
+We integrated TravisCI in order to automate our testing during our commits into github. We are hoping that this application of Travis CI will help our developer team catch more bugs and errors in code so that our developing process can be faster. In addition to Travis CI, our code quality will be checked using SonarQube. SonarQube is an open source platform for continuous code quality. 

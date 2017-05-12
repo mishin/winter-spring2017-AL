@@ -14,7 +14,7 @@
                 controller  : 'mainController'
             })
 
-            // route for the about page
+            // route for the login page
             .when('/about', {
                 templateUrl : 'pages/about.html',
                 controller  : 'aboutController'
@@ -30,13 +30,34 @@
     // create the controller and inject Angular's $scope
     scotchApp.controller('mainController', function($scope) {
         // create a message to display in our view
-        $scope.message = 'Everyone come and see how good I look!';
+        $scope.message = 'This page is a work in progress';
     });
 
     scotchApp.controller('aboutController', function($scope) {
         $scope.message = 'Look! I am an about page.';
+        //need login function. Lead to Student and Admin pages.
     });
 
-    scotchApp.controller('contactController', function($scope) {
-        $scope.message = 'Contact us! JK. This is just a demo.';
+    scotchApp.controller('contactController', function($scope, $http) {
+        $scope.save = function(user) {
+          		var postRequest = {
+          			method: 'POST',
+          			url:(window.location.hostname === 'localhost' ?
+        				'http://localhost:8080/user' :
+        				'https://cp-alphaleader.herokuapp.com/user'),
+        			data: {
+        				firstName: $scope.user.firstName,
+        				lastName: $scope.user.lastName,
+        				email: $scope.user.email,
+        				password: $scope.user.password,
+        			}
+          		}
+          		$http(postRequest).then(function success(response) {
+          	    window.location.href = '/student';
+        		}, function error(response) {
+        			console.error('error:');
+        			console.error(response.data.message);
+        		});
+        };
+
     });
