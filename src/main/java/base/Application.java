@@ -1,5 +1,8 @@
 package base;
 
+import base.catalogCourseDb.CatalogCourseRepository;
+import base.studentFlowchartDb.FlowchartRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -7,8 +10,17 @@ import org.springframework.context.ApplicationContext;
 @SpringBootApplication
 public class Application {
 
+    @Autowired private static CatalogCourseRepository catalogCourseRepository;
+    @Autowired private static FlowchartRepository studentFlowchartRepository;
+
     public static void main(String[] args) {
-        System.out.println("GOT HERE");
         ApplicationContext context = SpringApplication.run(Application.class, args);
+
+        //MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
+
+        //MongoDatabase database = mongoClient.getDatabase("SlochartDatabase");
+        //MongoCollection catalogCourses = database.getCollection("CatalogCourses");
+
+        //mongoClient.close(); //TODO on application shutdown
     }
 }
