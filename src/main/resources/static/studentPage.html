@@ -357,8 +357,6 @@
                 method : 'GET',
                 url : 'catalogcourses'
             }).then(function (response) {
-                console.log(response.data);
-                console.log(response.data._embedded);
                 $scope.catalogCourses = response.data._embedded.catalogcourses;
             });
         }
@@ -370,7 +368,6 @@
             }).then(function (response) {
                 angular.forEach(data, function(plannedCourse) {
                     angular.forEach(response.data._embedded.catalogcourses, function(catalogCourse) {
-                        console.log(catalogCourse.courseId == plannedCourse.courseId);
                         if(catalogCourse.courseId == plannedCourse.courseId) {
                             catalogCourse.year = plannedCourse.year;
                             catalogCourse.quarter = plannedCourse.quarter;
