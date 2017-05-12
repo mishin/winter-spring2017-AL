@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationContext;
 public class Application {
 
     public static void main(String[] args) {
+        System.out.println("GOT HERE");
         ApplicationContext context = SpringApplication.run(Application.class, args);
     }
 }
