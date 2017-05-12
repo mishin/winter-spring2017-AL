@@ -12,20 +12,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Course implements Serializable {
+public class CatalogCourse implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
+    @Id private String id;
+    private Integer courseId;
     private String prefix;
     private Integer number;
     private String title;
     private String educationArea;
     private Integer numUnits;
 
-    public Course (){};
+    public CatalogCourse(){};
 
-    public Course(String prefix, Integer number, String title, String educationArea, Integer numUnits) {
+    public CatalogCourse(Integer courseId, String prefix, Integer number, String title, String educationArea, Integer numUnits) {
+        this.courseId = courseId;
         this.prefix = prefix;
         this.number = number;
         this.title = title;
@@ -33,13 +33,17 @@ public class Course implements Serializable {
         this.numUnits = numUnits;
     }
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
+
+    public Integer getCourseId() { return this.courseId; }
+
+    public void setCourseId(Integer courseId) { this.courseId = courseId; }
 
     public String getPrefix() {
         return this.prefix;
