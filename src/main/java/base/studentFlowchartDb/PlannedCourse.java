@@ -14,7 +14,7 @@ public class PlannedCourse implements Serializable {
 
     public PlannedCourse() {}
 
-    public PlannedCourse(Long courseId, Integer year, Integer quarter, Integer position) {
+    public PlannedCourse(Long courseId, Integer quarter, Integer year, Integer position) {
         this.courseId = courseId;
         this.year = year;
         this.quarter = quarter;
