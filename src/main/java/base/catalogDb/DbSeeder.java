@@ -1,5 +1,7 @@
 package base.catalogDb;
 
+import base.MongoController;
+import com.mongodb.Mongo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -11,10 +13,17 @@ import java.util.List;
  */
 @Component
 public class DbSeeder implements CommandLineRunner {
-    private CatalogRepository courseCatalog;
+    private CatalogRepository catalogRepository;
+
+    public DbSeeder(CatalogRepository repository) {
+        catalogRepository = repository;
+    }
 
     @Override
     public void run(String ... strings) throws Exception {
+        MongoController.loginMongo();
+        CatalogDbController.collection = MongoController.getCollection("Course");
+        /*
         Course cpe101 = new Course(
             "CPE",
             101,
@@ -39,7 +48,10 @@ public class DbSeeder implements CommandLineRunner {
                     4
         );
 
-        List<Course> courses = Arrays.asList(cpe101, cpe202, cpe203);
-        courseCatalog.save(courses);
+        catalogRepository.deleteAll();
+
+        List<Course> courses = Arrays.asList(cpe203, cpe101, cpe202);
+        catalogRepository.save(courses);
+        */
     }
 }

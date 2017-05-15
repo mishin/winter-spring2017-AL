@@ -4,8 +4,6 @@
 
 package base.catalogDb;
 
-import org.springframework.data.mongodb.core.index.IndexDirection;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
@@ -23,10 +21,7 @@ public class Course implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO)
     //Id is string in MongoDB
     private String id;
-    //Organizes documents by prefix and number
-    @Indexed(direction = IndexDirection.ASCENDING)
     private String prefix;
-    @Indexed(direction = IndexDirection.ASCENDING)
     private int number;
     private String title;
     private String educationArea;
@@ -40,6 +35,15 @@ public class Course implements Serializable {
         this.title = title;
         this.educationArea = educationArea;
         this.numUnits = numUnits;
+    }
+
+    public org.bson.Document getDocument() {
+        return new org.bson.Document()
+                .append("prefix", prefix)
+                .append("number", number)
+                .append("title", title)
+                .append("educationArea", educationArea)
+                .append("numUnits", numUnits);
     }
 
     public String getId() {
