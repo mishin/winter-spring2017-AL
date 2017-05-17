@@ -13,7 +13,7 @@ import javax.persistence.Id;
 /**
  * Created by Lauren on 4/6/2017.
  */
-@Entity
+
 public class Item implements Serializable {
 
     @Id

@@ -13,8 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
-@Document(collection = "Course")
+@Document(collection = "course")
 public class CatalogCourse implements Serializable {
 
     @Id

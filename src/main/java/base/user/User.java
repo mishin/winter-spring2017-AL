@@ -17,6 +17,7 @@ package base.user;
  */
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
@@ -32,8 +33,8 @@ import java.io.Serializable;
  *
  * @author Rob Winch
  */
-@Entity
-@Table(name="users") // 'user' is a keyword in Postgres
+
+@Document(collection = "user")
 public class User implements Serializable {
 
     @Id
