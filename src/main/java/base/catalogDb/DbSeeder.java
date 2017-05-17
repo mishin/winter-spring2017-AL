@@ -1,7 +1,6 @@
 package base.catalogDb;
 
-import base.MongoController;
-import com.mongodb.Mongo;
+import base.catalogCourseDb.CatalogCourse;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -21,37 +20,38 @@ public class DbSeeder implements CommandLineRunner {
 
     @Override
     public void run(String ... strings) throws Exception {
-        MongoController.loginMongo();
-        CatalogDbController.collection = MongoController.getCollection("Course");
-        /*
-        Course cpe101 = new Course(
-            "CPE",
-            101,
-            "Fundamentals of Computer Science",
-            "",
-            4
+
+        CatalogCourse cpe101 = new CatalogCourse(
+                1,
+                "CPE",
+                101,
+                "Fundamentals of Computer Science",
+                "",
+                4
         );
 
-        Course cpe202 = new Course(
-            "CPE",
-                    202,
-                    "Data Structures",
-                    "",
-                    4
+        CatalogCourse cpe202 = new CatalogCourse(
+                2,
+                "CPE",
+                202,
+                "Data Structures",
+                "",
+                4
         );
 
-        Course cpe203 = new Course(
-            "CPE",
-                    203,
-                    "Project-Based Object-Oriented Programming and Design",
-                    "",
-                    4
+        CatalogCourse cpe203 = new CatalogCourse(
+                3,
+                "CPE",
+                203,
+                "Project-Based Object-Oriented Programming and Design",
+                "",
+                4
         );
 
         catalogRepository.deleteAll();
 
-        List<Course> courses = Arrays.asList(cpe203, cpe101, cpe202);
+        List<CatalogCourse> courses = Arrays.asList(cpe203, cpe101, cpe202);
         catalogRepository.save(courses);
-        */
     }
+
 }

@@ -31,9 +31,11 @@ public class UserController  {
 
     @RequestMapping("/all")
     public List<User> getUsers(@CurrentUser UserDetails currentUser) {
-        ArrayList<User> users = new ArrayList<>();
+        ArrayList<User> users = new ArrayList<User>();
         if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-            userRepository.findAll().forEach(users::add);
+            for (User u : userRepository.findAll()) {
+                users.add(u);
+            }
         }
         return users;
     }

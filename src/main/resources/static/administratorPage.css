@@ -92,6 +92,16 @@ body {
     background-color: #3e8e41;
 }
 
+/* Page CSS */
+
+.catalogSection {
+    margin: 20px;
+    float: left;
+}
+
+.catalogSection input {
+}
+
 /* Toggle Styles */
 
 #wrapper {

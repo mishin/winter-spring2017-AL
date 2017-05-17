@@ -2,7 +2,7 @@
  * Created by Lauren on 4/6/2017.
  */
 
-package base.catalogDb;
+package base.catalogCourseDb;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,21 +15,22 @@ import javax.persistence.Id;
 
 @Entity
 @Document(collection = "Course")
-public class Course implements Serializable {
+public class CatalogCourse implements Serializable {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    //Id is string in MongoDB
-    private String id;
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private String id; //Id is string in MongoDB
+    private int courseId;
     private String prefix;
     private int number;
     private String title;
     private String educationArea;
     private int numUnits;
 
-    public Course (){};
+    public CatalogCourse(){};
 
-    public Course(String prefix, int number, String title, String educationArea, int numUnits) {
+    public CatalogCourse(int courseId, String prefix, int number, String title, String educationArea, int numUnits) {
+        this.courseId = courseId;
         this.prefix = prefix;
         this.number = number;
         this.title = title;
@@ -53,6 +54,10 @@ public class Course implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
+
+    public int getCourseId() { return this.courseId; }
+
+    public void setCourseId(int courseId) { this.courseId = courseId; }
 
     public String getPrefix() {
         return this.prefix;
