@@ -8,16 +8,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
 
 @Document(collection = "course")
 public class CatalogCourse implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
     private String id; //Id is string in MongoDB
     private int courseId;
     private String prefix;

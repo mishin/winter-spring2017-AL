@@ -1,12 +1,14 @@
 package base.studentFlowchartDb;
 
+import org.springframework.data.annotation.Id;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
 public class PlannedCourse implements Serializable {
 
-    @Id private String id;
+    @Id
+    private String id;
     private Long courseId;
     private Integer year; //1-freshman, 2-sophomore, etc...
     private Integer quarter; //1-fall 2-winter 3-spring 4-summer

@@ -17,6 +17,7 @@ package base.user;
  */
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -38,7 +39,6 @@ import java.io.Serializable;
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotEmpty(message = "First name is required.")
@@ -49,7 +49,6 @@ public class User implements Serializable {
 
     @Email(message = "Please provide a valid email address.")
     @NotEmpty(message = "Email is required.")
-    @Column(unique=true, nullable = false)
     private String email;
 
     @NotEmpty(message = "Password is required.")
