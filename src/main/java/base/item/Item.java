@@ -1,23 +1,19 @@
 package base.item;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 /**
  * Created by Lauren on 4/6/2017.
  */
-@Entity
+
 public class Item implements Serializable {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String word;
 

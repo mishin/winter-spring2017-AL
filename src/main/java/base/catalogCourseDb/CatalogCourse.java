@@ -4,31 +4,42 @@
 
 package base.catalogCourseDb;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
 
-@Entity
+@Document(collection = "course")
 public class CatalogCourse implements Serializable {
 
-    @Id private String id;
-    private Integer courseId;
+    @Id
+    private String id; //Id is string in MongoDB
+    private int courseId;
     private String prefix;
-    private Integer number;
+    private int number;
     private String title;
     private String educationArea;
-    private Integer numUnits;
+    private int numUnits;
 
     public CatalogCourse(){};
 
-    public CatalogCourse(Integer courseId, String prefix, Integer number, String title, String educationArea, Integer numUnits) {
+    public CatalogCourse(int courseId, String prefix, int number, String title, String educationArea, int numUnits) {
         this.courseId = courseId;
         this.prefix = prefix;
         this.number = number;
         this.title = title;
         this.educationArea = educationArea;
         this.numUnits = numUnits;
+    }
+
+    public org.bson.Document getDocument() {
+        return new org.bson.Document()
+                .append("prefix", prefix)
+                .append("number", number)
+                .append("title", title)
+                .append("educationArea", educationArea)
+                .append("numUnits", numUnits);
     }
 
     public String getId() {
@@ -39,9 +50,9 @@ public class CatalogCourse implements Serializable {
         this.id = id;
     }
 
-    public Integer getCourseId() { return this.courseId; }
+    public int getCourseId() { return this.courseId; }
 
-    public void setCourseId(Integer courseId) { this.courseId = courseId; }
+    public void setCourseId(int courseId) { this.courseId = courseId; }
 
     public String getPrefix() {
         return this.prefix;
@@ -51,11 +62,11 @@ public class CatalogCourse implements Serializable {
         this.prefix = prefix;
     }
 
-    public Integer getNumber() {
+    public int getNumber() {
         return this.number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(int number) {
         this.number = number;
     }
 
@@ -75,7 +86,7 @@ public class CatalogCourse implements Serializable {
         this.educationArea = educationArea;
     }
 
-    public Integer getNumUnits() { return this.numUnits; }
+    public int getNumUnits() { return this.numUnits; }
 
-    public void setNumUnits(Integer numUnits) { this.numUnits = numUnits; }
+    public void setNumUnits(int numUnits) { this.numUnits = numUnits; }
 }

@@ -1,6 +1,7 @@
 package base.studentFlowchartDb;
 
-import org.h2.table.Plan;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,13 +11,13 @@ import java.util.List;
 /**
  * Created by Lauren on 4/6/2017.
  */
-@Entity
+@Document(collection = "flowchart")
 public class Flowchart implements Serializable {
 
-    @Id private String id;
+    @Id
+    private String id;
     private Long studentId;
     private String name;
-    @ElementCollection(targetClass=PlannedCourse.class)
     private List<PlannedCourse> plannedCourses = new ArrayList<PlannedCourse>();
 
     public Flowchart() {}
