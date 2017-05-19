@@ -41,6 +41,7 @@ public class UserController  {
     @PostMapping
     public User create(@Valid @RequestBody User reqUser) {
         User user = new User();
+        user.setId(System.currentTimeMillis());
         user.setEmail(reqUser.getEmail());
         user.setFirstName(reqUser.getFirstName());
         user.setLastName(reqUser.getLastName());
