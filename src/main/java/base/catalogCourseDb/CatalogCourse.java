@@ -33,15 +33,6 @@ public class CatalogCourse implements Serializable {
         this.numUnits = numUnits;
     }
 
-    public org.bson.Document getDocument() {
-        return new org.bson.Document()
-                .append("prefix", prefix)
-                .append("number", number)
-                .append("title", title)
-                .append("educationArea", educationArea)
-                .append("numUnits", numUnits);
-    }
-
     public String getId() {
         return this.id;
     }
