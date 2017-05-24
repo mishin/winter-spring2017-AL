@@ -33,7 +33,7 @@
         $scope.message = 'This page is a work in progress';
     });
 
-    scotchApp.controller('aboutController', function($scope) {
+    scotchApp.controller('aboutController', function($scope, $http) {
         $scope.message = 'Look! I am an about page.';
         //need login function. Lead to Student and Admin pages.
     });
