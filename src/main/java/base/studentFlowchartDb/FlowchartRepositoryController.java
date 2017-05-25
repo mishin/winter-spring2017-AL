@@ -28,6 +28,11 @@ public class FlowchartRepositoryController {
         return items;
     }
 
+    //@GetMapping("{id}")
+    //public Flowchart find(@PathVariable String id) {
+       // return flowchartRepository.findOne(id);
+    //}
+
     @GetMapping("{id}")
     public Flowchart findByStudentId(@PathVariable String id) {
 
@@ -35,9 +40,6 @@ public class FlowchartRepositoryController {
             if (item.getStudentId().toString().equals(id)) return item;
         }
 
-        //TODO use the given student ID to get the student's major
-        //TODO then instead of returning a new, empty flowchart, we can return the default
-        //TODO flowchart for that major.
         return new Flowchart();
     }
 
