@@ -2,7 +2,7 @@
  * Created by Lauren on 4/6/2017.
  */
 
-package base.catalogCourseDb;
+package base.catalogDb;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -40,6 +40,7 @@ public class CatalogCourse implements Serializable {
 
     public org.bson.Document getDocument() {
         return new org.bson.Document()
+                .append("courseId", courseId)
                 .append("prefix", prefix)
                 .append("number", number)
                 .append("title", title)

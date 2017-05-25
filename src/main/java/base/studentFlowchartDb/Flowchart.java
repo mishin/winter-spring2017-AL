@@ -8,23 +8,20 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Lauren on 4/6/2017.
- */
 @Document(collection = "flowchart")
 public class Flowchart implements Serializable {
 
     @Id
     private String id;
     private Long studentId;
-    private String name;
+    private String flowchartName;
     private List<PlannedCourse> plannedCourses = new ArrayList<PlannedCourse>();
 
     public Flowchart() {}
 
     public Flowchart(Long studentId, String name, List<PlannedCourse> plannedCourses) {
         this.studentId = studentId;
-        this.name = name;
+        this.flowchartName = name;
         this.plannedCourses.addAll(plannedCourses);
     }
 
@@ -44,12 +41,12 @@ public class Flowchart implements Serializable {
         this.studentId = studentId;
     }
 
-    public String getName() {
-        return name;
+    public String getFlowchartName() {
+        return flowchartName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFlowchartName(String flowchartName) {
+        this.flowchartName = flowchartName;
     }
 
     public List<PlannedCourse> getPlannedCourses() {

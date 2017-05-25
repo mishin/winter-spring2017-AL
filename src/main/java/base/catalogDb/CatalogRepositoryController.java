@@ -1,11 +1,5 @@
 package base.catalogDb;
 
-/**
- * Created by Lauren on 4/6/2017.
- */
-
-import base.catalogCourseDb.CatalogCourse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,13 +7,13 @@ import java.util.ArrayList;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/CatalogCourse")
-public class CatalogDbController {
+@RequestMapping("/catalog")
+public class CatalogRepositoryController {
 
     @Autowired
     private CatalogRepository catalogRepository;
 
-    public CatalogDbController(CatalogRepository repository) {
+    public CatalogRepositoryController(CatalogRepository repository) {
         catalogRepository = repository;
     }
 

@@ -130,10 +130,10 @@
             $scope.addMessage = "";
             $scope.addCatalogCourse = function() {
                 console.log(this.courseId);
-                if ($.isNumeric(this.courseId) && $.isNumeric(this.number) && $.isNumeric(this.numUnits)) {
+                if ($.isNumeric(this.number) && $.isNumeric(this.numUnits)) {
                     $http({
                         method : 'POST',
-                        url : 'catalogcourses',
+                        url : 'catalog',
                         data: {
                             courseId: this.courseId,
                             prefix: this.prefix,
