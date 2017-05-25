@@ -28,41 +28,41 @@ public class DbSeeder implements CommandLineRunner {
     public void run(String ... strings) throws Exception {
 
         List<CatalogCourse> courses = new ArrayList<CatalogCourse>();
-
-        BufferedReader br = new BufferedReader(new FileReader("coursecatalog.txt"));
-
-        try {
-            String currentLine;
-            CatalogCourse currentCourse;
-
-            while ((currentLine = br.readLine()) != null) {
-                System.out.println(currentLine);
-                String courseTokens[] = currentLine.split("},\\{");
-
-                for (String courseToken : courseTokens) {
-
-                    String tokens[] = courseToken.trim().split(",");
-                    currentCourse = new CatalogCourse(
-                            Integer.parseInt(tokens[0].split(":")[1].trim()),
-                            tokens[2].split(":")[1].trim().
-                                    substring(1, tokens[2].split(":")[1].trim().length()-1),
-                            Integer.parseInt(
-                                    tokens[3].split(":")[1].trim().
-                                    substring(1, tokens[3].split(":")[1].trim().length()-1)),
-
-                            tokens[4].split(":")[1].trim().
-                                    substring(1, tokens[4].split(":")[1].trim().length()-1),
-                            "major",
-                            Integer.parseInt(
-                                    tokens[5].split(":")[1].trim().
-                                    substring(1, tokens[5].split(":")[1].trim().length()-1))
-                    );
-                    courses.add(currentCourse);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//
+//        BufferedReader br = new BufferedReader(new FileReader("coursecatalog.txt"));
+//
+//        try {
+//            String currentLine;
+//            CatalogCourse currentCourse;
+//
+//            while ((currentLine = br.readLine()) != null) {
+//                System.out.println(currentLine);
+//                String courseTokens[] = currentLine.split("},\\{");
+//
+//                for (String courseToken : courseTokens) {
+//
+//                    String tokens[] = courseToken.trim().split(",");
+//                    currentCourse = new CatalogCourse(
+//                            Integer.parseInt(tokens[0].split(":")[1].trim()),
+//                            tokens[2].split(":")[1].trim().
+//                                    substring(1, tokens[2].split(":")[1].trim().length()-1),
+//                            Integer.parseInt(
+//                                    tokens[3].split(":")[1].trim().
+//                                    substring(1, tokens[3].split(":")[1].trim().length()-1)),
+//
+//                            tokens[4].split(":")[1].trim().
+//                                    substring(1, tokens[4].split(":")[1].trim().length()-1),
+//                            "major",
+//                            Integer.parseInt(
+//                                    tokens[5].split(":")[1].trim().
+//                                    substring(1, tokens[5].split(":")[1].trim().length()-1))
+//                    );
+//                    courses.add(currentCourse);
+//                }
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         catalogRepository.deleteAll();
         catalogRepository.save(courses);
