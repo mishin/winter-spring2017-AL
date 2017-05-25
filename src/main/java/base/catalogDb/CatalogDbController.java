@@ -34,9 +34,9 @@ public class CatalogDbController {
         return items;
     }
 
-    @GetMapping("{id}")
-    public CatalogCourse find(@PathVariable String id) {
-        return catalogRepository.findOne(id);
+    @GetMapping("{courseId}")
+    public CatalogCourse find(@PathVariable String courseId) {
+        return catalogRepository.findOne(courseId);
     }
 
     @PostMapping
@@ -46,14 +46,14 @@ public class CatalogDbController {
                         input.getEducationArea(), input.getNumUnits()));
     }
 
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable String id) {
-        catalogRepository.delete(id);
+    @DeleteMapping("{courseId}")
+    public void delete(@PathVariable String courseId) {
+        catalogRepository.delete(courseId);
     }
 
-    @PutMapping("{id}")
-    public CatalogCourse update(@PathVariable String id, @RequestBody CatalogCourse input) {
-        CatalogCourse CatalogCourse = catalogRepository.findOne(id);
+    @PutMapping("{courseId}")
+    public CatalogCourse update(@PathVariable String courseId, @RequestBody CatalogCourse input) {
+        CatalogCourse CatalogCourse = catalogRepository.findOne(courseId);
         if (CatalogCourse == null) {
             return null;
         } else {

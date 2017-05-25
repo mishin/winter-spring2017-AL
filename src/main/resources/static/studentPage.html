@@ -355,7 +355,7 @@
         function loadCatalogCourses ($scope, $http){
             $http({
                 method : 'GET',
-                url : 'catalogcourses'
+                url : 'CatalogCourse'
             }).then(function (response) {
                 console.log(response.data);
                 console.log(response.data._embedded);
@@ -366,7 +366,7 @@
         function loadPlannedCoursesFromCatalog($scope, $http, data) {
             $http({
                 method : 'GET',
-                url : 'catalogcourses'
+                url : 'CatalogCourse'
             }).then(function (response) {
                 angular.forEach(data, function(plannedCourse) {
                     angular.forEach(response.data._embedded.catalogcourses, function(catalogCourse) {
