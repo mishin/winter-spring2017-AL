@@ -51,7 +51,7 @@
                 data: JSON.stringify(creds),
                 success: function(data) {
                     window.sessionStorage.token = data;
-                    window.location.href = "http://localhost:8080/student";
+                    window.location.href = "https://cp-alphaleader.herokuapp.com/student";
                 },
                 error: function(err) {
                     console.log(err);
