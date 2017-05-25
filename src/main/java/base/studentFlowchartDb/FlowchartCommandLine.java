@@ -22,21 +22,21 @@ public class FlowchartCommandLine implements CommandLineRunner {
 
         PlannedCourse cpe101 = new PlannedCourse(
                 1,
-                2017,
+                1,
                 1,
                 1
         );
 
         PlannedCourse cpe202 = new PlannedCourse(
                 2,
-                2017,
+                1,
                 2,
                 1
         );
 
         PlannedCourse cpe203 = new PlannedCourse(
                 3,
-                2017,
+                2,
                 2,
                 2
         );
@@ -51,7 +51,7 @@ public class FlowchartCommandLine implements CommandLineRunner {
 
         List<Flowchart> charts = Arrays.asList(chart);
 
-        //flowchartRepository.deleteAll();
+        flowchartRepository.deleteAll();
         flowchartRepository.save(chart);
     }
 
