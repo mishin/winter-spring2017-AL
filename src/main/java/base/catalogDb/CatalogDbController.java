@@ -34,36 +34,39 @@ public class CatalogDbController {
         return items;
     }
 
-    @GetMapping("{courseId}")
-    public CatalogCourse find(@PathVariable String courseId) {
-        return catalogRepository.findOne(courseId);
+    @GetMapping("{id}")
+    public CatalogCourse find(@PathVariable String id) {
+        return catalogRepository.findOne(id);
     }
 
     @PostMapping
     public CatalogCourse create(@RequestBody CatalogCourse input) {
         return catalogRepository
-                .save(new CatalogCourse(input.getCourseId(), input.getPrefix(), input.getNumber(), input.getTitle(),
-                        input.getEducationArea(), input.getNumUnits()));
+                .save(new CatalogCourse(input.getCourseId(), input.getPrefix(), input.getNumber(),
+                        input.getTitle(), input.getEducationArea(), input.getDescription(),
+                        input.getPrerequisites(), input.getNumUnits()));
     }
 
-    @DeleteMapping("{courseId}")
-    public void delete(@PathVariable String courseId) {
-        catalogRepository.delete(courseId);
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable String id) {
+        catalogRepository.delete(id);
     }
 
-    @PutMapping("{courseId}")
-    public CatalogCourse update(@PathVariable String courseId, @RequestBody CatalogCourse input) {
-        CatalogCourse CatalogCourse = catalogRepository.findOne(courseId);
-        if (CatalogCourse == null) {
+    @PutMapping("{id}")
+    public CatalogCourse update(@PathVariable String id, @RequestBody CatalogCourse input) {
+        CatalogCourse catalogCourse = catalogRepository.findOne(id);
+        if (catalogCourse == null) {
             return null;
         } else {
-            CatalogCourse.setCourseId(input.getCourseId());
-            CatalogCourse.setNumber(input.getNumber());
-            CatalogCourse.setPrefix(input.getPrefix());
-            CatalogCourse.setTitle(input.getTitle());
-            CatalogCourse.setEducationArea(input.getEducationArea());
-            CatalogCourse.setNumUnits(input.getNumUnits());
-            return catalogRepository.save(CatalogCourse);
+            catalogCourse.setCourseId(input.getCourseId());
+            catalogCourse.setNumber(input.getNumber());
+            catalogCourse.setPrefix(input.getPrefix());
+            catalogCourse.setTitle(input.getTitle());
+            catalogCourse.setEducationArea(input.getEducationArea());
+            catalogCourse.setPrerequisites(input.getPrerequisites());
+            catalogCourse.setDescription(input.getDescription());
+            catalogCourse.setNumUnits(input.getNumUnits());
+            return catalogRepository.save(catalogCourse);
         }
     }
 }

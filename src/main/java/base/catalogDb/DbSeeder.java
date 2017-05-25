@@ -30,11 +30,13 @@ public class DbSeeder implements CommandLineRunner {
         List<CatalogCourse> courses = new ArrayList<CatalogCourse>();
 
         courses.add(new CatalogCourse(
-                1,
+                "1",
                 "CPE",
                 308,
                 "Software Engineering I",
                 "major",
+                "",
+                "",
                 4
         ));
 

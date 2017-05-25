@@ -14,22 +14,27 @@ import org.springframework.data.annotation.Id;
 public class CatalogCourse implements Serializable {
 
     @Id
-    private String id; //Id is string in MongoDB
-    private int courseId;
+    //Id is string in MongoDB
+    private String courseId;
     private String prefix;
     private int number;
     private String title;
     private String educationArea;
+    private String description;
+    private String prerequisites;
     private int numUnits;
 
     public CatalogCourse(){};
 
-    public CatalogCourse(int courseId, String prefix, int number, String title, String educationArea, int numUnits) {
+    public CatalogCourse(String courseId, String prefix, int number, String title,
+                         String educationArea, String description, String prerequisites, int numUnits) {
         this.courseId = courseId;
         this.prefix = prefix;
         this.number = number;
         this.title = title;
         this.educationArea = educationArea;
+        this.description = description;
+        this.prerequisites = prerequisites;
         this.numUnits = numUnits;
     }
 
@@ -39,20 +44,14 @@ public class CatalogCourse implements Serializable {
                 .append("number", number)
                 .append("title", title)
                 .append("educationArea", educationArea)
+                .append("description", description)
+                .append("prerequisites", prerequisites)
                 .append("numUnits", numUnits);
     }
 
-    public String getId() {
-        return this.id;
-    }
+    public String getCourseId() { return this.courseId; }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public int getCourseId() { return this.courseId; }
-
-    public void setCourseId(int courseId) { this.courseId = courseId; }
+    public void setCourseId(String courseId) { this.courseId = courseId; }
 
     public String getPrefix() {
         return this.prefix;
@@ -84,6 +83,22 @@ public class CatalogCourse implements Serializable {
 
     public void setEducationArea(String educationArea) {
         this.educationArea = educationArea;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPrerequisites() {
+        return prerequisites;
+    }
+
+    public void setPrerequisites(String prerequisites) {
+        this.prerequisites = prerequisites;
     }
 
     public int getNumUnits() { return this.numUnits; }
