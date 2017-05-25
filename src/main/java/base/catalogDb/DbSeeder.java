@@ -1,9 +1,15 @@
 package base.catalogDb;
 
 import base.catalogCourseDb.CatalogCourse;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,36 +27,44 @@ public class DbSeeder implements CommandLineRunner {
     @Override
     public void run(String ... strings) throws Exception {
 
-        CatalogCourse cpe101 = new CatalogCourse(
-                1,
-                "CPE",
-                101,
-                "Fundamentals of Computer Science",
-                "",
-                4
-        );
+        List<CatalogCourse> courses = new ArrayList<CatalogCourse>();
 
-        CatalogCourse cpe202 = new CatalogCourse(
-                2,
-                "CPE",
-                202,
-                "Data Structures",
-                "",
-                4
-        );
+        BufferedReader br = new BufferedReader(new FileReader("coursecatalog.txt"));
 
-        CatalogCourse cpe203 = new CatalogCourse(
-                3,
-                "CPE",
-                203,
-                "Project-Based Object-Oriented Programming and Design",
-                "",
-                4
-        );
+        try {
+            String currentLine;
+            CatalogCourse currentCourse;
+
+            while ((currentLine = br.readLine()) != null) {
+                System.out.println(currentLine);
+                String courseTokens[] = currentLine.split("},\\{");
+
+                for (String courseToken : courseTokens) {
+
+                    String tokens[] = courseToken.trim().split(",");
+                    currentCourse = new CatalogCourse(
+                            Integer.parseInt(tokens[0].split(":")[1].trim()),
+                            tokens[2].split(":")[1].trim().
+                                    substring(1, tokens[2].split(":")[1].trim().length()-1),
+                            Integer.parseInt(
+                                    tokens[3].split(":")[1].trim().
+                                    substring(1, tokens[3].split(":")[1].trim().length()-1)),
+
+                            tokens[4].split(":")[1].trim().
+                                    substring(1, tokens[4].split(":")[1].trim().length()-1),
+                            "major",
+                            Integer.parseInt(
+                                    tokens[5].split(":")[1].trim().
+                                    substring(1, tokens[5].split(":")[1].trim().length()-1))
+                    );
+                    courses.add(currentCourse);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         catalogRepository.deleteAll();
-
-        List<CatalogCourse> courses = Arrays.asList(cpe203, cpe101, cpe202);
         catalogRepository.save(courses);
     }
 
