@@ -11,10 +11,10 @@ import java.util.List;
  * Created by calvinnguyen on 5/7/17.
  */
 @Component
-public class DbSeeder implements CommandLineRunner {
+public class CatalogCourseCommandLine implements CommandLineRunner {
     private CatalogRepository catalogRepository;
 
-    public DbSeeder(CatalogRepository repository) {
+    public CatalogCourseCommandLine(CatalogRepository repository) {
         catalogRepository = repository;
     }
 

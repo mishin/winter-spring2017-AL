@@ -1,5 +1,6 @@
 package base.studentFlowchartDb;
 
+import base.catalogCourseDb.CatalogCourse;
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
@@ -9,14 +10,14 @@ public class PlannedCourse implements Serializable {
 
     @Id
     private String id;
-    private Long courseId;
-    private Integer year; //1-freshman, 2-sophomore, etc...
-    private Integer quarter; //1-fall 2-winter 3-spring 4-summer
-    private Integer position;
+    private int courseId;
+    private int year; //1-freshman, 2-sophomore, etc...
+    private int quarter; //1-fall 2-winter 3-spring 4-summer
+    private int position;
 
     public PlannedCourse() {}
 
-    public PlannedCourse(Long courseId, Integer quarter, Integer year, Integer position) {
+    public PlannedCourse(int courseId, int quarter, int year, int position) {
         this.courseId = courseId;
         this.year = year;
         this.quarter = quarter;
@@ -31,31 +32,31 @@ public class PlannedCourse implements Serializable {
         this.id = id;
     }
 
-    public Long getCourseId() {
+    public int getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(Long courseId) {
+    public void setCourseId(int courseId) {
         this.courseId = courseId;
     }
 
-    public Integer getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(Integer year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
-    public Integer getQuarter() {
+    public int getQuarter() {
         return quarter;
     }
 
-    public void setQuarter(Integer quarter) {
+    public void setQuarter(int quarter) {
         this.quarter = quarter;
     }
 
-    public Integer getPosition() {
+    public int getPosition() {
         return position;
     }
 
