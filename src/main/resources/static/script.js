@@ -34,8 +34,35 @@
     });
 
     scotchApp.controller('aboutController', function($scope, $http) {
-        $scope.message = 'Look! I am an about page.';
-        //need login function. Lead to Student and Admin pages.
+
+
+        function sendSignIn(username, password) {
+            var creds = {
+                "username": email,
+                "password": password
+            };
+            $.ajax({
+                url: domain + "/login",
+                type: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                dataType: "text",
+                data: JSON.stringify(creds),
+                success: function(data) {
+                    window.sessionStorage.token = data;
+                    window.location.href = "http://localhost:8080/student";
+                },
+                error: function(err) {
+                    console.log(err);
+                    // alert('error signing up, try again');
+                    var x = document.getElementById("errorMessage");
+                    if (x.style.display === 'none') {
+                        x.style.display = 'block';
+                    }
+                }
+            });
+        }
     });
 
     scotchApp.controller('contactController', function($scope, $http) {
