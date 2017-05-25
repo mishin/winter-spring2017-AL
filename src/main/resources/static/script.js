@@ -71,7 +71,7 @@
           			method: 'POST',
           			url:(window.location.hostname === 'localhost' ?
         				"http://localhost:8080/user" :
-        				"https://slocharts.herokuapp.com/user"),
+        				"https://cp-alphaleader.herokuapp.com/user"),
         			data: {
         				firstName: $scope.user.firstName,
         				lastName: $scope.user.lastName,
