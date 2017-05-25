@@ -28,6 +28,15 @@ public class DbSeeder implements CommandLineRunner {
     public void run(String ... strings) throws Exception {
 
         List<CatalogCourse> courses = new ArrayList<CatalogCourse>();
+
+        courses.add(new CatalogCourse(
+                1,
+                "CPE",
+                308,
+                "Software Engineering",
+                "major",
+                4
+        ));
 //
 //        BufferedReader br = new BufferedReader(new FileReader("coursecatalog.txt"));
 //
