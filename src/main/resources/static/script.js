@@ -36,32 +36,24 @@
     scotchApp.controller('aboutController', function($scope, $http) {
 
 
-        function sendSignIn(username, password) {
-            var creds = {
-                "username": email,
-                "password": password
-            };
-            $.ajax({
-                url: domain + "/login",
-                type: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                dataType: "text",
-                data: JSON.stringify(creds),
-                success: function(data) {
-                    window.sessionStorage.token = data;
-                    window.location.href = "https://cp-alphaleader.herokuapp.com/student";
-                },
-                error: function(err) {
-                    console.log(err);
-                    // alert('error signing up, try again');
-                    var x = document.getElementById("errorMessage");
-                    if (x.style.display === 'none') {
-                        x.style.display = 'block';
-                    }
-                }
-            });
+        $scope.sendSignIn = function(email, password) {
+           var postRequest = {
+          			method: 'POST',
+          			url:(window.location.hostname === 'localhost' ?
+        				"http://localhost:8080/login" :
+        				"https://slocharts.herokuapp.com/login"),
+        			data: {
+        				email: $scope.user.email,
+        				password: $scope.user.password,
+        			}
+           }
+          		$http(postRequest).then(function success(response) {
+          		window.sessionStorage.token = data;
+          	    window.location.href = "https://slocharts.herokuapp.com/student";
+        		}, function error(response) {
+        			console.error('error:');
+        			console.error(response.data.message);
+        		});
         }
     });
 
@@ -71,7 +63,7 @@
           			method: 'POST',
           			url:(window.location.hostname === 'localhost' ?
         				"http://localhost:8080/user" :
-        				"https://cp-alphaleader.herokuapp.com/user"),
+        				"https://slocharts.herokuapp.com/user"),
         			data: {
         				firstName: $scope.user.firstName,
         				lastName: $scope.user.lastName,
@@ -80,7 +72,7 @@
         			}
           		}
           		$http(postRequest).then(function success(response) {
-          	    window.location.href = "https://cp-alphaleader.herokuapp.com/student";
+          	    window.location.href = "https://slocharts.herokuapp.com/student";
         		}, function error(response) {
         			console.error('error:');
         			console.error(response.data.message);

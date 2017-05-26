@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -55,14 +56,18 @@ public class FlowchartRepositoryController {
     }
 
     @PutMapping("{id}")
-    public Flowchart update(@PathVariable String id, @RequestBody Flowchart input) {
-        Flowchart flowchart = flowchartRepository.findOne(id);
+    public Flowchart update(@PathVariable String id, @RequestBody List<PlannedCourse> input) {
+        System.out.println("got here");
+        for (PlannedCourse p : input) {
+            System.out.println("c: " + p.getCourseId());
+        }
+        Flowchart flowchart = findByStudentId(id);
         if (flowchart == null) {
+            System.out.println("flowchart null");
             return null;
         } else {
-            flowchart.setId(input.getId());
-            flowchart.setFlowchartName(input.getFlowchartName());
-            flowchart.setPlannedCourses(input.getPlannedCourses());
+            System.out.println("flowchart not null");
+            flowchart.setPlannedCourses(input);
 
             return flowchartRepository.save(flowchart);
         }
