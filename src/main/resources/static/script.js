@@ -37,24 +37,49 @@
 
 
         $scope.sendSignIn = function() {
-           var postRequest = {
-          			method: 'POST',
-          			url:(window.location.hostname === 'localhost' ?
-        				"http://localhost:8080/login" :
-        				"https://slocharts.herokuapp.com/login"),
-        			data: {
-        				email: $scope.user.email,
-        				password: $scope.user.password,
-        			}
-           }
-          		$http(postRequest).then(function success(response) {
-          		window.sessionStorage.token = data;
-          	    window.location.href = "https://slocharts.herokuapp.com/student";
-        		}, function error(response) {
-        			console.error('error:');
-        			console.error(response.data.message);
-        		});
-        }
+//           var postRequest = {
+//          			method: 'POST',
+//          			url:(window.location.hostname === 'localhost' ?
+//        				"http://localhost:8080/login" :
+//        				"https://slocharts.herokuapp.com/login"),
+//        			data: {
+//        				email: $scope.user.email,
+//        				password: $scope.user.password,
+//        			}
+//           }
+//          		$http(postRequest).then(function success(response) {
+//          		window.sessionStorage.token = data;
+//          	    window.location.href = "https://slocharts.herokuapp.com/student";
+//        		}, function error(response) {
+//        			console.error('error:');
+//        			console.error(response.data.message);
+//        		});
+//        }
+
+      $scope.login = function() {
+		var postRequest = {
+			method: 'POST',
+			url: (window.location.hostname === 'localhost' ?
+				'http://localhost:8080/user/login' :
+                'https://cp-missingsemicolons.herokuapp.com/user/login'),
+			data: {
+				email: $scope.user.email,
+				password: $scope.user.password
+			}
+		};
+		$http(postRequest).then(function(response) {
+			if (response.data) {
+				localStorage.setItem("jwtToken", response.data.token);
+				window.location.href = '/newsfeed';
+			} else {
+				console.log('Invalid email or password');
+			}
+		}, function(response) {
+            alert("Invalid email or password");
+			console.log('error:(');
+			console.log(response);
+		});
+	}
     });
 
     scotchApp.controller('contactController', function($scope, $http) {
