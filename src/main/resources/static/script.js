@@ -51,7 +51,7 @@
                 data: JSON.stringify(creds),
                 success: function(data) {
                     window.sessionStorage.token = data;
-                    window.location.href = "https://cp-alphaleader.herokuapp.com/student";
+                    window.location.href = "https://slocharts.herokuapp.com/student";
                 },
                 error: function(err) {
                     console.log(err);
@@ -71,7 +71,7 @@
           			method: 'POST',
           			url:(window.location.hostname === 'localhost' ?
         				"http://localhost:8080/user" :
-        				"https://cp-alphaleader.herokuapp.com/user"),
+        				"https://slocharts.herokuapp.com/user"),
         			data: {
         				firstName: $scope.user.firstName,
         				lastName: $scope.user.lastName,
@@ -80,7 +80,7 @@
         			}
           		}
           		$http(postRequest).then(function success(response) {
-          	    window.location.href = "https://cp-alphaleader.herokuapp.com/student";
+          	    window.location.href = "https://slocharts.herokuapp.com/student";
         		}, function error(response) {
         			console.error('error:');
         			console.error(response.data.message);
