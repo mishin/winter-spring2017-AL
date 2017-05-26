@@ -59,14 +59,24 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <h3>Course Catalog</h3>
+            <br>
+            <br>
             <div ng-controller="CatalogCtrl">
+                <ul id="catalog1" class="catalogTable">
+                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in catalogCourses | orderBy:['prefix', 'number']">
+                        {{c.title}}
+                        <br>
+                        {{c.prefix}} {{c.number}}
+                    </li>
+                </ul>
+                <!--
                 <table class="catalogTable">
                     <tr ng-repeat="c in catalogCourses | orderBy:['prefix', 'number']">
                         <td class="{{c.educationArea}}">
                             <span class="class-number">{{c.prefix}} {{c.number}}</span>
                         </td>
                     </tr>
-                </table>
+                </table> -->
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -85,7 +95,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Fall</h1>
                                     <ul id="quarter1" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 1">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 1">
                                             {{c.title}}
                                             <br>
                                             {{c.prefix}} {{c.number}}
@@ -95,7 +105,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Winter</h1>
                                     <ul id="quarter2" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 2">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 2">
                                             {{c.title}}
                                             <br>
                                             {{c.prefix}} {{c.number}}
@@ -105,7 +115,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Spring</h1>
                                     <ul id="quarter3" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 3">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 3">
                                             {{c.title}}
                                             <br>
                                             {{c.prefix}} {{c.number}}
@@ -118,7 +128,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Fall</h1>
                                     <ul id="quarter4" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 1">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 1">
                                             {{c.title}}
                                             <br>
                                             {{c.prefix}} {{c.number}}
@@ -128,7 +138,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Winter</h1>
                                     <ul id="quarter5" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 2">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 2">
                                             {{c.title}}
                                             <br>
                                             {{c.prefix}} {{c.number}}
@@ -138,7 +148,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Spring</h1>
                                     <ul id="quarter6" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 3">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 3">
                                             {{c.title}}
                                             <br>
                                             {{c.prefix}} {{c.number}}
@@ -151,7 +161,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Fall</h1>
                                     <ul id="quarter7" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 3 && c.quarter == 1">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 3 && c.quarter == 1">
                                             {{c.title}}
                                             <br>
                                             {{c.prefix}} {{c.number}}
@@ -161,7 +171,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Winter</h1>
                                     <ul id="quarter8" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 3 && c.quarter == 2">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 3 && c.quarter == 2">
                                             {{c.title}}
                                             <br>
                                             {{c.prefix}} {{c.number}}
@@ -171,7 +181,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Spring</h1>
                                     <ul id="quarter9" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 3 && c.quarter == 3">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 3 && c.quarter == 3">
                                             {{c.title}}
                                             <br>
                                             {{c.prefix}} {{c.number}}
@@ -184,7 +194,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Fall</h1>
                                     <ul id="quarter10" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 4 && c.quarter == 1">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 4 && c.quarter == 1">
                                             {{c.title}}
                                             <br>
                                             {{c.prefix}} {{c.number}}
@@ -194,7 +204,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Winter</h1>
                                     <ul id="quarter11" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 4 && c.quarter == 2">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 4 && c.quarter == 2">
                                             {{c.title}}
                                             <br>
                                             {{c.prefix}} {{c.number}}
@@ -204,7 +214,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Spring</h1>
                                     <ul id="quarter12" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 4 && c.quarter == 3">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 4 && c.quarter == 3">
                                             {{c.title}}
                                             <br>
                                             {{c.prefix}} {{c.number}}
@@ -335,20 +345,7 @@
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-        $( function() {
-            $( "#quarter1, #quarter2, #quarter3, #quarter4, #quarter5, #quarter6, #quarter7, #quarter8, #quarter9, #quarter10, #quarter11, #quarter12" ).sortable({
-                connectWith: ".flowchartQuarter",
-                placeholder: "coursePlaceholder",
-                receive: function(event, ui) {
-                    console.log("receive");
-                    console.log(event);
-                    console.log(event.target);
-                    console.log(ui);
-                }
-            }).disableSelection();
-        });
-    </script>
+
     <script>
         var app = angular.module('StudentApp', ['ui.bootstrap']);
 
@@ -403,10 +400,61 @@
             $scope.savePlannedCourses = function() {
                 $scope.savedCourses = [];
                 var quarters = document.getElementsByClassName("flowchartQuarter");
-                console.log(quarters);
-                // TODO
+                var q = 0;
+                angular.forEach(quarters, function(quarter) {
+                    var courses = quarter.getElementsByClassName("course");
+                    p = 1;
+                    angular.forEach(courses, function(course) {
+                        console.log(course.dataset.courseid);
+                        $scope.savedCourses.push( {
+                            "courseId": course.dataset.courseid,
+                            "year": Math.floor(q/3) + 1,
+                            "quarter": (q%3) + 1,
+                            "position": p
+                        } );
+                        p = p + 1;
+                    });
+                    q = q + 1;
+                });
+
+                $http({
+                    method : 'PUT',
+                    url : 'studentFlowchart/1',
+                    data : $scope.savedCourses
+                }).then(function (response) {
+                    console.log("check response to see if the backend says its all cool");
+                    console.log("then give user either error or confirmation");
+                    console.log(response.status);
+                    if (response.status < 300) {
+                        console.log("SUCCESSFUL SAVE");
+                    }
+                    else {
+                        console.log("FAILURE TO SAVE");
+                    }
+                });
+                console.log($scope.savedCourses);
             };
         });
+    </script>
+    <script>
+        setTimeout(function() {
+            $( "#quarter1, #quarter2, #quarter3, #quarter4, #quarter5, #quarter6, #quarter7, #quarter8, #quarter9, #quarter10, #quarter11, #quarter12" ).sortable({
+                    connectWith: ".flowchartQuarter",
+                    placeholder: "coursePlaceholder",
+                    receive: function(event, ui) {
+                        console.log("receive");
+                        console.log(event);
+                        console.log(event.target);
+                        console.log(ui);
+                    }
+                }).disableSelection();
+
+            $( "#catalog1 .course" ).draggable({
+                connectToSortable: ".flowchartQuarter",
+                helper: "clone",
+                revert: "invalid"
+             });
+        }, 3000);
     </script>
 </body>
 </html>
