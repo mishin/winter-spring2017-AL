@@ -36,9 +36,9 @@
     scotchApp.controller('aboutController', function($scope, $http) {
 
 
-        function sendSignIn(username, password) {
+        function sendSignIn(email, password) {
             var creds = {
-                "username": email,
+                "email": email,
                 "password": password
             };
             $.ajax({
