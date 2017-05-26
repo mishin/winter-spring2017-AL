@@ -1,11 +1,5 @@
 package base.catalogDb;
 
-/**
- * Created by Lauren on 4/6/2017.
- */
-
-import base.catalogCourseDb.CatalogCourse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,13 +7,13 @@ import java.util.ArrayList;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/CatalogCourse")
-public class CatalogDbController {
+@RequestMapping("/catalog")
+public class CatalogRepositoryController {
 
     @Autowired
     private CatalogRepository catalogRepository;
 
-    public CatalogDbController(CatalogRepository repository) {
+    public CatalogRepositoryController(CatalogRepository repository) {
         catalogRepository = repository;
     }
 
@@ -42,8 +36,9 @@ public class CatalogDbController {
     @PostMapping
     public CatalogCourse create(@RequestBody CatalogCourse input) {
         return catalogRepository
-                .save(new CatalogCourse(input.getCourseId(), input.getPrefix(), input.getNumber(), input.getTitle(),
-                        input.getEducationArea(), input.getNumUnits()));
+                .save(new CatalogCourse(input.getCourseId(), input.getPrefix(), input.getNumber(),
+                        input.getTitle(), input.getEducationArea(), input.getDescription(),
+                        input.getPrerequisites(), input.getNumUnits()));
     }
 
     @DeleteMapping("{id}")
@@ -53,17 +48,19 @@ public class CatalogDbController {
 
     @PutMapping("{id}")
     public CatalogCourse update(@PathVariable String id, @RequestBody CatalogCourse input) {
-        CatalogCourse CatalogCourse = catalogRepository.findOne(id);
-        if (CatalogCourse == null) {
+        CatalogCourse catalogCourse = catalogRepository.findOne(id);
+        if (catalogCourse == null) {
             return null;
         } else {
-            CatalogCourse.setCourseId(input.getCourseId());
-            CatalogCourse.setNumber(input.getNumber());
-            CatalogCourse.setPrefix(input.getPrefix());
-            CatalogCourse.setTitle(input.getTitle());
-            CatalogCourse.setEducationArea(input.getEducationArea());
-            CatalogCourse.setNumUnits(input.getNumUnits());
-            return catalogRepository.save(CatalogCourse);
+            catalogCourse.setCourseId(input.getCourseId());
+            catalogCourse.setNumber(input.getNumber());
+            catalogCourse.setPrefix(input.getPrefix());
+            catalogCourse.setTitle(input.getTitle());
+            catalogCourse.setEducationArea(input.getEducationArea());
+            catalogCourse.setPrerequisites(input.getPrerequisites());
+            catalogCourse.setDescription(input.getDescription());
+            catalogCourse.setNumUnits(input.getNumUnits());
+            return catalogRepository.save(catalogCourse);
         }
     }
 }

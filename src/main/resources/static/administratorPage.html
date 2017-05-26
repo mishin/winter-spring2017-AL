@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="administratorPage.css">
         <!-- Angular CSS -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
-        <script src="https://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.1.0.js"></script>
+        <script src="ui-bootstrap-tpls-0.1.0.js"></script>
         <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <!-- JQuery CSS -->
@@ -74,33 +74,35 @@
                                 </fieldset>
                             </form>
                         </div>
-                        <div class="catalogSection">
-                            <form>
+                        <div class="catalogSection" ng-controller="EditCatalogCourseCtrl">
+                            <form ng-submit="editCatalogCourse()">
                                 <fieldset>
                                     <legend>Edit Catalog Course</legend>
                                     Course Id:<br>
-                                    <input type="text" name="courseId"><br>
+                                    <input type="text" ng-model="courseId" name="courseId"><br>
                                     Prefix:<br>
-                                    <input type="text" name="prefix"><br>
+                                    <input type="text" ng-model="prefix" name="prefix"><br>
                                     Number:<br>
-                                    <input type="text" name="number"><br>
+                                    <input type="text" ng-model="number" name="number"><br>
                                     Title:<br>
-                                    <input type="text" name="title"><br>
+                                    <input type="text" ng-model="title" name="title"><br>
                                     Education Area:<br>
-                                    <input type="text" name="educationArea"><br>
+                                    <input type="text" ng-model="educationArea" name="educationArea"><br>
                                     Number of Units:<br>
-                                    <input type="text" name="numUnits"><br><br>
+                                    <input type="text" ng-model="numUnits" name="numUnits"><br><br>
                                     <input type="submit" value="Edit">
+                                    <p>{{editMessage}}</p>
                                 </fieldset>
                             </form>
                         </div>
-                        <div class="catalogSection">
-                            <form>
+                        <div class="catalogSection" ng-controller="DeleteCatalogCourseCtrl">
+                            <form ng-submit="deleteCatalogCourse()">
                                 <fieldset>
                                     <legend>Delete Catalog Course</legend>
                                     Course Id:<br>
-                                    <input type="text" name="courseId"><br><br>
+                                    <input type="text" ng-model="courseId" name="courseId"><br>
                                     <input type="submit" value="Delete">
+                                    <p>{{deleteMessage}}</p>
                                 </fieldset>
                             </form>
                         </div>
@@ -130,10 +132,10 @@
             $scope.addMessage = "";
             $scope.addCatalogCourse = function() {
                 console.log(this.courseId);
-                if ($.isNumeric(this.courseId) && $.isNumeric(this.number) && $.isNumeric(this.numUnits)) {
+                if ($.isNumeric(this.number) && $.isNumeric(this.numUnits)) {
                     $http({
                         method : 'POST',
-                        url : 'catalogcourses',
+                        url : 'catalog',
                         data: {
                             courseId: this.courseId,
                             prefix: this.prefix,
@@ -154,6 +156,58 @@
                         }
                     });
                 }
+            }
+        });
+
+        app.controller('EditCatalogCourseCtrl', function ($scope, $http){
+            $scope.editMessage = "";
+            $scope.editCatalogCourse = function() {
+                console.log(this.courseId);
+                if ($.isNumeric(this.number) && $.isNumeric(this.numUnits)) {
+                    $http({
+                        method : 'PUT',
+                        url : 'catalog/' + this.courseId,
+                        data: {
+                            courseId: this.courseId,
+                            prefix: this.prefix,
+                            number: this.number,
+                            title: this.title,
+                            educationArea: this.educationArea,
+                            numUnits: this.numUnits
+                        }
+                    }).then(function (response) {
+                        console.log("check response to see if the backend says its all cool");
+                        console.log("then give user either error or confirmation");
+                        console.log(response.status);
+                        if (response.status < 300) {
+                            $scope.editMessage = "Course " + response.data.prefix + " " + response.data.number + " successfully changed.";
+                        }
+                        else {
+                            $scope.editMessage = "There was an error changing course " + response.data.prefix + " " + response.data.number + ".";
+                        }
+                    });
+                }
+            }
+        });
+
+        app.controller('DeleteCatalogCourseCtrl', function ($scope, $http){
+            $scope.deleteMessage = "";
+            $scope.deleteCatalogCourse = function() {
+                console.log(this.courseId);
+                $http({
+                    method : 'DELETE',
+                    url : 'catalog/' + this.courseId
+                }).then(function (response) {
+                    console.log("check response to see if the backend says its all cool");
+                    console.log("then give user either error or confirmation");
+                    console.log(response.status);
+                    if (response.status < 300) {
+                        $scope.deleteMessage = "Course " + response.data.prefix + " " + response.data.number + " successfully deleted.";
+                    }
+                    else {
+                        $scope.deleteMessage = "There was an error deleting course " + response.data.prefix + " " + response.data.number + ".";
+                    }
+                });
             }
         });
 

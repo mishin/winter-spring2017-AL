@@ -34,8 +34,35 @@
     });
 
     scotchApp.controller('aboutController', function($scope, $http) {
-        $scope.message = 'Look! I am an about page.';
-        //need login function. Lead to Student and Admin pages.
+
+
+        function sendSignIn(username, password) {
+            var creds = {
+                "username": email,
+                "password": password
+            };
+            $.ajax({
+                url: domain + "/login",
+                type: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                dataType: "text",
+                data: JSON.stringify(creds),
+                success: function(data) {
+                    window.sessionStorage.token = data;
+                    window.location.href = "https://cp-alphaleader.herokuapp.com/student";
+                },
+                error: function(err) {
+                    console.log(err);
+                    // alert('error signing up, try again');
+                    var x = document.getElementById("errorMessage");
+                    if (x.style.display === 'none') {
+                        x.style.display = 'block';
+                    }
+                }
+            });
+        }
     });
 
     scotchApp.controller('contactController', function($scope, $http) {
@@ -43,8 +70,8 @@
           		var postRequest = {
           			method: 'POST',
           			url:(window.location.hostname === 'localhost' ?
-        				'http://localhost:8080/user' :
-        				'https://cp-alphaleader.herokuapp.com/user'),
+        				"http://localhost:8080/user" :
+        				"https://cp-alphaleader.herokuapp.com/user"),
         			data: {
         				firstName: $scope.user.firstName,
         				lastName: $scope.user.lastName,
@@ -53,7 +80,7 @@
         			}
           		}
           		$http(postRequest).then(function success(response) {
-          	    window.location.href = '/student';
+          	    window.location.href = "https://cp-alphaleader.herokuapp.com/student";
         		}, function error(response) {
         			console.error('error:');
         			console.error(response.data.message);
