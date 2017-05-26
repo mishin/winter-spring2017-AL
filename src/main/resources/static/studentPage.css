@@ -126,36 +126,38 @@ body {
 
 /* Catalog Table CSS */
 
-table.catalogTable {
-    width:100%;
+.catalogTable {
+    border: 0 0 0 0;
+    padding: 0 0 0 0;
+    margin: 0;
+    min-height: 100%;
+    width:100px;
+    box-sizing: border-box;
+    list-style-type: none;
 }
 
-table.catalogTable td {
-    width:100%;
-    height:30px;
+.catalogTable li {
+    border: 0 0 0 0;
+    padding: 0 0 0 0;
+    box-sizing: border-box;
 }
 
-table.catalogTable td.major {
-    background-color:#ffff77;
-    text-align:center;
-    border:1px solid black;
+.catalogCourse {
+    height: 100px;
+    text-align: center;
+    border: 1px solid black;
+    box-sizing: border-box;
+    background-color: #ffffff;
 }
 
-table.catalogTable td.support {
-    background-color:#ffbb99;
-    text-align:center;
-    border:1px solid black;
+.catalogCourse.major {
+    background-color: #ffff77;
 }
-
-table.catalogTable td.ge {
-    background-color:#99ff99;
-    text-align:center;
-    border:1px solid black;
+.catalogCourse.support {
+    background-color: #ffbb99;
 }
-
-table.catalogTable * .class-number {
-    padding-top:5px;
-    font-weight:bold;
+.catalogCourse.ge {
+    background-color: #99ff99;
 }
 
 /* Header CSS */

@@ -59,14 +59,24 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <h3>Course Catalog</h3>
+            <br>
+            <br>
             <div ng-controller="CatalogCtrl">
+                <ul id="catalog" class="catalogTable">
+                    <li class="catalogCourse {{c.educationArea}}" ng-repeat="c in catalogCourses | orderBy:['prefix', 'number']">
+                        {{c.title}}
+                        <br>
+                        {{c.prefix}} {{c.number}}
+                    </li>
+                </ul>
+                <!--
                 <table class="catalogTable">
                     <tr ng-repeat="c in catalogCourses | orderBy:['prefix', 'number']">
                         <td class="{{c.educationArea}}">
                             <span class="class-number">{{c.prefix}} {{c.number}}</span>
                         </td>
                     </tr>
-                </table>
+                </table> -->
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -347,6 +357,26 @@
                     console.log(ui);
                 }
             }).disableSelection();
+        });
+
+        $( function() {
+            $( "#catalog" ).sortable({
+                connectWith: ".flowchartQuarter",
+                forcePlaceholderSize: false,
+                helper: function(e, li) {
+                    copyHelper = li.clone().insertAfter(li);
+                    return li.clone();
+                },
+                stop: function() {
+                    copyHelper && copyHelper.remove();
+                }
+            });
+
+            $(".flowchartQuarter").sortable({
+                receive: function(e, ui) {
+                    copyHelper = null;
+                }
+             });
         });
     </script>
     <script>
