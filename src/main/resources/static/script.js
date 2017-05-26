@@ -58,8 +58,8 @@
      		var postRequest = {
      			method: 'POST',
      			url: (window.location.hostname === 'localhost' ?
-     				'http://localhost:8080/user/validate' :
-                                     'https://cp-missingsemicolons.herokuapp.com/user/validate'),
+     				'http://localhost:8080/user/valid' :
+                    'https://slocharts.herokuapp.com/user/valid'),
      			data: {
      				email: $scope.user.email,
      				password: $scope.user.password
@@ -68,7 +68,7 @@
      		$http(postRequest).then(function(response) {
      			if (response.data) {
      				localStorage.setItem("jwtToken", response.data.token);
-     				window.location.href = '/newsfeed';
+     				window.location.href = 'https://slocharts.herokuapp.com/student';
      			} else {
      				console.log('Invalid email or password');
      			}
