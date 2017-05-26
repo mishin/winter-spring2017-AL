@@ -37,31 +37,23 @@
 
 
         $scope.sendSignIn = function(email, password) {
-            var creds = {
-                "email": email,
-                "password": password
-            };
-            $.ajax({
-                url: "https://slocharts.herokuapp.com/login",
-                type: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                dataType: "text",
-                data: JSON.stringify(creds),
-                success: function(data) {
-                    window.sessionStorage.token = data;
-                    window.location.href = "https://slocharts.herokuapp.com/student";
-                },
-                error: function(err) {
-                    console.log(err);
-                    // alert('error signing up, try again');
-                    var x = document.getElementById("errorMessage");
-                    if (x.style.display === 'none') {
-                        x.style.display = 'block';
-                    }
-                }
-            });
+           var postRequest = {
+          			method: 'POST',
+          			url:(window.location.hostname === 'localhost' ?
+        				"http://localhost:8080/user" :
+        				"https://slocharts.herokuapp.com/user"),
+        			data: {
+        				email: $scope.email,
+        				password: $scope.password,
+        			}
+           }
+          		$http(postRequest).then(function success(response) {
+          		window.sessionStorage.token = data;
+          	    window.location.href = "https://slocharts.herokuapp.com/student";
+        		}, function error(response) {
+        			console.error('error:');
+        			console.error(response.data.message);
+        		});
         }
     });
 
