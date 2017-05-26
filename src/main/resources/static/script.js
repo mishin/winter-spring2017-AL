@@ -35,8 +35,6 @@
 
     scotchApp.controller('aboutController', function($scope, $http) {
 
-
-        $scope.sendSignIn = function() {
 //           var postRequest = {
 //          			method: 'POST',
 //          			url:(window.location.hostname === 'localhost' ?
@@ -56,30 +54,30 @@
 //        		});
 //        }
 
-      $scope.login = function() {
-		var postRequest = {
-			method: 'POST',
-			url: (window.location.hostname === 'localhost' ?
-				'http://localhost:8080/user/login' :
-                'https://cp-missingsemicolons.herokuapp.com/user/login'),
-			data: {
-				email: $scope.user.email,
-				password: $scope.user.password
-			}
-		};
-		$http(postRequest).then(function(response) {
-			if (response.data) {
-				localStorage.setItem("jwtToken", response.data.token);
-				window.location.href = '/newsfeed';
-			} else {
-				console.log('Invalid email or password');
-			}
-		}, function(response) {
-            alert("Invalid email or password");
-			console.log('error:(');
-			console.log(response);
-		});
-	}
+     $scope.signIn = function() {
+     		var postRequest = {
+     			method: 'POST',
+     			url: (window.location.hostname === 'localhost' ?
+     				'http://localhost:8080/user/validate' :
+                                     'https://cp-missingsemicolons.herokuapp.com/user/validate'),
+     			data: {
+     				email: $scope.user.email,
+     				password: $scope.user.password
+     			}
+     		};
+     		$http(postRequest).then(function(response) {
+     			if (response.data) {
+     				localStorage.setItem("jwtToken", response.data.token);
+     				window.location.href = '/newsfeed';
+     			} else {
+     				console.log('Invalid email or password');
+     			}
+     		}, function(response) {
+                 alert("Invalid email or password");
+     			console.log('error:(');
+     			console.log(response);
+     		});
+     	}
     });
 
     scotchApp.controller('contactController', function($scope, $http) {

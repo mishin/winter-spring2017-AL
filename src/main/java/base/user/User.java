@@ -58,7 +58,7 @@ public class User implements Serializable, UserDetails {
     private String password;
 
     private String authenticationToken;
-    
+
     public User() {}
 
     public User(User user) {
