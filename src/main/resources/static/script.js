@@ -42,7 +42,7 @@
                 "password": password
             };
             $.ajax({
-                url: domain + "/login",
+                url: "https://slocharts.herokuapp.com/login",
                 type: "POST",
                 headers: {
                     "Content-Type": "application/json",
