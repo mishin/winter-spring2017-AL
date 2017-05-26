@@ -160,6 +160,12 @@ body {
     background-color: #99ff99;
 }
 
+.course.ui-draggable-dragging {
+    width: 100px;
+    height: 100px;
+    z-index: 1000;
+}
+
 /* Header CSS */
 
 #header {
@@ -245,6 +251,7 @@ body {
 
 #wrapper {
     padding-left: 0;
+    overflow: hidden;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -264,6 +271,7 @@ body {
     margin-left: -250px;
     overflow-y: auto;
     background: #DDDDDD;
+
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
