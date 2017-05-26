@@ -85,6 +85,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .authorizeRequests()
                 // allow anonymous resource requests
                 .antMatchers(HttpMethod.GET,"/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/**").permitAll()
                 .antMatchers(HttpMethod.POST, authPath).permitAll() // to get auth token
                 .antMatchers(HttpMethod.POST, "/user").permitAll() // to get auth token
                 .anyRequest().authenticated();
