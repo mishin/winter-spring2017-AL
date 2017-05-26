@@ -40,8 +40,8 @@
            var postRequest = {
           			method: 'POST',
           			url:(window.location.hostname === 'localhost' ?
-        				"http://localhost:8080/user" :
-        				"https://slocharts.herokuapp.com/user"),
+        				"http://localhost:8080/login" :
+        				"https://slocharts.herokuapp.com/login"),
         			data: {
         				email: $scope.email,
         				password: $scope.password,
