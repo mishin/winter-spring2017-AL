@@ -43,8 +43,8 @@
         				"http://localhost:8080/login" :
         				"https://slocharts.herokuapp.com/login"),
         			data: {
-        				email: $scope.email,
-        				password: $scope.password,
+        				email: $scope.user.email,
+        				password: $scope.user.password,
         			}
            }
           		$http(postRequest).then(function success(response) {
