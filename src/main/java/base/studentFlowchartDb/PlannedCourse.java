@@ -1,9 +1,7 @@
 package base.studentFlowchartDb;
 
-import base.catalogCourseDb.CatalogCourse;
 import org.springframework.data.annotation.Id;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 public class PlannedCourse implements Serializable {

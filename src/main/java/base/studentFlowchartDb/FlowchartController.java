@@ -41,7 +41,7 @@ public class FlowchartController {
     @PostMapping
     public Flowchart create(@RequestBody Flowchart input) {
         return flowchartRepository
-                .save(new Flowchart(input.getStudentId(), input.getName(), input.getPlannedCourses()));
+                .save(new Flowchart(input.getStudentId(), input.getFlowchartName(), input.getPlannedCourses()));
     }
 
     @DeleteMapping("{id}")
@@ -75,7 +75,7 @@ public class FlowchartController {
             return null;
         } else {
             flowchart.setStudentId(input.getStudentId());
-            flowchart.setName(input.getName());
+            flowchart.setFlowchartName(input.getFlowchartName());
             flowchart.setPlannedCourses(input.getPlannedCourses());
             return flowchartRepository.save(flowchart);
         }
