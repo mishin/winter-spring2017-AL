@@ -36,7 +36,7 @@
     scotchApp.controller('aboutController', function($scope, $http) {
 
 
-        $scope.sendSignIn = function(email, password) {
+        $scope.sendSignIn = function() {
            var postRequest = {
           			method: 'POST',
           			url:(window.location.hostname === 'localhost' ?
