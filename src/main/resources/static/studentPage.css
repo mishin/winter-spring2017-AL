@@ -68,11 +68,26 @@ body {
 }
 
 .course {
-    height: 100px;
     text-align: center;
     border: 1px solid black;
     box-sizing: border-box;
     background-color: #ffffff;
+}
+
+.flowchartQuarter .course {
+    height: 100px;
+    width: 100px;
+}
+
+.catalogTable .course {
+    height: 50px;
+    width: 100%;
+}
+
+.course.ui-draggable-dragging {
+    width: 100px;
+    height: 100px;
+    z-index: 1000;
 }
 
 .course.major {
@@ -131,39 +146,17 @@ body {
     padding: 0 0 0 0;
     margin: 0;
     min-height: 100%;
-    width:100px;
     box-sizing: border-box;
     list-style-type: none;
 }
 
 .catalogTable li {
-    border: 0 0 0 0;
     padding: 0 0 0 0;
     box-sizing: border-box;
 }
 
-.catalogCourse {
-    height: 100px;
-    text-align: center;
-    border: 1px solid black;
-    box-sizing: border-box;
-    background-color: #ffffff;
-}
-
-.catalogCourse.major {
-    background-color: #ffff77;
-}
-.catalogCourse.support {
-    background-color: #ffbb99;
-}
-.catalogCourse.ge {
-    background-color: #99ff99;
-}
-
-.course.ui-draggable-dragging {
-    width: 100px;
-    height: 100px;
-    z-index: 1000;
+.catalogTable li span {
+    font-weight: bold;
 }
 
 /* Header CSS */
@@ -278,6 +271,10 @@ body {
     transition: all 0.5s ease;
 }
 
+#sidebar-wrapper {
+    text-align: center;
+}
+
 #wrapper.toggled #sidebar-wrapper {
     width: 250px;
 }
@@ -298,10 +295,6 @@ body {
 input {
     height: 25px;
     width: 150px;
-}
-
-.catalogCourse {
-    position: center;
 }
 
 .sidebar-nav {
