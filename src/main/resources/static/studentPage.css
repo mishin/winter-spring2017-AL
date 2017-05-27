@@ -67,11 +67,19 @@ body {
     box-sizing: border-box;
 }
 
+.flowchartQuarter li span {
+    font-weight: bold;
+}
+
 .course {
+    z-index: 1000;
     text-align: center;
     border: 1px solid black;
     box-sizing: border-box;
     background-color: #ffffff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
 }
 
 .flowchartQuarter .course {
@@ -82,12 +90,15 @@ body {
 .catalogTable .course {
     height: 50px;
     width: 100%;
+    white-space: nowrap;
 }
 
 .course.ui-draggable-dragging {
     width: 100px;
     height: 100px;
     z-index: 1000;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .course.major {
@@ -188,6 +199,7 @@ body {
 }
 
 .header-item-left {
+    cursor: pointer;
     text-decoration:none;
     display:inline;
     font-size:18px;
@@ -198,6 +210,7 @@ body {
 }
 
 .header-item-right {
+    cursor: pointer;
     text-decoration:none;
     display:inline;
     font-size:18px;
@@ -219,7 +232,7 @@ body {
     background-color: #1e4d2b;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    z-index: 1000;
 }
 
 .dropdown-content a {
@@ -253,6 +266,7 @@ body {
 
 #wrapper.toggled {
     padding-left: 250px;
+    overflow: hidden;
 }
 
 #sidebar-wrapper {
@@ -264,6 +278,7 @@ body {
     margin-left: -250px;
     overflow-y: auto;
     background: #DDDDDD;
+    overflow: hidden;
 
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -273,10 +288,12 @@ body {
 
 #sidebar-wrapper {
     text-align: center;
+    overflow: hidden;
 }
 
 #wrapper.toggled #sidebar-wrapper {
     width: 250px;
+    overflow: hidden;
 }
 
 #page-content-wrapper {
@@ -363,6 +380,7 @@ input {
     #page-content-wrapper {
         padding: 20px;
         position: relative;
+        z-index: 200;
     }
 
     #wrapper.toggled #page-content-wrapper {
