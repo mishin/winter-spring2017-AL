@@ -31,10 +31,9 @@ public class UserController  {
     private JwtTokenUtil jwtTokenUtil;
 
     // Return only logged in user
-    @GetMapping
-    public UserDetails getCurrentUser(@CurrentUser UserDetails currentUser) {
-        return currentUser;
-    }
+
+    @GetMapping("{id}")
+    public UserDetails getCurrentUser(@PathVariable String id, @CurrentUser UserDetails currentUser) { return currentUser; }
 
     @RequestMapping("/all")
     public List<User> getUsers(@CurrentUser UserDetails currentUser) {
