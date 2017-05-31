@@ -19,10 +19,13 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Represents a user in our system.
@@ -36,7 +39,7 @@ import java.io.Serializable;
  */
 
 @Document(collection = "user")
-public class User implements Serializable {
+public class User implements Serializable, UserDetails {
 
     @Id
     private Long id;
@@ -53,6 +56,8 @@ public class User implements Serializable {
 
     @NotEmpty(message = "Password is required.")
     private String password;
+
+    private String authenticationToken;
 
     public User() {}
 
@@ -103,6 +108,44 @@ public class User implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getUsername() {
+        return email;
+    }
+
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    public void setAuthenticationToken(String token) {
+        authenticationToken = token;
+    }
+
+    public String getAuthenticationToken() {
+        return authenticationToken;
+    }
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return new ArrayList<>();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
 
     @Override
     public String toString() {

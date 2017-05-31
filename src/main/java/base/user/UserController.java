@@ -1,8 +1,12 @@
 package base.user;
 
 import base.security.CurrentUser;
+import base.security.WebDevice;
+import base.security.jwt.JwtAuthenticationResponse;
+import base.security.jwt.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -22,6 +26,9 @@ public class UserController  {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
     // Return only logged in user
     @GetMapping
@@ -71,4 +78,17 @@ public class UserController  {
             return userRepository.save(user);
         }
     }
+
+    @PostMapping("/valid")
+    public ResponseEntity<?> validateUser(@RequestBody User inUser) {
+        User user = userRepository.findByEmail(inUser.getEmail());
+        if (user != null && (new BCryptPasswordEncoder())
+                .matches(inUser.getPassword(), user.getPassword())) {
+            String token = jwtTokenUtil.generateToken(user, new WebDevice());
+            return ResponseEntity.ok(new JwtAuthenticationResponse(token));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
