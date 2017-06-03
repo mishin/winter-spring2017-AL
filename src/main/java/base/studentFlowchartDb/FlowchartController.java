@@ -49,25 +49,6 @@ public class FlowchartController {
         flowchartRepository.delete(id);
     }
 
-    /*
-    @DeleteMapping("{id}/{courseId}")
-    public void delete(@PathVariable String id, @PathVariable String courseId) {
-        Flowchart flowchart = flowchartRepository.findOne(id);
-        if (flowchart != null) {
-            List<PlannedCourse> courses = flowchart.getPlannedCourses();
-            Iterator<PlannedCourse> courseIter = courses.iterator();
-            PlannedCourse course;
-            while(courseIter.hasNext()) {
-                course = courseIter.next();
-                if (course.getCourseId() == ) {
-                    courses.remove(course);
-                    break;
-                }
-            }
-        }
-    }
-    */
-
     @PutMapping("{id}")
     public Flowchart update(@PathVariable String id, @RequestBody Flowchart input) {
         Flowchart flowchart = flowchartRepository.findOne(id);
