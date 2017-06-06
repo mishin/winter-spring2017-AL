@@ -60,9 +60,13 @@
         <div id="sidebar-wrapper">
             <h3>Course Catalog</h3>
             <br>
+            <form>Search:
+                <input type="text" ng-model="searchInput">
+            </form>
+            <br>
             <div ng-controller="CatalogCtrl">
                 <ul id="catalog1" class="catalogTable">
-                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in catalogCourses | orderBy:['prefix', 'number']">
+                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in catalogCourses | orderBy:['prefix', 'number'] | filter:searchInput">
                         <span>{{c.prefix}} {{c.number}}</span>
                         <br>
                         {{c.title}}
@@ -408,6 +412,9 @@
         });
 
         app.controller('HeaderCtrl', function ($scope, $http) {
+            console.log("before");
+            console.log(window.sessionStorage.getItem ("token"));
+            console.log("after");
             $scope.savePlannedCourses = function() {
                 $scope.savedCourses = [];
                 var quarters = document.getElementsByClassName("flowchartQuarter");
