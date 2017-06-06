@@ -31,6 +31,7 @@ public class UserController  {
     private JwtTokenUtil jwtTokenUtil;
 
     // Return only logged in user
+    
     @GetMapping
     public UserDetails getCurrentUser(@CurrentUser UserDetails currentUser) {
         return currentUser;

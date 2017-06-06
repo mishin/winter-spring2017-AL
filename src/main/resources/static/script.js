@@ -67,7 +67,7 @@
      		};
      		$http(postRequest).then(function(response) {
      			if (response.data) {
-     				localStorage.setItem("jwtToken", response.data.token);
+     				window.sessionStorage.setItem("jwtToken", response.data.token);
      				window.location.href = 'https://slocharts.herokuapp.com/student';
      			} else {
      				console.log('Invalid email or password');
