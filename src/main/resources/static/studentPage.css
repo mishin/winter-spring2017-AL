@@ -71,6 +71,11 @@ body {
     font-weight: bold;
 }
 
+.flowchartQuarter li span.courseDeleteButton {
+    color: red;
+    text-align: right;
+}
+
 .course {
     z-index: 1000;
     text-align: center;
@@ -176,6 +181,7 @@ body {
     padding:0px;
     background:#1e4d2b;
     height:50px;
+    z-index: 1000;
 }
 
 #header a:link {
