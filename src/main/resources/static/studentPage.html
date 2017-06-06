@@ -60,8 +60,13 @@
         <div id="sidebar-wrapper">
             <h3>Course Catalog</h3>
             <br>
-            <form>Search:
-                <input type="text" ng-model="searchInput">
+            <form>
+                <span>Prefix:  </span>
+                <input type="text" ng-model="searchInput.prefix"/><br>
+                <span>Number:  </span>
+                <input type="text" ng-model="searchInput.number"/><br>
+                <span>Title:   </span>
+                <input type="text" ng-model="searchInput.title"/><br>
             </form>
             <br>
             <div ng-controller="CatalogCtrl">

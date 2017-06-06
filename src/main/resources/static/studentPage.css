@@ -295,6 +295,14 @@ body {
 #sidebar-wrapper {
     text-align: center;
     overflow-x: hidden;
+    width: 100%
+}
+
+#sidebar-wrapper form {
+    text-align: left;
+    margin-left: 10px;
+    width: 100%;
+    display-inline: block;
 }
 
 #wrapper.toggled #sidebar-wrapper {
