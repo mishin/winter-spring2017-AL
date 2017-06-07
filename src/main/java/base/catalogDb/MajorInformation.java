@@ -51,26 +51,4 @@ public class MajorInformation implements Serializable {
 
     public void setDefaultFlowchart(Flowchart defaultFlowchart) { this.defaultFlowchart = defaultFlowchart; }
 
-    private class ColorInfo {
-        private List<Integer> majorCourseIds = new ArrayList<Integer>();
-        private List<Integer> supportCourseIds = new ArrayList<Integer>();
-
-        public List<Integer> getMajorCourseIds() {
-            return majorCourseIds;
-        }
-
-        public void setMajorCourseIds(List<Integer> getMajorCourseIds) {
-            this.majorCourseIds.clear();
-            this.majorCourseIds.addAll(majorCourseIds);
-        }
-
-        public List<Integer> getSupportCourseIds() {
-            return supportCourseIds;
-        }
-
-        public void setSupportCourseIds(List<Integer> getSupportCourseIds) {
-            this.supportCourseIds.clear();
-            this.supportCourseIds.addAll(supportCourseIds);
-        }
-    }
 }
