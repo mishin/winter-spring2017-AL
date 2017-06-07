@@ -52,7 +52,7 @@
                 <a href="#">Visual Settings</a>
             </div>
         </div>
-        <span style="float:right"><p class="header-item-right">Logout jdoe@calpoly.edu</p></span>
+        <span style="float:right"><p class="header-item-right">Logout {{email}}</p></span>
     </div>
     <div id="wrapper">
 
@@ -417,9 +417,20 @@
         });
 
         app.controller('HeaderCtrl', function ($scope, $http) {
-            console.log("before");
-            console.log(window.sessionStorage.getItem ("token"));
-            console.log("after");
+            console.log(window.sessionStorage.getItem("jwtToken"));
+            var token = window.sessionStorage.getItem("jwtToken");
+
+            $http({
+                method : 'GET',
+                url: 'user'
+                headers : {
+                    "X-Auth-Token" : token
+                }
+            }).then(function (response) {
+                $scope.email = response.data.email;
+                console.log(response);
+            });
+
             $scope.savePlannedCourses = function() {
                 $scope.savedCourses = [];
                 var quarters = document.getElementsByClassName("flowchartQuarter");
