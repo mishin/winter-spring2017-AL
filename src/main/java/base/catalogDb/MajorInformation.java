@@ -43,32 +43,32 @@ public class MajorInformation implements Serializable {
         this.major = major;
     }
 
-    public ColorInfo getColorInfo() = { return colorInfo;}
+    public ColorInfo getColorInfo() { return colorInfo; }
 
-    public void setColorInfo(ColorInfo colorInfo) = { this.colorInfo = colorInfo;}
+    public void setColorInfo(ColorInfo colorInfo) { this.colorInfo = colorInfo; }
 
-    public Flowchart getDefaultFlowchart() = { return defaultFlowchart; }
+    public Flowchart getDefaultFlowchart() { return defaultFlowchart; }
 
     public void setDefaultFlowchart(Flowchart defaultFlowchart) { this.defaultFlowchart = defaultFlowchart; }
 
     private class ColorInfo {
-        private List<int> majorCourseIds = new ArrayList<int>();
-        private List<int> supportCourseIds = new ArrayList<int>();
+        private List<Integer> majorCourseIds = new ArrayList<Integer>();
+        private List<Integer> supportCourseIds = new ArrayList<Integer>();
 
-        public List<int> getMajorCourseIds() {
+        public List<Integer> getMajorCourseIds() {
             return majorCourseIds;
         }
 
-        public void setMajorCourseIds(List<int> getMajorCourseIds) {
+        public void setMajorCourseIds(List<Integer> getMajorCourseIds) {
             this.majorCourseIds.clear();
             this.majorCourseIds.addAll(majorCourseIds);
         }
 
-        public List<int> getSupportCourseIds() {
+        public List<Integer> getSupportCourseIds() {
             return supportCourseIds;
         }
 
-        public void setSupportCourseIds(List<int> getSupportCourseIds) {
+        public void setSupportCourseIds(List<Integer> getSupportCourseIds) {
             this.supportCourseIds.clear();
             this.supportCourseIds.addAll(supportCourseIds);
         }

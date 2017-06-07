@@ -9,6 +9,8 @@ import java.util.ArrayList;
  * Created by calvinnguyen on 6/2/17.
  */
 
+@CrossOrigin
+@RestController
 @RequestMapping("/majorcatalog")
 public class MajorRepositoryController {
 
