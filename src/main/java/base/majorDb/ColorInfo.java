@@ -1,4 +1,4 @@
-package base.catalogDb;
+package base.majorDb;
 
 import org.springframework.data.annotation.Id;
 

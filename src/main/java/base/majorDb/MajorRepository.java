@@ -1,4 +1,4 @@
-package base.catalogDb;
+package base.majorDb;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

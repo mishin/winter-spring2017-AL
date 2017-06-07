@@ -1,13 +1,10 @@
-package base.catalogDb;
+package base.majorDb;
 
 import base.studentFlowchartDb.Flowchart;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.awt.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by calvinnguyen on 6/2/17.

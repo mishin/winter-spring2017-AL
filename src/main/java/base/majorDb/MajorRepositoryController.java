@@ -1,4 +1,4 @@
-package base.catalogDb;
+package base.majorDb;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +35,19 @@ public class MajorRepositoryController {
     @GetMapping("{id}")
     public MajorInformation find(@PathVariable String id) {
         return majorRepository.findOne(id);
+    }
+
+    @GetMapping("{major}/color")
+    public ColorInfo findColor(@PathVariable String major) {
+        ArrayList<MajorInformation> items = new ArrayList<MajorInformation>();
+
+        for (MajorInformation item : majorRepository.findAll()) {
+            if (item.getMajor().equals(major)) {
+                return item.getColorInfo();
+            }
+        }
+
+        return null;
     }
 
     @PostMapping
