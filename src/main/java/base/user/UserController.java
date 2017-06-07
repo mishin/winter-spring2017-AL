@@ -31,6 +31,7 @@ public class UserController  {
     private JwtTokenUtil jwtTokenUtil;
 
     // Return only logged in user
+    
     @GetMapping
     public UserDetails getCurrentUser(@CurrentUser UserDetails currentUser) {
         return currentUser;
@@ -39,11 +40,11 @@ public class UserController  {
     @RequestMapping("/all")
     public List<User> getUsers(@CurrentUser UserDetails currentUser) {
         ArrayList<User> users = new ArrayList<User>();
-        if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+//        if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             for (User u : userRepository.findAll()) {
                 users.add(u);
             }
-        }
+//        }
         return users;
     }
 
