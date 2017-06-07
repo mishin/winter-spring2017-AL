@@ -399,7 +399,7 @@
 
         function loadPlannedCourses($scope, $http){
             $scope.plannedCourses = [];
-            $http.get("/studentFlowchart/1")
+            $http.get("/studentFlowchart/" + $scope.userId)
             .then(function (response) {
                 console.log("response.data");
                 console.log(response.data);
@@ -427,6 +427,7 @@
                     "X-Auth-Token" : token
                 }
             }).then(function (response) {
+                $scope.userId = response.data.id;
                 $scope.email = response.data.email;
                 console.log(response);
             });
@@ -453,7 +454,7 @@
 
                 $http({
                     method : 'PUT',
-                    url : 'studentFlowchart/1',
+                    url : 'studentFlowchart/' + $scope.userId,
                     data : $scope.savedCourses
                 }).then(function (response) {
                     console.log("check response to see if the backend says its all cool");
