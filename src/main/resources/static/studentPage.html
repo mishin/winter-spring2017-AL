@@ -26,14 +26,14 @@
     <![endif]-->
 </head>
 
-<body>
-    <div id="header" ng-controller="HeaderCtrl">
+<body ng-controller="StudentCtrl">
+    <div id="header">
         <a href="#menu-toggle" class="header-item-left" id="menu-toggle">Catalog</a>
         <a href="#menu-toggle" class="header-item-left" id="courses-toggle">Required Courses</a>
         <div class="dropdown">
             <p class="header-item-left">Saved Flowcharts</p>
             <div class="dropdown-content">
-                <a href="#">Freshman Flowchart</a>
+                <a href="#" data-flowchartId="{{f.id}}" ng-repeat="f in userFlowcharts" ng-click="loadPlannedCourses(f.id)">{{f.flowchartName}}</a>
                 <a href="#">Flowchart Number Two</a>
             </div>
         </div>
@@ -69,7 +69,7 @@
                 <input type="text" ng-model="searchInput.title"/><br>
             </form>
             <br>
-            <div ng-controller="CatalogCtrl">
+            <div>
                 <ul id="catalog1" class="catalogTable">
                     <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in catalogCourses | orderBy:['prefix', 'number'] | filter:searchInput">
                         <span>{{c.prefix}} {{c.number}}</span>
@@ -77,14 +77,6 @@
                         {{c.title}}
                     </li>
                 </ul>
-                <!--
-                <table class="catalogTable">
-                    <tr ng-repeat="c in catalogCourses | orderBy:['prefix', 'number']">
-                        <td class="{{c.educationArea}}">
-                            <span class="class-number">{{c.prefix}} {{c.number}}</span>
-                        </td>
-                    </tr>
-                </table> -->
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -93,8 +85,8 @@
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
-                    <div ng-controller="FlowchartCtrl">
-                        <h2>Editing "{{flowchartName}}"</h2>
+                    <div>
+                        <h2>Editing "{{selectedFlowchartName}}"</h2>
                         <br>
 
                         <div class="flowchart">
@@ -369,12 +361,27 @@
     <script>
         var app = angular.module('StudentApp', ['ui.bootstrap']);
 
-        function loadCatalogCourses ($scope, $http){
+        function loadUserInformation($scope, $http){
+            console.log(window.sessionStorage.getItem("token"));
+            var token = window.sessionStorage.getItem("token");
+
             $http({
                 method : 'GET',
-                url : 'catalog'
+                url : 'user',
+                headers : {
+                    "X-Auth-Token" : token
+                }
             }).then(function (response) {
-                $scope.catalogCourses = response.data;
+                $scope.email = response.data.email;
+
+                $http.get("/studentFlowchart/student/" + $scope.userId)
+                .then(function (response) {
+                    $scope.userFlowcharts = response.data;
+                    $scope.selectedFlowchartId = response.data[0].id;
+                    $scope.selectedFlowchartName = response.data[0].flowchartName;
+                });
+
+                console.log(response);
             });
         }
 
@@ -383,9 +390,16 @@
                 method : 'GET',
                 url : 'catalog'
             }).then(function (response) {
+                console.log($scope.plannedCourses);
+                while($scope.plannedCourses.length > 0) { $scope.plannedCourses.pop(); }
+                console.log("A");
+                console.log($scope.plannedCourses);
                 angular.forEach(data, function(plannedCourse) {
+                    console.log("B");
                     angular.forEach(response.data, function(catalogCourse) {
+                        console.log("C");
                         if(catalogCourse.courseId == plannedCourse.courseId) {
+                            console.log("D");
                             catalogCourse.year = plannedCourse.year;
                             catalogCourse.quarter = plannedCourse.quarter;
                             catalogCourse.position = plannedCourse.position;
@@ -397,42 +411,25 @@
             });
         }
 
-        function loadPlannedCourses($scope, $http){
+        function setHeaderFunctions ($scope, $http) {
             $scope.plannedCourses = [];
-            $http.get("/studentFlowchart/" + $scope.userId)
-            .then(function (response) {
-                console.log("response.data");
-                console.log(response.data);
-                $scope.flowchartName = response.data.flowchartName;
-                loadPlannedCoursesFromCatalog($scope, $http, response.data.plannedCourses);
-            });
-        }
+            $scope.loadPlannedCourses = function loadPlannedCourses(flowchartId){
+                $http.get("/studentFlowchart/" + flowchartId)
+                .then(function (response) {
+                    $scope.selectedFlowchartId = response.data.id;
+                    $scope.selectedFlowchartName = response.data.flowchartName;
+                    loadPlannedCoursesFromCatalog($scope, $http, response.data.plannedCourses);
+                });
+            }
 
-        app.controller('HeaderCtrl', function ($scope, $http) {
-            console.log(window.sessionStorage.getItem("token"));
-            var token = window.sessionStorage.getItem("token");
-
-            $http({
-                method : 'GET',
-                url : 'user',
-                headers : {
-                    "X-Auth-Token" : token
-                }
-            }).then(function (response) {
-                $scope.userId = response.data.id;
-                $scope.email = response.data.email;
-                console.log(response);
-            });
-
+            $scope.savedCourses = [];
             $scope.savePlannedCourses = function() {
-                $scope.savedCourses = [];
                 var quarters = document.getElementsByClassName("flowchartQuarter");
                 var q = 0;
                 angular.forEach(quarters, function(quarter) {
                     var courses = quarter.getElementsByClassName("course");
                     p = 1;
                     angular.forEach(courses, function(course) {
-                        console.log(course.dataset.courseid);
                         $scope.savedCourses.push( {
                             "courseId": course.dataset.courseid,
                             "year": Math.floor(q/3) + 1,
@@ -446,7 +443,7 @@
 
                 $http({
                     method : 'PUT',
-                    url : 'studentFlowchart/' + $scope.userId,
+                    url : 'studentFlowchart/' + $scope.selectedFlowchartId,
                     data : $scope.savedCourses
                 }).then(function (response) {
                     console.log("check response to see if the backend says its all cool");
@@ -461,15 +458,23 @@
                 });
                 console.log($scope.savedCourses);
             };
-        });
+        }
 
-        app.controller('CatalogCtrl', function ($scope, $http){
+        function loadCatalogCourses ($scope, $http){
+            $http({
+                method : 'GET',
+                url : 'catalog'
+            }).then(function (response) {
+                $scope.catalogCourses = response.data;
+            });
+        }
+
+        app.controller('StudentCtrl', function ($scope, $http) {
+            loadUserInformation($scope, $http);
+            setHeaderFunctions($scope, $http);
             loadCatalogCourses($scope, $http);
         });
 
-        app.controller('FlowchartCtrl', function ($scope, $http) {
-            loadPlannedCourses($scope, $http);
-        });
     </script>
     <script>
         setTimeout(function() {

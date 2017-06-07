@@ -29,20 +29,34 @@ public class FlowchartRepositoryController {
         return items;
     }
 
-    @GetMapping("{id}")
-    public Flowchart findByStudentId(@PathVariable String id) {
+    @GetMapping("student/{id}")
+    public ArrayList<Flowchart> findByStudentId(@PathVariable Long id) {
+        System.out.println("get student id: " + id);
+        ArrayList<Flowchart> items = new ArrayList<Flowchart>();
 
         for (Flowchart item : flowchartRepository.findAll()) {
-            if (item.getStudentId().toString().equals(id)) return item;
+            if (item.getStudentId().toString().equals(id.toString())) items.add(item);
         }
+
+        if (items.size() == 0)
+            items.add(this.create(new Flowchart(id, "Default Flowchart", new ArrayList<PlannedCourse>())));
+
+        return items;
 
         //TODO use the given student ID to get the student's major
         //TODO then instead of returning a new, empty flowchart, we can return the default
         //TODO flowchart for that major.
         //TODO make change so flowchart is only created the first time when they save.
-        Flowchart newFlowchart = new Flowchart();
-        this.create(newFlowchart);
-        return newFlowchart;
+    }
+
+    @GetMapping("{id}")
+    public Flowchart findById(@PathVariable String id) {
+        System.out.println("get id: " + id);
+        for (Flowchart item : flowchartRepository.findAll()) {
+            if (item.getId().toString().equals(id)) return item;
+        }
+
+        return null;
     }
 
     @PostMapping
@@ -62,14 +76,15 @@ public class FlowchartRepositoryController {
         for (PlannedCourse p : input) {
             System.out.println("c: " + p.getCourseId());
         }
-        Flowchart flowchart = findByStudentId(id);
+
+        Flowchart flowchart = findById(id);
+
         if (flowchart == null) {
             System.out.println("flowchart null");
             return null;
         } else {
             System.out.println("flowchart not null");
             flowchart.setPlannedCourses(input);
-
             return flowchartRepository.save(flowchart);
         }
     }
