@@ -417,8 +417,8 @@
         });
 
         app.controller('HeaderCtrl', function ($scope, $http) {
-            console.log(window.sessionStorage.getItem("jwtToken"));
-            var token = window.sessionStorage.getItem("jwtToken");
+            console.log(window.sessionStorage.getItem("token"));
+            var token = window.sessionStorage.getItem("token");
 
             $http({
                 method : 'GET',
