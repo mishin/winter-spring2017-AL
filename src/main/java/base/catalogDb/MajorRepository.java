@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
  * Created by calvinnguyen on 6/2/17.
  */
 @Repository
-public class MajorRepository extends MongoRepository<CourseEdArea, String> {
+public interface MajorRepository extends MongoRepository<MajorInformation, String> {
 }

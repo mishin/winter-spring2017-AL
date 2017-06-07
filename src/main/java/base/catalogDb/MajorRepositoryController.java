@@ -20,10 +20,10 @@ public class MajorRepositoryController {
     }
 
     @GetMapping
-    public ArrayList<CourseEdArea> listAll() {
-        ArrayList<CourseEdArea> items = new ArrayList<CourseEdArea>();
+    public ArrayList<MajorInformation> listAll() {
+        ArrayList<MajorInformation> items = new ArrayList<MajorInformation>();
 
-        for (CourseEdArea item : majorRepository.findAll()) {
+        for (MajorInformation item : majorRepository.findAll()) {
             items.add(item);
         }
 
@@ -31,14 +31,14 @@ public class MajorRepositoryController {
     }
 
     @GetMapping("{id}")
-    public CourseEdArea find(@PathVariable String id) {
+    public MajorInformation find(@PathVariable String id) {
         return majorRepository.findOne(id);
     }
 
     @PostMapping
-    public CourseEdArea create(@RequestBody CourseEdArea input) {
+    public MajorInformation create(@RequestBody MajorInformation input) {
         return majorRepository
-                .save(new CourseEdArea(input.getCatalogId(), input.getMajor(), input.getCatalogCourses()));
+                .save(new MajorInformation(input.getMajor(), input.getColorInfo(), input.getDefaultFlowchart()));
     }
 
     @DeleteMapping("{id}")
@@ -47,14 +47,14 @@ public class MajorRepositoryController {
     }
 
     @PutMapping("{id}")
-    public CourseEdArea update(@PathVariable String id, @RequestBody CourseEdArea input) {
-        CourseEdArea catalog = majorRepository.findOne(id);
+    public MajorInformation update(@PathVariable String id, @RequestBody MajorInformation input) {
+        MajorInformation catalog = majorRepository.findOne(id);
         if (catalog == null) {
             return null;
         } else {
-            catalog.setCatalogId(input.getCatalogId());
             catalog.setMajor(input.getMajor());
-            catalog.setCatalogCourses(input.getCatalogCourses());
+            catalog.setColorInfo(input.getColorInfo());
+            catalog.setDefaultFlowchart(input.getDefaultFlowchart());
             return majorRepository.save(catalog);
         }
     }
