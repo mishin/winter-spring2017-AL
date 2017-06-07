@@ -68,7 +68,6 @@
      		$http(postRequest).then(function(response) {
      			if (response.data) {
      				window.sessionStorage.setItem("token", response.data.token);
-     				console.log("Empty");
      				window.location.href = 'https://slocharts.herokuapp.com/student';
      			} else {
      				console.log('Invalid email or password');
@@ -93,6 +92,7 @@
         				lastName: $scope.user.lastName,
         				email: $scope.user.email,
         				password: $scope.user.password,
+        				major: $scope.user.major,
         			}
           		}
           		$http(postRequest).then(function success(response) {
