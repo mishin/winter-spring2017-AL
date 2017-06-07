@@ -399,7 +399,7 @@
 
         function loadPlannedCourses($scope, $http){
             $scope.plannedCourses = [];
-            $http.get("/studentFlowchart/1")
+            $http.get("/studentFlowchart/" + $scope.userId)
             .then(function (response) {
                 console.log("response.data");
                 console.log(response.data);
@@ -408,17 +408,9 @@
             });
         }
 
-        app.controller('CatalogCtrl', function ($scope, $http){
-            loadCatalogCourses($scope, $http);
-        });
-
-        app.controller('FlowchartCtrl', function ($scope, $http) {
-            loadPlannedCourses($scope, $http);
-        });
-
         app.controller('HeaderCtrl', function ($scope, $http) {
-            console.log(window.sessionStorage.getItem("jwtToken"));
-            var token = window.sessionStorage.getItem("jwtToken");
+            console.log(window.sessionStorage.getItem("token"));
+            var token = window.sessionStorage.getItem("token");
 
             $http({
                 method : 'GET',
@@ -427,6 +419,7 @@
                     "X-Auth-Token" : token
                 }
             }).then(function (response) {
+                $scope.userId = response.data.id;
                 $scope.email = response.data.email;
                 console.log(response);
             });
@@ -453,7 +446,7 @@
 
                 $http({
                     method : 'PUT',
-                    url : 'studentFlowchart/1',
+                    url : 'studentFlowchart/' + $scope.userId,
                     data : $scope.savedCourses
                 }).then(function (response) {
                     console.log("check response to see if the backend says its all cool");
@@ -468,6 +461,14 @@
                 });
                 console.log($scope.savedCourses);
             };
+        });
+
+        app.controller('CatalogCtrl', function ($scope, $http){
+            loadCatalogCourses($scope, $http);
+        });
+
+        app.controller('FlowchartCtrl', function ($scope, $http) {
+            loadPlannedCourses($scope, $http);
         });
     </script>
     <script>
