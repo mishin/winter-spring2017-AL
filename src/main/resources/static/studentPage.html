@@ -372,6 +372,7 @@
                     "X-Auth-Token" : token
                 }
             }).then(function (response) {
+                $scope.userId = response.data.id;
                 $scope.email = response.data.email;
 
                 $http.get("/studentFlowchart/student/" + $scope.userId)
