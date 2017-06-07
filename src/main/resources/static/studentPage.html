@@ -408,14 +408,6 @@
             });
         }
 
-        app.controller('CatalogCtrl', function ($scope, $http){
-            loadCatalogCourses($scope, $http);
-        });
-
-        app.controller('FlowchartCtrl', function ($scope, $http) {
-            loadPlannedCourses($scope, $http);
-        });
-
         app.controller('HeaderCtrl', function ($scope, $http) {
             console.log(window.sessionStorage.getItem("token"));
             var token = window.sessionStorage.getItem("token");
@@ -469,6 +461,14 @@
                 });
                 console.log($scope.savedCourses);
             };
+        });
+
+        app.controller('CatalogCtrl', function ($scope, $http){
+            loadCatalogCourses($scope, $http);
+        });
+
+        app.controller('FlowchartCtrl', function ($scope, $http) {
+            loadPlannedCourses($scope, $http);
         });
     </script>
     <script>

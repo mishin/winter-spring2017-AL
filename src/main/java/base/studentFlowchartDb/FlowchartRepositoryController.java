@@ -39,7 +39,10 @@ public class FlowchartRepositoryController {
         //TODO use the given student ID to get the student's major
         //TODO then instead of returning a new, empty flowchart, we can return the default
         //TODO flowchart for that major.
-        return new Flowchart();
+        //TODO make change so flowchart is only created the first time when they save.
+        Flowchart newFlowchart = new Flowchart();
+        this.create(newFlowchart);
+        return newFlowchart;
     }
 
     @PostMapping
