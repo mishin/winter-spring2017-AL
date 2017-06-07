@@ -56,6 +56,7 @@ public class UserController  {
         user.setFirstName(reqUser.getFirstName());
         user.setLastName(reqUser.getLastName());
         user.setPassword(new BCryptPasswordEncoder().encode(reqUser.getPassword()));
+        user.setMajor(reqUser.getMajor());
         return userRepository.save(user);
     }
 
@@ -76,6 +77,7 @@ public class UserController  {
             user.setLastName(reqUser.getLastName());
             user.setEmail(reqUser.getEmail());
             user.setPassword(new BCryptPasswordEncoder().encode(reqUser.getPassword()));
+            user.setMajor(reqUser.getMajor());
             return userRepository.save(user);
         }
     }

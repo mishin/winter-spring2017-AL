@@ -57,6 +57,9 @@ public class User implements Serializable, UserDetails {
     @NotEmpty(message = "Password is required.")
     private String password;
 
+    @NotEmpty(message = "Please provide your major.")
+    private String major;
+
     private String authenticationToken;
 
     public User() {}
@@ -67,6 +70,7 @@ public class User implements Serializable, UserDetails {
         this.lastName = user.lastName;
         this.email = user.email;
         this.password = user.password;
+        this.major = user.major;
     }
 
     public String getPassword() {
@@ -108,6 +112,10 @@ public class User implements Serializable, UserDetails {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getMajor() {return major;}
+
+    public void setMajor(String major) {this.major = major; }
 
     public String getUsername() {
         return email;
