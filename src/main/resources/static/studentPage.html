@@ -34,7 +34,7 @@
             <p class="header-item-left">Saved Flowcharts</p>
             <div class="dropdown-content">
                 <a href="#" data-flowchartId="{{f.id}}" ng-repeat="f in userFlowcharts" ng-click="loadPlannedCourses(f.id)">{{f.flowchartName}}</a>
-                <a href="#">Flowchart Number Two</a>
+                <a href="#" style="text-align:center;font-weight:bold;">+</a>
             </div>
         </div>
         <div class="dropdown">
@@ -86,7 +86,10 @@
             <div class="container-fluid">
                 <div class="row">
                     <div>
-                        <h2>Editing "{{selectedFlowchartName}}"</h2>
+                        <div>
+                            <h2>Editing "{{selectedFlowchartName}}"</h2>
+                            <img src="http://simpleicon.com/wp-content/uploads/pencil.png" ng-click="editFlowchartName()" style="position:relative;width:32px;height:32px;">
+                        </div>
                         <br>
 
                         <div class="flowchart">
@@ -458,6 +461,32 @@
                     }
                 });
                 console.log($scope.savedCourses);
+            };
+
+            $scope.editFlowchartName = function() {
+                var oldName = $scope.selectedFlowchart;
+                var newName = window.prompt("Enter new flowchart name.", $scope.selectedFlowchartName);
+
+                if (newName == null || newName == "") {
+                    console.log("cancelled prompt");
+                } else {
+                    $http({
+                    method : 'PUT',
+                    url : 'studentFlowchart/' + $scope.selectedFlowchartId + '/name',
+                    data : newName
+                    }).then(function (response) {
+                        if (response.status < 300) {
+                            $scope.selectedFlowchartName = newName;
+                            $http.get("/studentFlowchart/student/" + 1)
+                            .then(function (response) {
+                                $scope.userFlowcharts = response.data;
+                            });
+                        }
+                        else {
+                            window.alert("There was a problem renaming your flowchart.");
+                        }
+                    });
+                }
             };
         }
 
