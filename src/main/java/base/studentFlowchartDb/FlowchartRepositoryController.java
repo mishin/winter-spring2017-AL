@@ -41,15 +41,7 @@ public class FlowchartRepositoryController {
             }
         }
 
-        if (items.size() == 0)
-            items.add(this.create(new Flowchart(id,"Default Flowchart", new ArrayList<PlannedCourse>())));
-
         return items;
-
-        //TODO use the given student ID to get the student's major
-        //TODO then instead of returning a new, empty flowchart, we can return the default
-        //TODO flowchart for that major.
-        //TODO make change so flowchart is only created the first time when they save.
     }
 
     @GetMapping("{id}")

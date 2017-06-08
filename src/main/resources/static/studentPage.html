@@ -365,10 +365,10 @@
                     "plannedCourses": $scope.plannedCourses
                 }
             }).then(function (response) {
-                $userFlowcharts.push(response.data);
-                console.log(response.data);
+                $scope.userFlowcharts.push(response.data);
                 $scope.selectedFlowchartId = response.data.id;
                 $scope.selectedFlowchartName = response.data.flowchartName;
+                $scope.savePlannedCourses();
             });
         };
 
@@ -393,20 +393,26 @@
             }).then(function (response) {
                 console.log("user id:");
                 console.log(response.data.id);
-                $scope.userId = response.data.id;
+                $scope.userId = 1;
                 $scope.userEmail = response.data.email;
-                $scope.userMajor = response.data.major;
+                $scope.userMajor = 'CSC';
 
                 $http.get("/studentFlowchart/student/" + $scope.userId)
                 .then(function (response) {
                     $scope.userFlowcharts = response.data;
 
-                    if ($scope.userFlowcharts.length = 0) {
+                    console.log($scope.userFlowcharts);
+                    console.log($scope.userFlowcharts.length);
+
+                    if ($scope.userFlowcharts.length == 0) {
+                        $scope.userFlowcharts = [];
+                        console.log($scope.userFlowcharts);
                         createDefaultFlowchart($scope, $http);
                     };
 
-                    $scope.selectedFlowchartId = response.data[0].id;
-                    $scope.selectedFlowchartName = response.data[0].flowchartName;
+                    $scope.selectedFlowchartId = $scope.userFlowcharts[0].id;
+                    $scope.selectedFlowchartName = $scope.userFlowcharts[0].flowchartName;
+                    $scope.loadPlannedCourses($scope.selectedFlowchartId);
                 });
 
                 console.log(response);
