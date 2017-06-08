@@ -71,7 +71,7 @@
             <br>
             <div>
                 <ul id="catalog1" class="catalogTable">
-                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in catalogCourses | orderBy:['prefix', 'number'] | filter:searchInput">
+                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in catalogCourses | orderBy:['name'] | filter:searchInput">
                         <span>{{c.name}}</span>
                         <br>
                         {{c.title}}
