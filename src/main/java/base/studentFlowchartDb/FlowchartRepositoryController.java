@@ -42,8 +42,7 @@ public class FlowchartRepositoryController {
         }
 
         if (items.size() == 0)
-            items.add(this.create(new Flowchart(id,"Default Flowchart",
-                    new ArrayList<PlannedCourse>())));
+            items.add(this.create(new Flowchart(id,"Default Flowchart", new ArrayList<PlannedCourse>())));
 
         return items;
 
