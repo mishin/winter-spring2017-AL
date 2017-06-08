@@ -19,6 +19,9 @@ public class MongoController {
         uri = new MongoClientURI(URI);
         client = new MongoClient(uri);
         db = client.getDatabase("heroku_c1vgg6jm");
+///*TODO Delete this later, this is only for running mongo locally*/
+//        client = new MongoClient("localhost", 27017);
+//        db = client.getDatabase("testdb");
     }
 
     public static void logoutMongo() {

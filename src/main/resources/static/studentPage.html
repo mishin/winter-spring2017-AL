@@ -71,8 +71,8 @@
             <br>
             <div>
                 <ul id="catalog1" class="catalogTable">
-                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in catalogCourses | orderBy:['prefix', 'number'] | filter:searchInput">
-                        <span>{{c.prefix}} {{c.number}}</span>
+                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in catalogCourses | orderBy:['name'] | filter:searchInput">
+                        <span>{{c.name}}</span>
                         <br>
                         {{c.title}}
                     </li>
@@ -86,10 +86,9 @@
             <div class="container-fluid">
                 <div class="row">
                     <div>
-                        <div>
-                            <h2>Editing "{{selectedFlowchartName}}"</h2>
+                        <h2>Editing "{{selectedFlowchartName}}"
                             <img src="http://simpleicon.com/wp-content/uploads/pencil.png" ng-click="editFlowchartName()" style="position:relative;width:32px;height:32px;">
-                        </div>
+                        </h2>
                         <br>
 
                         <div class="flowchart">
@@ -100,7 +99,7 @@
                                     <ul id="quarter1" class="flowchartQuarter">
                                         <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 1">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
-                                            <span>{{c.prefix}} {{c.number}}</span>
+                                            <span>{{c.name}}</span>
                                             <br>
                                             {{c.title}}
                                         </li>
@@ -111,7 +110,7 @@
                                     <ul id="quarter2" class="flowchartQuarter">
                                         <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 2">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
-                                            <span>{{c.prefix}} {{c.number}}</span>
+                                            <span>{{c.name}}</span>
                                             <br>
                                             {{c.title}}
                                         </li>
@@ -122,7 +121,7 @@
                                     <ul id="quarter3" class="flowchartQuarter">
                                         <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 3">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
-                                            <span>{{c.prefix}} {{c.number}}</span>
+                                            <span>{{c.name}}</span>
                                             <br>
                                             {{c.title}}
                                         </li>
@@ -136,7 +135,7 @@
                                     <ul id="quarter4" class="flowchartQuarter">
                                         <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 1">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
-                                            <span>{{c.prefix}} {{c.number}}</span>
+                                            <span>{{c.name}}</span>
                                             <br>
                                             {{c.title}}
                                         </li>
@@ -147,7 +146,7 @@
                                     <ul id="quarter5" class="flowchartQuarter">
                                         <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 2">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
-                                            <span>{{c.prefix}} {{c.number}}</span>
+                                            <span>{{c.name}}</span>
                                             <br>
                                             {{c.title}}
                                         </li>
@@ -158,7 +157,7 @@
                                     <ul id="quarter6" class="flowchartQuarter">
                                         <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 3">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
-                                            <span>{{c.prefix}} {{c.number}}</span>
+                                            <span>{{c.name}}</span>
                                             <br>
                                             {{c.title}}
                                         </li>
@@ -172,7 +171,7 @@
                                     <ul id="quarter7" class="flowchartQuarter">
                                         <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 3 && c.quarter == 1">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
-                                            <span>{{c.prefix}} {{c.number}}</span>
+                                            <span>{{c.name}}</span>
                                             <br>
                                             {{c.title}}
                                         </li>
@@ -183,7 +182,7 @@
                                     <ul id="quarter8" class="flowchartQuarter">
                                         <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 3 && c.quarter == 2">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
-                                            <span>{{c.prefix}} {{c.number}}</span>
+                                            <span>{{c.name}}</span>
                                             <br>
                                             {{c.title}}
                                         </li>
@@ -194,7 +193,7 @@
                                     <ul id="quarter9" class="flowchartQuarter">
                                         <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 3 && c.quarter == 3">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
-                                            <span>{{c.prefix}} {{c.number}}</span>
+                                            <span>{{c.name}}</span>
                                             <br>
                                             {{c.title}}
                                         </li>
@@ -208,7 +207,7 @@
                                     <ul id="quarter10" class="flowchartQuarter">
                                         <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 4 && c.quarter == 1">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
-                                            <span>{{c.prefix}} {{c.number}}</span>
+                                            <span>{{c.name}}</span>
                                             <br>
                                             {{c.title}}
                                         </li>
@@ -219,7 +218,7 @@
                                     <ul id="quarter11" class="flowchartQuarter">
                                         <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 4 && c.quarter == 2">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
-                                            <span>{{c.prefix}} {{c.number}}</span>
+                                            <span>{{c.name}}</span>
                                             <br>
                                             {{c.title}}
                                         </li>
@@ -230,7 +229,7 @@
                                     <ul id="quarter12" class="flowchartQuarter">
                                         <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 4 && c.quarter == 3">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
-                                            <span>{{c.prefix}} {{c.number}}</span>
+                                            <span>{{c.name}}</span>
                                             <br>
                                             {{c.title}}
                                         </li>
@@ -375,7 +374,9 @@
                     "X-Auth-Token" : token
                 }
             }).then(function (response) {
-                $scope.userId = response.data.id;
+                $scope.userId = 1;
+                console.log("user id:");
+                console.log(response.data.id);
                 $scope.email = response.data.email;
 
                 $http.get("/studentFlowchart/student/" + $scope.userId)
@@ -394,16 +395,12 @@
                 method : 'GET',
                 url : 'catalog'
             }).then(function (response) {
-                console.log($scope.plannedCourses);
-                while($scope.plannedCourses.length > 0) { $scope.plannedCourses.pop(); }
-                console.log("A");
-                console.log($scope.plannedCourses);
+                $scope.plannedCourses = [];
+                $('.flowchartQuarter li').remove();
+
                 angular.forEach(data, function(plannedCourse) {
-                    console.log("B");
                     angular.forEach(response.data, function(catalogCourse) {
-                        console.log("C");
                         if(catalogCourse.courseId == plannedCourse.courseId) {
-                            console.log("D");
                             catalogCourse.year = plannedCourse.year;
                             catalogCourse.quarter = plannedCourse.quarter;
                             catalogCourse.position = plannedCourse.position;
