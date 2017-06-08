@@ -36,7 +36,9 @@ public class FlowchartRepositoryController {
 
         for (Flowchart item : flowchartRepository.findAll()) {
             System.out.println("---- item id: " + item.getStudentId());
-            if (item.getStudentId().toString().equals(id.toString())) items.add(item);
+            if (item.getStudentId() != null && item.getStudentId().toString().equals(id.toString())) {
+                items.add(item);
+            }
         }
 
         if (items.size() == 0)
