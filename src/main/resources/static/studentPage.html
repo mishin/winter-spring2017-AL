@@ -411,6 +411,7 @@
                     };
 
                     console.log($scope.userFlowcharts);
+                    console.log($scope.userFlowcharts[0]);
                     $scope.selectedFlowchartId = $scope.userFlowcharts[0].id;
                     $scope.selectedFlowchartName = $scope.userFlowcharts[0].flowchartName;
                     $scope.loadPlannedCourses($scope.selectedFlowchartId);
@@ -473,6 +474,8 @@
                     q = q + 1;
                 });
 
+                console.log("saved courses: ");
+                console.log($scope.savedCourses);
                 $http({
                     method : 'PUT',
                     url : 'studentFlowchart/' + $scope.selectedFlowchartId,
