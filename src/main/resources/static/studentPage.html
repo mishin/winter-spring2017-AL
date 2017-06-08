@@ -444,6 +444,15 @@
                             catalogCourse.year = plannedCourse.year;
                             catalogCourse.quarter = plannedCourse.quarter;
                             catalogCourse.position = plannedCourse.position;
+                            if ($.inArray(plannedCourse.courseId, $scope.majorCourseIds) >= 0) {
+                                catalogCourse.educationArea = "major";
+                            }
+                            else if ($.inArray(plannedCourse.courseId, $scope.supportCourseIds) >= 0) {
+                                catalogCourse.educationArea = "support";
+                            }
+                            else {
+                                catalogCourse.educationArea = "ge";
+                            }
 
                             $scope.plannedCourses.push(catalogCourse);
                         }
