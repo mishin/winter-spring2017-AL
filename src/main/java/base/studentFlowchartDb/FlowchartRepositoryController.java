@@ -30,16 +30,18 @@ public class FlowchartRepositoryController {
     }
 
     @GetMapping("student/{id}")
-    public ArrayList<Flowchart> findByStudentId(@PathVariable String id) {
-        System.out.println("get student id: " + id);
+    public ArrayList<Flowchart> findByStudentId(@PathVariable Long id) {
+        System.out.println("-----get student id: " + id);
         ArrayList<Flowchart> items = new ArrayList<Flowchart>();
 
         for (Flowchart item : flowchartRepository.findAll()) {
+            System.out.println("---- item id: " + item.getStudentId());
             if (item.getStudentId().toString().equals(id.toString())) items.add(item);
         }
 
         if (items.size() == 0)
-            items.add(this.create(new Flowchart(Long.parseLong(id), "Default Flowchart", new ArrayList<PlannedCourse>())));
+            items.add(this.create(new Flowchart(id,"Default Flowchart",
+                    new ArrayList<PlannedCourse>())));
 
         return items;
 
