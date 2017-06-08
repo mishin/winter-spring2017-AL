@@ -27,35 +27,7 @@
 </head>
 
 <body ng-controller="StudentCtrl">
-    <div id="header">
-        <a href="#menu-toggle" class="header-item-left" id="menu-toggle">Catalog</a>
-        <a href="#menu-toggle" class="header-item-left" id="courses-toggle">Required Courses</a>
-        <div class="dropdown">
-            <p class="header-item-left">Saved Flowcharts</p>
-            <div class="dropdown-content">
-                <a href="#" data-flowchartId="{{f.id}}" ng-repeat="f in userFlowcharts" ng-click="loadPlannedCourses(f.id)">{{f.flowchartName}}</a>
-                <a href="#" style="text-align:center;font-weight:bold;">+</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <p class="header-item-left">Export</p>
-            <div class="dropdown-content">
-            </div>
-        </div>
-        <a class="header-item-left" ng-click="savePlannedCourses()">Save</a>
-        <div class="dropdown">
-            <p class="header-item-left">Options</p>
-            <div class="dropdown-content">
-                <a href="#">Change Major</a>
-                <a href="#">Add/Change Minor</a>
-                <a href="#">Add/Change Concentration</a>
-                <a href="#">Visual Settings</a>
-            </div>
-        </div>
-        <span style="float:right"><p class="header-item-right">Logout {{email}}</p></span>
-    </div>
     <div id="wrapper">
-
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <h3>Course Catalog</h3>
@@ -78,7 +50,33 @@
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
-
+        <div id="header">
+            <a href="#menu-toggle" class="header-item-left" id="menu-toggle">Catalog</a>
+            <a href="#menu-toggle" class="header-item-left" id="courses-toggle">Required Courses</a>
+            <div class="dropdown">
+                <p class="header-item-left">Saved Flowcharts</p>
+                <div class="dropdown-content">
+                    <a href="#" data-flowchartId="{{f.id}}" ng-repeat="f in userFlowcharts" ng-click="loadPlannedCourses(f.id)">{{f.flowchartName}}</a>
+                    <a href="#" style="text-align:center;font-weight:bold;">+</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <p class="header-item-left">Export</p>
+                <div class="dropdown-content">
+                </div>
+            </div>
+            <a class="header-item-left" ng-click="savePlannedCourses()">Save</a>
+            <div class="dropdown">
+                <p class="header-item-left">Options</p>
+                <div class="dropdown-content">
+                    <a href="#">Change Major</a>
+                    <a href="#">Add/Change Minor</a>
+                    <a href="#">Add/Change Concentration</a>
+                    <a href="#">Visual Settings</a>
+                </div>
+            </div>
+            <span style="float:right"><p class="header-item-right">Logout {{email}}</p></span>
+        </div>
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
