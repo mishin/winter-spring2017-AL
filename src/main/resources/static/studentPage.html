@@ -511,6 +511,9 @@
             $( "#quarter1, #quarter2, #quarter3, #quarter4, #quarter5, #quarter6, #quarter7, #quarter8, #quarter9, #quarter10, #quarter11, #quarter12" ).sortable({
                     connectWith: ".flowchartQuarter",
                     placeholder: "coursePlaceholder",
+                    update: function(event, ui) {
+                        console.log("TODO put flowchart validation here");
+                    },
                     stop: function(event, ui) {
                         if ($(ui.item).find(".courseDeleteButton").length == 0)
                         {
