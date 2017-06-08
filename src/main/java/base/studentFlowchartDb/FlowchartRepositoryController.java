@@ -91,5 +91,18 @@ public class FlowchartRepositoryController {
             return flowchartRepository.save(flowchart);
         }
     }
+
+    @PutMapping("{id}/name")
+    public Flowchart updateName(@PathVariable String id, @RequestBody String newName) {
+        Flowchart flowchart = findById(id);
+
+        if (flowchart == null) {
+            System.out.println("flowchart null");
+            return null;
+        } else {
+            flowchart.setFlowchartName(newName);
+            return flowchartRepository.save(flowchart);
+        }
+    }
 }
 
