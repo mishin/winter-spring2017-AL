@@ -36,8 +36,8 @@ public class CatalogRepositoryController {
     @PostMapping
     public CatalogCourse create(@RequestBody CatalogCourse input) {
         return catalogRepository
-                .save(new CatalogCourse(input.getCourseId(), input.getPrefix(), input.getNumber(),
-                        input.getTitle(), input.getEducationArea(), input.getDescription(),
+                .save(new CatalogCourse(input.getCourseId(), input.getName(),
+                        input.getTitle(), /*input.getEducationArea(),*/ input.getDescription(),
                         input.getPrerequisites(), input.getNumUnits()));
     }
 
@@ -53,10 +53,9 @@ public class CatalogRepositoryController {
             return null;
         } else {
             catalogCourse.setCourseId(input.getCourseId());
-            catalogCourse.setNumber(input.getNumber());
-            catalogCourse.setPrefix(input.getPrefix());
+            catalogCourse.setName(input.getName());
             catalogCourse.setTitle(input.getTitle());
-            catalogCourse.setEducationArea(input.getEducationArea());
+            //catalogCourse.setEducationArea(input.getEducationArea());
             catalogCourse.setPrerequisites(input.getPrerequisites());
             catalogCourse.setDescription(input.getDescription());
             catalogCourse.setNumUnits(input.getNumUnits());
