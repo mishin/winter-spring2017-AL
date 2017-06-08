@@ -37,17 +37,6 @@ public class CatalogCourse implements Serializable {
         this.numUnits = numUnits;
     }
 
-    public org.bson.Document getDocument() {
-        return new org.bson.Document()
-                .append("courseId", courseId)
-                .append("name", name)
-                .append("title", title)
-                //.append("educationArea", educationArea)
-                .append("description", description)
-                .append("prerequisites", prerequisites)
-                .append("numUnits", numUnits);
-    }
-
     public String getCourseId() { return this.courseId; }
 
     public void setCourseId(String courseId) { this.courseId = courseId; }
@@ -59,7 +48,6 @@ public class CatalogCourse implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
 
     public String getTitle() {
         return this.title;
