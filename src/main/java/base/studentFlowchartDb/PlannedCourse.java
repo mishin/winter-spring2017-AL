@@ -2,26 +2,25 @@ package base.studentFlowchartDb;
 
 import org.springframework.data.annotation.Id;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 public class PlannedCourse implements Serializable {
 
     @Id
     private String id;
-    private int courseId;
-    private int year; //1-freshman, 2-sophomore, etc...
-    private int quarter; //1-fall 2-winter 3-spring 4-summer
-    private int position;
-    private String educationArea;
+    private Long courseId;
+    private Integer year; //1-freshman, 2-sophomore, etc...
+    private Integer quarter; //1-fall 2-winter 3-spring 4-summer
+    private Integer position;
 
     public PlannedCourse() {}
 
-    public PlannedCourse(int courseId, int quarter, int year, int position, String educationArea) {
+    public PlannedCourse(Long courseId, Integer quarter, Integer year, Integer position) {
         this.courseId = courseId;
         this.year = year;
         this.quarter = quarter;
         this.position = position;
-        this.educationArea = educationArea;
     }
 
     public String getId() {
@@ -32,43 +31,35 @@ public class PlannedCourse implements Serializable {
         this.id = id;
     }
 
-    public int getCourseId() {
+    public Long getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(int courseId) {
+    public void setCourseId(Long courseId) {
         this.courseId = courseId;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 
-    public int getQuarter() {
+    public Integer getQuarter() {
         return quarter;
     }
 
-    public void setQuarter(int quarter) {
+    public void setQuarter(Integer quarter) {
         this.quarter = quarter;
     }
 
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
     public void setPosition(Integer position) {
         this.position = position;
-    }
-
-    public String getEducationArea() {
-        return this.educationArea;
-    }
-
-    public void setEducationArea(String educationArea) {
-        this.educationArea = educationArea;
     }
 }
