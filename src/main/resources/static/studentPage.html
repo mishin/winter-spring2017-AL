@@ -471,10 +471,12 @@
                     }).then(function (response) {
                         if (response.status < 300) {
                             $scope.selectedFlowchartName = newName;
-                            $http.get("/studentFlowchart/student/" + 1)
+                            console.log($scope.userId);
+                            $http.get("/studentFlowchart/student/" + $scope.userId)
                             .then(function (response) {
                                 $scope.userFlowcharts = response.data;
                             });
+                            console.log($scope.userId);
                         }
                         else {
                             window.alert("There was a problem renaming your flowchart.");

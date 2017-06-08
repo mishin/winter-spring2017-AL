@@ -30,7 +30,7 @@ public class FlowchartRepositoryController {
     }
 
     @GetMapping("student/{id}")
-    public ArrayList<Flowchart> findByStudentId(@PathVariable Long id) {
+    public ArrayList<Flowchart> findByStudentId(@PathVariable String id) {
         System.out.println("get student id: " + id);
         ArrayList<Flowchart> items = new ArrayList<Flowchart>();
 
@@ -39,7 +39,7 @@ public class FlowchartRepositoryController {
         }
 
         if (items.size() == 0)
-            items.add(this.create(new Flowchart(id, "Default Flowchart", new ArrayList<PlannedCourse>())));
+            items.add(this.create(new Flowchart(Long.parseLong(id), "Default Flowchart", new ArrayList<PlannedCourse>())));
 
         return items;
 
