@@ -86,10 +86,9 @@
             <div class="container-fluid">
                 <div class="row">
                     <div>
-                        <div>
-                            <h2>Editing "{{selectedFlowchartName}}"</h2>
+                        <h2>Editing "{{selectedFlowchartName}}"
                             <img src="http://simpleicon.com/wp-content/uploads/pencil.png" ng-click="editFlowchartName()" style="position:relative;width:32px;height:32px;">
-                        </div>
+                        </h2>
                         <br>
 
                         <div class="flowchart">
@@ -375,7 +374,9 @@
                     "X-Auth-Token" : token
                 }
             }).then(function (response) {
-                $scope.userId = response.data.id;
+                $scope.userId = 1;
+                console.log("user id:");
+                console.log(response.data.id);
                 $scope.email = response.data.email;
 
                 $http.get("/studentFlowchart/student/" + $scope.userId)
@@ -394,16 +395,12 @@
                 method : 'GET',
                 url : 'catalog'
             }).then(function (response) {
-                console.log($scope.plannedCourses);
-                while($scope.plannedCourses.length > 0) { $scope.plannedCourses.pop(); }
-                console.log("A");
-                console.log($scope.plannedCourses);
+                $scope.plannedCourses = [];
+                $('.flowchartQuarter li').remove();
+
                 angular.forEach(data, function(plannedCourse) {
-                    console.log("B");
                     angular.forEach(response.data, function(catalogCourse) {
-                        console.log("C");
                         if(catalogCourse.courseId == plannedCourse.courseId) {
-                            console.log("D");
                             catalogCourse.year = plannedCourse.year;
                             catalogCourse.quarter = plannedCourse.quarter;
                             catalogCourse.position = plannedCourse.position;
