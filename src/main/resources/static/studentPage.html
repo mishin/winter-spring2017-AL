@@ -410,6 +410,7 @@
                         createDefaultFlowchart($scope, $http);
                     };
 
+                    console.log($scope.userFlowcharts);
                     $scope.selectedFlowchartId = $scope.userFlowcharts[0].id;
                     $scope.selectedFlowchartName = $scope.userFlowcharts[0].flowchartName;
                     $scope.loadPlannedCourses($scope.selectedFlowchartId);
