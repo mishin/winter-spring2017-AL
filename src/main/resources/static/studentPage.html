@@ -368,7 +368,6 @@
                 $scope.userFlowcharts.push(response.data);
                 $scope.selectedFlowchartId = response.data.id;
                 $scope.selectedFlowchartName = response.data.flowchartName;
-                $scope.savePlannedCourses();
             });
         };
 
@@ -436,8 +435,6 @@
                         }
                     });
                 });
-
-                $scope.savePlannedCourses();
             });
         }
 
@@ -534,6 +531,9 @@
             loadUserInformation($scope, $http);
             setHeaderFunctions($scope, $http);
             loadCatalogCourses($scope, $http);
+            setTimeout(function() {
+                $scope.savePlannedCourses();
+            }, 5000);
         });
 
     </script>
