@@ -15,14 +15,14 @@
             })
 
             // route for the login page
-            .when('/about', {
-                templateUrl : 'pages/about.html',
+            .when('/login', {
+                templateUrl : 'pages/login.html',
                 controller  : 'aboutController'
             })
 
             // route for the contact page
-            .when('/contact', {
-                templateUrl : 'pages/contact.html',
+            .when('/signUp', {
+                templateUrl : 'pages/signUp.html',
                 controller  : 'contactController'
             });
     });
