@@ -355,7 +355,7 @@
         var app = angular.module('StudentApp', ['ui.bootstrap']);
 
         function createNewFlowchart($scope, $http, name){
-            $scope.plannedCourses
+            console.log($scope.plannedCourses);
             $http({
                 method : 'POST',
                 url : 'studentFlowchart',
@@ -365,16 +365,16 @@
                     "plannedCourses": $scope.plannedCourses
                 }
             }).then(function (response) {
+                $userFlowcharts.push(response.data);
+                console.log(response.data);
                 $scope.selectedFlowchartId = response.data.id;
                 $scope.selectedFlowchartName = response.data.flowchartName;
             });
         };
 
         function createDefaultFlowchart($scope, $http){
-            $scope.plannedCourses = [];
             $http.get("/majorFlowchart/major/" + $scope.userMajor)
             .then(function (response) {
-
                 loadPlannedCoursesFromCatalog($scope, $http, response.data.defaultFlowchart.plannedCourses);
                 createNewFlowchart($scope, $http, "Default Flowchart");
             });
