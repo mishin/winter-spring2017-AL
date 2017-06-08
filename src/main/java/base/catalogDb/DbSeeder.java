@@ -17,6 +17,29 @@ import com.google.gson.Gson;
 public class DbSeeder implements CommandLineRunner {
     private CatalogRepository catalogRepository;
 
+    /*
+    public static List<String> convertPrereq(String prereq) {
+        Pattern p = Pattern.compile("([A-Z]{2,4}\\s\\d{3})");   // the pattern to search for
+        Matcher m = p.matcher(prereq);
+        List<String> processedPrereq = new ArrayList<String>();
+
+        while (m.find())
+        {
+            processedPrereq.add(m.group());
+        }
+
+        return processedPrereq;
+    }
+
+    public static String containsName(List<CatalogCourse> courses, String name) {
+        for (CatalogCourse c: courses) {
+            if (c.getName().equals(name))
+                return c.getCourseId();
+        }
+        return null;
+    }
+    */
+
     public DbSeeder(CatalogRepository repository) {
         catalogRepository = repository;
     }
