@@ -409,8 +409,8 @@
         }
 
         function setHeaderFunctions ($scope, $http) {
-            $scope.plannedCourses = [];
             $scope.loadPlannedCourses = function loadPlannedCourses(flowchartId){
+                $scope.plannedCourses = [];
                 $http.get("/studentFlowchart/" + flowchartId)
                 .then(function (response) {
                     $scope.selectedFlowchartId = response.data.id;
@@ -419,8 +419,9 @@
                 });
             }
 
-            $scope.savedCourses = [];
             $scope.savePlannedCourses = function() {
+                $scope.savedCourses = [];
+
                 var quarters = document.getElementsByClassName("flowchartQuarter");
                 var q = 0;
                 angular.forEach(quarters, function(quarter) {

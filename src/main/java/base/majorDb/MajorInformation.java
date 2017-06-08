@@ -1,10 +1,12 @@
 package base.majorDb;
 
 import base.studentFlowchartDb.Flowchart;
+import base.studentFlowchartDb.PlannedCourse;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by calvinnguyen on 6/2/17.
@@ -26,13 +28,9 @@ public class MajorInformation implements Serializable {
         this.defaultFlowchart = defaultFlowchart;
     }
 
-    public String getId() {
-        return id;
-    }
+    public String getId() { return id; }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    public void setId(String id) { this.id = id; }
 
     public String getMajor() { return major; }
 
@@ -47,5 +45,9 @@ public class MajorInformation implements Serializable {
     public Flowchart getDefaultFlowchart() { return defaultFlowchart; }
 
     public void setDefaultFlowchart(Flowchart defaultFlowchart) { this.defaultFlowchart = defaultFlowchart; }
+
+    public List<PlannedCourse> getPlannedCourses() { return defaultFlowchart.getPlannedCourses(); }
+
+    public void setPlannedCourses(List<PlannedCourse> plannedCourses) { defaultFlowchart.setPlannedCourses(plannedCourses); }
 
 }

@@ -2,7 +2,7 @@
 <html lang="en" ng-app="AdministratorMajorsApp">
 
 <head>
-    <title>SLOChart | Student</title>
+    <title>SLOChart | Administrator</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
@@ -56,14 +56,13 @@
         <div class="dropdown">
             <p class="header-item-left">Saved Flowcharts</p>
             <div class="dropdown-content">
-                <a href="#" data-flowchartId="{{f.id}}" ng-repeat="f in userFlowcharts" ng-click="loadPlannedCourses(f.id)">{{f.flowchartName}}</a>
+                <a href="#" data-flowchartId="{{f.major}}" ng-repeat="f in majorFlowcharts" ng-click="loadPlannedCourses(f.major)">{{f.major}} - {{f.flowchartName}}</a>
                 <a href="#" style="text-align:center;font-weight:bold;">+</a>
             </div>
         </div>
         <a class="header-item-left" ng-click="savePlannedCourses()">Save</a>
         <span style="float:right">
             <a href="/administratorCatalogCourses" class="header-item-left">Edit Catalog Courses</a>
-            <a href="/administratorMajors" class="header-item-left">Edit Majors</a>
             <p class="header-item-right">Logout admin@calpoly.edu</p>
         </span>
     </div>
@@ -72,7 +71,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div>
-                    <h2>Editing "{{selectedFlowchartName}}" Default Flowchart
+                    <h2>Editing "{{selectedFlowchartName}}" for {{selectedFlowchartMajor}}
                         <img src="http://simpleicon.com/wp-content/uploads/pencil.png" ng-click="editFlowchartName()" style="position:relative;width:32px;height:32px;">
                     </h2>
                     <br>
@@ -253,30 +252,21 @@
 <script>
         var app = angular.module('AdministratorMajorsApp', ['ui.bootstrap']);
 
-        function loadUserInformation($scope, $http){
-            console.log(window.sessionStorage.getItem("token"));
-            var token = window.sessionStorage.getItem("token");
+        function loadSavedFlowcharts($scope, $http){
+            $http.get("/majorFlowchart")
+            .then(function (response) {
+                $scope.majorFlowcharts = [];
 
-            $http({
-                method : 'GET',
-                url : 'user',
-                headers : {
-                    "X-Auth-Token" : token
-                }
-            }).then(function (response) {
-                $scope.userId = 1;
-                console.log("user id:");
-                console.log(response.data.id);
-                $scope.email = response.data.email;
+                console.log(response.data);
 
-                $http.get("/studentFlowchart/student/" + $scope.userId)
-                .then(function (response) {
-                    $scope.userFlowcharts = response.data;
-                    $scope.selectedFlowchartId = response.data[0].id;
-                    $scope.selectedFlowchartName = response.data[0].flowchartName;
+                angular.forEach(response.data, function(majorInfo) {
+                    console.log(majorInfo);
+                    majorInfo.defaultFlowchart.major = majorInfo.major;
+                    $scope.majorFlowcharts.push(majorInfo.defaultFlowchart);
                 });
-
-                console.log(response);
+                console.log($scope.majorFlowcharts);
+                $scope.selectedFlowchartMajor = $scope.majorFlowcharts[0].major;
+                $scope.selectedFlowchartName = $scope.majorFlowcharts[0].flowchartName;
             });
         }
 
@@ -303,18 +293,20 @@
         }
 
         function setHeaderFunctions ($scope, $http) {
-            $scope.plannedCourses = [];
-            $scope.loadPlannedCourses = function loadPlannedCourses(flowchartId){
-                $http.get("/studentFlowchart/" + flowchartId)
+
+            $scope.loadPlannedCourses = function loadPlannedCourses(major){
+
+                $scope.plannedCourses = [];
+                $http.get("/majorFlowchart/major/" + major)
                 .then(function (response) {
-                    $scope.selectedFlowchartId = response.data.id;
-                    $scope.selectedFlowchartName = response.data.flowchartName;
-                    loadPlannedCoursesFromCatalog($scope, $http, response.data.plannedCourses);
+                    $scope.selectedFlowchartMajor = response.data.major;
+                    $scope.selectedFlowchartName = response.data.defaultFlowchart.flowchartName;
+                    loadPlannedCoursesFromCatalog($scope, $http, response.data.defaultFlowchart.plannedCourses);
                 });
             }
 
-            $scope.savedCourses = [];
             $scope.savePlannedCourses = function() {
+                $scope.savedCourses = [];
                 var quarters = document.getElementsByClassName("flowchartQuarter");
                 var q = 0;
                 angular.forEach(quarters, function(quarter) {
@@ -334,7 +326,7 @@
 
                 $http({
                     method : 'PUT',
-                    url : 'studentFlowchart/' + $scope.selectedFlowchartId,
+                    url : 'majorFlowchart/major/' + $scope.selectedFlowchartMajor,
                     data : $scope.savedCourses
                 }).then(function (response) {
                     console.log("check response to see if the backend says its all cool");
@@ -351,23 +343,23 @@
             };
 
             $scope.editFlowchartName = function() {
-                var oldName = $scope.selectedFlowchart;
+                var oldMajor = $scope.selectedFlowchartMajor;
+                var oldName = $scope.selectedFlowchartName;
+                var newMajor = window.prompt("Enter new major.", $scope.selectedFlowchartMajor);
                 var newName = window.prompt("Enter new flowchart name.", $scope.selectedFlowchartName);
 
-                if (newName == null || newName == "") {
+                if (newName == null || newName == "" || newMajor == null || newMajor == "") {
                     console.log("cancelled prompt");
                 } else {
                     $http({
-                    method : 'PUT',
-                    url : 'studentFlowchart/' + $scope.selectedFlowchartId + '/name',
-                    data : newName
+                        method : 'PUT',
+                        url : 'majorFlowchart/major/' + oldMajor + '/rename/' + newMajor + "/" + newName
                     }).then(function (response) {
                         if (response.status < 300) {
                             $scope.selectedFlowchartName = newName;
-                            $http.get("/studentFlowchart/student/" + 1)
-                            .then(function (response) {
-                                $scope.userFlowcharts = response.data;
-                            });
+                            $scope.selectedFlowchartMajor = newMajor;
+
+                            loadSavedFlowcharts($scope, $http);
                         }
                         else {
                             window.alert("There was a problem renaming your flowchart.");
@@ -387,7 +379,7 @@
         }
 
         app.controller('AdministratorMajorCtrl', function ($scope, $http) {
-            loadUserInformation($scope, $http);
+            loadSavedFlowcharts($scope, $http);
             setHeaderFunctions($scope, $http);
             loadCatalogCourses($scope, $http);
         });
