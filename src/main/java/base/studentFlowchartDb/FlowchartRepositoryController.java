@@ -1,6 +1,5 @@
 package base.studentFlowchartDb;
 
-import base.majorDb.MajorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,11 +34,9 @@ public class FlowchartRepositoryController {
         System.out.println("get student id: " + id);
         ArrayList<Flowchart> items = new ArrayList<Flowchart>();
 
-        /*
         for (Flowchart item : flowchartRepository.findAll()) {
             if (item.getStudentId().toString().equals(id.toString())) items.add(item);
         }
-        */
 
         if (items.size() == 0)
             items.add(this.create(new Flowchart(id, "Default Flowchart", new ArrayList<PlannedCourse>())));
@@ -105,4 +102,3 @@ public class FlowchartRepositoryController {
         }
     }
 }
-
