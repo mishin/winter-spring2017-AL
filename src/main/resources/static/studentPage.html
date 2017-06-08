@@ -379,6 +379,18 @@
             });
         };
 
+        function loadColorInfo($scope, $http){
+            console.log("loadColorInfo()");
+            $http.get("/majorFlowchart/major/" + $scope.userMajor + "/color")
+            .then(function (response) {
+                $scope.majorCourseIds = response.data.majorCourseIds;
+                $scope.supportCourseIds = response.data.supportCourseIds;
+
+                console.log($scope.majorCourseIds);
+                console.log($scope.supportCourseIds);
+            });
+        }
+
         function loadUserInformation($scope, $http){
             console.log(window.sessionStorage.getItem("token"));
             var token = window.sessionStorage.getItem("token");
@@ -395,6 +407,8 @@
                 $scope.userId = response.data.id;
                 $scope.userEmail = response.data.email;
                 $scope.userMajor = response.data.major;
+
+                loadColorInfo($scope, $http);
 
                 $http.get("/studentFlowchart/student/" + $scope.userId)
                 .then(function (response) {
@@ -531,9 +545,6 @@
             loadUserInformation($scope, $http);
             setHeaderFunctions($scope, $http);
             loadCatalogCourses($scope, $http);
-            setTimeout(function() {
-                $scope.savePlannedCourses();
-            }, 5000);
         });
 
     </script>
