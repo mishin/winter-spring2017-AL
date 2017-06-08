@@ -13,13 +13,13 @@ public class Flowchart implements Serializable {
 
     @Id
     private String id;
-    private Long studentId;
+    private int studentId;
     private String flowchartName;
     private List<PlannedCourse> plannedCourses = new ArrayList<PlannedCourse>();
 
     public Flowchart() {}
 
-    public Flowchart(Long studentId, String name, List<PlannedCourse> plannedCourses) {
+    public Flowchart(int studentId, String name, List<PlannedCourse> plannedCourses) {
         this.studentId = studentId;
         this.flowchartName = name;
         this.plannedCourses.addAll(plannedCourses);
@@ -33,11 +33,11 @@ public class Flowchart implements Serializable {
         this.id = id;
     }
 
-    public Long getStudentId() {
+    public int getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(Long studentId) {
+    public void setStudentId(int studentId) {
         this.studentId = studentId;
     }
 
