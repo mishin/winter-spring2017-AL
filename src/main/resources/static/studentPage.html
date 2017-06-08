@@ -547,6 +547,18 @@
                 url : 'catalog'
             }).then(function (response) {
                 $scope.catalogCourses = response.data;
+
+                angular.forEach($scope.catalogCourses, function(course) {
+                    if ($.inArray(course.courseId, $scope.majorCourseIds) >= 0) {
+                        course.educationArea = "major";
+                    }
+                    else if ($.inArray(course.courseId, $scope.supportCourseIds) >= 0) {
+                        course.educationArea = "support";
+                    }
+                    else {
+                        course.educationArea = "ge";
+                    }
+                });
             });
         }
 
