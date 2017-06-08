@@ -410,10 +410,6 @@
                         createDefaultFlowchart($scope, $http);
                     };
 
-                    console.log($scope.userFlowcharts);
-                    console.log($scope.userFlowcharts[0]);
-                    $scope.selectedFlowchartId = $scope.userFlowcharts["0"].id;
-                    $scope.selectedFlowchartName = $scope.userFlowcharts["0"].flowchartName;
                     $scope.loadPlannedCourses($scope.selectedFlowchartId);
                 });
 
@@ -440,6 +436,8 @@
                         }
                     });
                 });
+
+                $scope.savePlannedCourses();
             });
         }
 
