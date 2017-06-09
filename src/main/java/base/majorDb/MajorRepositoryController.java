@@ -3,6 +3,7 @@ package base.majorDb;
 import base.studentFlowchartDb.Flowchart;
 import base.studentFlowchartDb.PlannedCourse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Array;
@@ -66,9 +67,11 @@ public class MajorRepositoryController {
     }
 
     @PostMapping
-    public MajorInformation create(@RequestBody MajorInformation input) {
+    public MajorInformation create() {
+        Flowchart newFlowchart = new Flowchart();
+        newFlowchart.setFlowchartName("New Flowchart");
         return majorRepository
-                .save(new MajorInformation(input.getMajor(), input.getColorInfo(), input.getDefaultFlowchart()));
+                .save(new MajorInformation("no specific major", new ColorInfo(), newFlowchart));
     }
 
     @DeleteMapping("{id}")
