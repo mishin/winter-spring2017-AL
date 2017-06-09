@@ -459,7 +459,7 @@
                             });
                         });
                         angular.forEach(courses, function(course) {
-                            seenCourseIds.push(course.dataset.id);
+                            seenCourseIds.push(course.dataset.courseid);
                         });
                     });
                 }, 1000);
@@ -612,7 +612,7 @@
                                 });
                             });
                             angular.forEach(courses, function(course) {
-                                seenCourseIds.push(course.dataset.id);
+                                seenCourseIds.push(course.dataset.courseid);
                             });
                         });
                     },
