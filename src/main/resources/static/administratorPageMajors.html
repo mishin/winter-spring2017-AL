@@ -71,18 +71,20 @@
         <div class="container-fluid">
             <div class="row">
                 <div>
-                    <h2>Editing "{{selectedFlowchartName}}" for {{selectedFlowchartMajor}}
-                        <img src="http://simpleicon.com/wp-content/uploads/pencil.png" ng-click="editFlowchartName()" style="position:relative;width:32px;height:32px;">
-                    </h2>
-                    <br>
+                    <div ng-show="selectedFlowchartName != null">
+                        <h2>Editing "{{selectedFlowchartName}}" for {{selectedFlowchartMajor}}
+                            <img src="http://simpleicon.com/wp-content/uploads/pencil.png" ng-click="editFlowchartName()" style="position:relative;width:32px;height:32px;">
+                        </h2>
+                        <br>
+                    </div>
 
-                    <div class="flowchart">
+                    <div ng-show="selectedFlowchartName != null" class="flowchart">
                         <div class="year">
                             <h1>Freshman</h1>
                             <div class="flowchartQuarterColumn">
                                 <h1>Fall</h1>
                                 <ul id="quarter1" class="flowchartQuarter">
-                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 1">
+                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 1" ng-click="changeCourseColor(c)">
                                         <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                         <span>{{c.name}}</span>
                                         <br>
@@ -93,7 +95,7 @@
                             <div class="flowchartQuarterColumn">
                                 <h1>Winter</h1>
                                 <ul id="quarter2" class="flowchartQuarter">
-                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 2">
+                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 2" ng-click="changeCourseColor(c)">
                                         <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                         <span>{{c.name}}</span>
                                         <br>
@@ -104,7 +106,7 @@
                             <div class="flowchartQuarterColumn">
                                 <h1>Spring</h1>
                                 <ul id="quarter3" class="flowchartQuarter">
-                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 3">
+                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 3" ng-click="changeCourseColor(c)">
                                         <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                         <span>{{c.name}}</span>
                                         <br>
@@ -118,7 +120,7 @@
                             <div class="flowchartQuarterColumn">
                                 <h1>Fall</h1>
                                 <ul id="quarter4" class="flowchartQuarter">
-                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 1">
+                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 1" ng-click="changeCourseColor(c)">
                                         <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                         <span>{{c.name}}</span>
                                         <br>
@@ -129,7 +131,7 @@
                             <div class="flowchartQuarterColumn">
                                 <h1>Winter</h1>
                                 <ul id="quarter5" class="flowchartQuarter">
-                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 2">
+                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 2" ng-click="changeCourseColor(c)">
                                         <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                         <span>{{c.name}}</span>
                                         <br>
@@ -140,7 +142,7 @@
                             <div class="flowchartQuarterColumn">
                                 <h1>Spring</h1>
                                 <ul id="quarter6" class="flowchartQuarter">
-                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 3">
+                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 3" ng-click="changeCourseColor(c)">
                                         <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                         <span>{{c.name}}</span>
                                         <br>
@@ -154,7 +156,7 @@
                             <div class="flowchartQuarterColumn">
                                 <h1>Fall</h1>
                                 <ul id="quarter7" class="flowchartQuarter">
-                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 3 && c.quarter == 1">
+                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 3 && c.quarter == 1" ng-click="changeCourseColor(c)">
                                         <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                         <span>{{c.name}}</span>
                                         <br>
@@ -165,7 +167,7 @@
                             <div class="flowchartQuarterColumn">
                                 <h1>Winter</h1>
                                 <ul id="quarter8" class="flowchartQuarter">
-                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 3 && c.quarter == 2">
+                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 3 && c.quarter == 2" ng-click="changeCourseColor(c)">
                                         <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                         <span>{{c.name}}</span>
                                         <br>
@@ -176,7 +178,7 @@
                             <div class="flowchartQuarterColumn">
                                 <h1>Spring</h1>
                                 <ul id="quarter9" class="flowchartQuarter">
-                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 3 && c.quarter == 3">
+                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 3 && c.quarter == 3" ng-click="changeCourseColor(c)">
                                         <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                         <span>{{c.name}}</span>
                                         <br>
@@ -190,7 +192,7 @@
                             <div class="flowchartQuarterColumn">
                                 <h1>Fall</h1>
                                 <ul id="quarter10" class="flowchartQuarter">
-                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 4 && c.quarter == 1">
+                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 4 && c.quarter == 1" ng-click="changeCourseColor(c)">
                                         <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                         <span>{{c.name}}</span>
                                         <br>
@@ -201,7 +203,7 @@
                             <div class="flowchartQuarterColumn">
                                 <h1>Winter</h1>
                                 <ul id="quarter11" class="flowchartQuarter">
-                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 4 && c.quarter == 2">
+                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 4 && c.quarter == 2" ng-click="changeCourseColor(c)">
                                         <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                         <span>{{c.name}}</span>
                                         <br>
@@ -212,13 +214,93 @@
                             <div class="flowchartQuarterColumn">
                                 <h1>Spring</h1>
                                 <ul id="quarter12" class="flowchartQuarter">
-                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 4 && c.quarter == 3">
+                                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 4 && c.quarter == 3" ng-click="changeCourseColor(c)">
                                         <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                         <span>{{c.name}}</span>
                                         <br>
                                         {{c.title}}
                                     </li>
                                 </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>-->
+                <br>
+                <h4>FAQs</h4>
+                <div class="faq_container">
+                    <div class="faq">
+                        <div class="faq_question"> &#x25BE; How do I add a minor? </div>
+                        <div class="faq_answer_container">
+                            <div class="faq_answer">
+                                First, click the Options button, then select "Add Minor". Choose the minor that
+                                you'd like to add, and the Required Courses section will populate with the required
+                                courses.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq_container">
+                    <div class="faq">
+                        <div class="faq_question"> &#x25BE; How do I edit a flowchart? </div>
+                        <div class="faq_answer_container">
+                            <div class="faq_answer">
+                                To edit a flowchart, click Saved Flowcharts, then select the flowchart you wish to
+                                edit. Drag and drop the classes you wish to move to their new locations.  Click the
+                                save button and your changes will be persisted. If you would like to print your
+                                flowchart, click Export.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq_container">
+                    <div class="faq">
+                        <div class="faq_question"> &#x25BE; How do I display the flowchart information? </div>
+                        <div class="faq_answer_container">
+                            <div class="faq_answer">
+                                Open the Catalog menu, then select the flowchart you wish to view information for.
+                                A popup window will display with the flowchart name, flowchart description, prerequisites,
+                                and term the flowchart is typically offered.  Once finished, click anywhere outside of
+                                the box and the popup box will disappear.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq_container">
+                    <div class="faq">
+                        <div class="faq_question"> &#x25BE; How do I make a note? </div>
+                        <div class="faq_answer_container">
+                            <div class="faq_answer">
+                                Click on the class you would like to make a note on. Within the popup box, click on add note.
+                                Write what you need in the note. Click the Add Note button and your editing session will end
+                                Your new note will be displayed whenever you click on that class. The flowchart will have a visual cue showing that the note has been added.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq_container">
+                    <div class="faq">
+                        <div class="faq_question"> &#x25BE; If I have changed my major, how do I change my flowchart to represent my new major? </div>
+                        <div class="faq_answer_container">
+                            <div class="faq_answer">
+                                First, select the “Edit Profile” option in the sidebar of your home screen. In the editing page, change your major selection to represent your new major and save your profile.
+                                Select the option “Add New Flowchart”. You will know have a flowchart populated with courses related to your new major.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq_container">
+                    <div class="faq">
+                        <div class="faq_question"> &#x25BE; How do I mark a flowchart as complete? </div>
+                        <div class="faq_answer_container">
+                            <div class="faq_answer">
+                                Click the edit button on the sidebar to enter editing mode for the flowchart. Select the flowchart you would like to mark in your flowchart.
+                                A box with options should appear on selection. Choose to mark the flowchart as complete.  Click the save button and your editing session will end.
                             </div>
                         </div>
                     </div>
@@ -264,9 +346,6 @@
                     majorInfo.defaultFlowchart.major = majorInfo.major;
                     $scope.majorFlowcharts.push(majorInfo.defaultFlowchart);
                 });
-                console.log($scope.majorFlowcharts);
-                $scope.selectedFlowchartMajor = $scope.majorFlowcharts[0].major;
-                $scope.selectedFlowchartName = $scope.majorFlowcharts[0].flowchartName;
             });
         }
 
@@ -285,6 +364,19 @@
                             catalogCourse.quarter = plannedCourse.quarter;
                             catalogCourse.position = plannedCourse.position;
 
+                            console.log($scope.majorCourseIds);
+                            console.log($.inArray(parseInt(plannedCourse.courseId), $scope.majorCourseIds) >= 0);
+
+                            if ($.inArray(parseInt(plannedCourse.courseId), $scope.majorCourseIds) >= 0) {
+                                catalogCourse.educationArea = "major";
+                            }
+                            else if ($.inArray(parseInt(plannedCourse.courseId), $scope.supportCourseIds) >= 0) {
+                                catalogCourse.educationArea = "support";
+                            }
+                            else {
+                                catalogCourse.educationArea = "ge";
+                            }
+
                             $scope.plannedCourses.push(catalogCourse);
                         }
                     });
@@ -301,6 +393,8 @@
                 .then(function (response) {
                     $scope.selectedFlowchartMajor = response.data.major;
                     $scope.selectedFlowchartName = response.data.defaultFlowchart.flowchartName;
+                    $scope.majorCourseIds = response.data.colorInfo.majorCourseIds;
+                    $scope.supportCourseIds = response.data.colorInfo.supportCourseIds;
                     loadPlannedCoursesFromCatalog($scope, $http, response.data.defaultFlowchart.plannedCourses);
                 });
             }
@@ -319,6 +413,8 @@
                             "quarter": (q%3) + 1,
                             "position": p
                         } );
+                        console.log("look for educationArea or ge or major in here: ");
+                        console.log(course);
                         p = p + 1;
                     });
                     q = q + 1;
@@ -382,6 +478,19 @@
             loadSavedFlowcharts($scope, $http);
             setHeaderFunctions($scope, $http);
             loadCatalogCourses($scope, $http);
+
+            $scope.changeCourseColor = function changeCourseColor(course) {
+                if(course.educationArea == null || course.educationArea == "ge") {
+                    course.educationArea = "major";
+                }
+                else if(course.educationArea == "major") {
+                    course.educationArea = "support";
+                }
+                else if(course.educationArea == "support") {
+                    course.educationArea = "ge";
+                }
+                console.log(course);
+            };
         });
 
     </script>
@@ -390,9 +499,6 @@
             $( "#quarter1, #quarter2, #quarter3, #quarter4, #quarter5, #quarter6, #quarter7, #quarter8, #quarter9, #quarter10, #quarter11, #quarter12" ).sortable({
                     connectWith: ".flowchartQuarter",
                     placeholder: "coursePlaceholder",
-                    update: function(event, ui) {
-                        console.log("TODO put flowchart validation here");
-                    },
                     stop: function(event, ui) {
                         if ($(ui.item).find(".courseDeleteButton").length == 0)
                         {
@@ -400,6 +506,9 @@
                                 $(this).parent().remove();
                             });
                             $(ui.item).prepend(courseDeleteButton);
+                            $(ui.item).addClass("ge");
+                            $(ui.item).click(function(){
+                            });
                         }
                     }
                 }).disableSelection();
