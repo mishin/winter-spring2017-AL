@@ -11,6 +11,10 @@ body {
     background:#EEEEEE;
 }
 
+img {
+    cursor: pointer;
+}
+
 /* Header CSS */
 
 #header {

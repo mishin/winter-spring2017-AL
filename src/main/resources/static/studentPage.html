@@ -80,6 +80,7 @@
                         <div ng-show="selectedFlowchartName != null">
                             <h2>Editing "{{selectedFlowchartName}}"
                                 <img src="http://simpleicon.com/wp-content/uploads/pencil.png" ng-click="editFlowchartName()" style="position:relative;width:32px;height:32px;">
+                                <img src="https://www.shareicon.net/data/2015/08/23/89587_trash_512x512.png" ng-click="deleteCurrentFlowchart()" style="position:relative;width:32px;height:32px;">
                             </h2>
                             <br>
                         </div>
@@ -391,6 +392,13 @@
             });
         }
 
+        function loadSavedFlowcharts($scope, $http){
+            $http.get("/studentFlowchart/student/" + $scope.userId)
+            .then(function (response) {
+                $scope.userFlowcharts = response.data;
+            });
+        };
+
         function loadUserInformation($scope, $http){
             console.log(window.sessionStorage.getItem("token"));
             var token = window.sessionStorage.getItem("token");
@@ -409,22 +417,7 @@
                 $scope.userMajor = response.data.major;
 
                 loadColorInfo($scope, $http);
-
-                $http.get("/studentFlowchart/student/" + $scope.userId)
-                .then(function (response) {
-                    $scope.userFlowcharts = response.data;
-
-                    console.log($scope.userFlowcharts);
-                    console.log($scope.userFlowcharts.length);
-
-                    if ($scope.userFlowcharts.length == 0) {
-                        $scope.userFlowcharts = [];
-                        createDefaultFlowchart($scope, $http);
-                    }
-                    else {
-                        $scope.loadPlannedCourses($scope.selectedFlowchartId);
-                    }
-                });
+                loadSavedFlowcharts($scope, $http);
 
                 console.log(response);
             });
@@ -476,6 +469,22 @@
                 createDefaultFlowchart($scope, $http);
             };
 
+            $scope.deleteCurrentFlowchart = function() {
+                $http({
+                    method : 'DELETE',
+                    url : 'studentFlowchart/' + $scope.selectedFlowchartId
+                }).then(function (response) {
+                    if (response.status < 300) {
+                        $scope.selectedFlowchartId = null;
+                        $scope.selectedFlowchartName = null;
+                        loadSavedFlowcharts($scope, $http);
+                    }
+                    else {
+                        window.alert("There was a problem deleting the flowchart.");
+                    }
+                });
+            }
+
             $scope.savePlannedCourses = function() {
                 $scope.savedCourses = [];
 
@@ -505,7 +514,7 @@
                     console.log("then give user either error or confirmation");
                     console.log(response.status);
                     if (response.status < 300) {
-                        window.alert("Flowchart saved succesfully.");
+                        window.alert("Flowchart saved successfully.");
                     }
                     else {
                         window.alert("There was a problem saving the flowchart.");

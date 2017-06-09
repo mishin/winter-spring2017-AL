@@ -24,6 +24,10 @@ body {
     background:#EEEEEE;
 }
 
+img {
+    cursor: pointer;
+}
+
 /* Flowchart Table CSS */
 
 .flowchart {
