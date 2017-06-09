@@ -445,6 +445,23 @@
                         }
                     });
                 });
+
+                var quarters = document.getElementsByClassName("flowchartQuarter");
+                var seenCourseIds = [];
+                angular.forEach(quarters, function(quarter) {
+                    var courses = quarter.getElementsByClassName("course");
+                    console.log(courses);
+                    angular.forEach(courses, function(course) {
+                        console.log(course);
+                        $(course).removeClass("valid").removeClass("invalid").addClass("valid");
+                        if ($.inArray(course.dataset.id, seenCourseIds) < 0) {
+                            $(course).removeClass("valid").addClass("invalid");
+                        }
+                    });
+                    angular.forEach(courses, function(course) {
+                        seenCourseIds.push(course.dataset.id);
+                    });
+                });
             });
         }
 
