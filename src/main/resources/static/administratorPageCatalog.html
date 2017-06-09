@@ -53,7 +53,7 @@
                 <a href="#menu-toggle" class="header-item-left" id="menu-toggle">Catalog</a>
                 <span style="float:right">
                     <a href="/administratorMajors" class="header-item-left">Edit Majors</a>
-                    <p class="header-item-right">Logout admin@calpoly.edu</p>
+                    <p ng-click="logout()" class="header-item-right">Logout admin@calpoly.edu</p>
                 </span>
             </div>
             <!-- Page Content -->
@@ -221,6 +221,12 @@
                     }
                 });
             }
+
+            $scope.logout = function() {
+                $scope.user = null;
+                window.sessionStorage.removeItem("token");
+                window.location.href = 'https://slocharts.herokuapp.com/';
+            };
         });
 
     </script>

@@ -57,7 +57,7 @@
                 <p class="header-item-left">Saved Flowcharts</p>
                 <div class="dropdown-content">
                     <a href="#" data-flowchartId="{{f.id}}" ng-repeat="f in userFlowcharts" ng-click="loadPlannedCourses(f.id)">{{f.flowchartName}}</a>
-                    <a href="#" style="text-align:center;font-weight:bold;">+</a>
+                    <a href="#" style="text-align:center;font-weight:bold;" ng-click="addNewFlowchart()">+</a>
                 </div>
             </div>
             <a class="header-item-left" ng-click="savePlannedCourses()">Save</a>
@@ -90,7 +90,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Fall</h1>
                                     <ul id="quarter1" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 1">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses track by $index | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 1">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                             <span>{{c.name}}</span>
                                             <br>
@@ -101,7 +101,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Winter</h1>
                                     <ul id="quarter2" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 2">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses track by $index | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 2">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                             <span>{{c.name}}</span>
                                             <br>
@@ -112,7 +112,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Spring</h1>
                                     <ul id="quarter3" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 3">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses track by $index | orderBy:'position'" ng-if="c.year == 1 && c.quarter == 3">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                             <span>{{c.name}}</span>
                                             <br>
@@ -126,7 +126,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Fall</h1>
                                     <ul id="quarter4" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 1">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses track by $index | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 1">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                             <span>{{c.name}}</span>
                                             <br>
@@ -137,7 +137,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Winter</h1>
                                     <ul id="quarter5" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 2">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses track by $index | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 2">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                             <span>{{c.name}}</span>
                                             <br>
@@ -148,7 +148,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Spring</h1>
                                     <ul id="quarter6" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 3">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses track by $index | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 3">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                             <span>{{c.name}}</span>
                                             <br>
@@ -162,7 +162,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Fall</h1>
                                     <ul id="quarter7" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 3 && c.quarter == 1">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses track by $index | orderBy:'position'" ng-if="c.year == 3 && c.quarter == 1">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                             <span>{{c.name}}</span>
                                             <br>
@@ -173,7 +173,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Winter</h1>
                                     <ul id="quarter8" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 3 && c.quarter == 2">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses track by $index | orderBy:'position'" ng-if="c.year == 3 && c.quarter == 2">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                             <span>{{c.name}}</span>
                                             <br>
@@ -184,7 +184,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Spring</h1>
                                     <ul id="quarter9" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 3 && c.quarter == 3">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses track by $index | orderBy:'position'" ng-if="c.year == 3 && c.quarter == 3">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                             <span>{{c.name}}</span>
                                             <br>
@@ -198,7 +198,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Fall</h1>
                                     <ul id="quarter10" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 4 && c.quarter == 1">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses track by $index | orderBy:'position'" ng-if="c.year == 4 && c.quarter == 1">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                             <span>{{c.name}}</span>
                                             <br>
@@ -209,7 +209,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Winter</h1>
                                     <ul id="quarter11" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 4 && c.quarter == 2">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses track by $index | orderBy:'position'" ng-if="c.year == 4 && c.quarter == 2">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                             <span>{{c.name}}</span>
                                             <br>
@@ -220,7 +220,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Spring</h1>
                                     <ul id="quarter12" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses | orderBy:'position'" ng-if="c.year == 4 && c.quarter == 3">
+                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses track by $index | orderBy:'position'" ng-if="c.year == 4 && c.quarter == 3">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                             <span>{{c.name}}</span>
                                             <br>
@@ -356,12 +356,6 @@
     <script>
         var app = angular.module('StudentApp', ['ui.bootstrap']);
 
-        function logout ($scope, $http) {
-            $scope.user = null;
-            delete window.sessionStorage.token;
-            window.location.href = 'https://slocharts.herokuapp.com/';
-        }
-
         function createNewFlowchart($scope, $http, name, plannedCourses){
             console.log($scope.plannedCourses);
             $http({
@@ -478,6 +472,10 @@
                 });
             }
 
+            $scope.addNewFlowchart = function() {
+                createDefaultFlowchart($scope, $http);
+            };
+
             $scope.savePlannedCourses = function() {
                 $scope.savedCourses = [];
 
@@ -498,8 +496,6 @@
                     q = q + 1;
                 });
 
-                console.log("saved courses: ");
-                console.log($scope.savedCourses);
                 $http({
                     method : 'PUT',
                     url : 'studentFlowchart/' + $scope.selectedFlowchartId,
@@ -509,13 +505,12 @@
                     console.log("then give user either error or confirmation");
                     console.log(response.status);
                     if (response.status < 300) {
-                        console.log("SUCCESSFUL SAVE");
+                        window.alert("Flowchart saved succesfully.");
                     }
                     else {
-                        console.log("FAILURE TO SAVE");
+                        window.alert("There was a problem saving the flowchart.");
                     }
                 });
-                console.log($scope.savedCourses);
             };
 
             $scope.editFlowchartName = function() {
@@ -572,6 +567,15 @@
             loadUserInformation($scope, $http);
             setHeaderFunctions($scope, $http);
             loadCatalogCourses($scope, $http);
+
+
+
+            $scope.logout = function() {
+                $scope.user = null;
+                window.sessionStorage.removeItem("token");
+                window.location.href = 'https://slocharts.herokuapp.com/';
+            };
+             
         });
 
 
