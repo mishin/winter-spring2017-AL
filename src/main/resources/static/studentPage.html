@@ -27,36 +27,6 @@
 </head>
 
 <body ng-controller="StudentCtrl">
-<<<<<<< HEAD
-    <div id="header">
-        <a href="#menu-toggle" class="header-item-left" id="menu-toggle">Catalog</a>
-        <a href="#menu-toggle" class="header-item-left" id="courses-toggle">Required Courses</a>
-        <div class="dropdown">
-            <p class="header-item-left">Saved Flowcharts</p>
-            <div class="dropdown-content">
-                <a href="#" data-flowchartId="{{f.id}}" ng-repeat="f in userFlowcharts" ng-click="loadPlannedCourses(f.id)">{{f.flowchartName}}</a>
-                <a href="#" style="text-align:center;font-weight:bold;" ng-click="createFlowchart()">+</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <p class="header-item-left">Export</p>
-            <div class="dropdown-content">
-            </div>
-        </div>
-        <a class="header-item-left" ng-click="savePlannedCourses()">Save</a>
-        <div class="dropdown">
-            <p class="header-item-left">Options</p>
-            <div class="dropdown-content">
-                <a href="#">Change Major</a>
-                <a href="#">Add/Change Minor</a>
-                <a href="#">Add/Change Concentration</a>
-                <a href="#">Visual Settings</a>
-            </div>
-        </div>
-        <span style="float:right"><p ng-click="logout()" class="header-item-right">Logout {{email}}</p></span>
-    </div>
-=======
->>>>>>> 9e3decd192ec5fe6692945f7d0c8c83cfa241c96
     <div id="wrapper">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
@@ -595,16 +565,6 @@
                         course.educationArea = "ge";
                     }
                 });
-            });
-        }
-
-        function createFlowchart ($scope, $http) {
-            $http({
-                method : 'POST',
-                url : 'studentFlowchart'
-            }).then(function (response) {
-                $scope.selectedFlowchartId = response.data.id;
-                $scope.selectedFlowchartName = response.data.flowchartName;
             });
         }
 
