@@ -61,15 +61,6 @@
                 </div>
             </div>
             <a class="header-item-left" ng-click="savePlannedCourses()">Save</a>
-            <div class="dropdown">
-                <p class="header-item-left">Options</p>
-                <div class="dropdown-content">
-                    <a href="#">Change Major</a>
-                    <a href="#">Add/Change Minor</a>
-                    <a href="#">Add/Change Concentration</a>
-                    <a href="#">Visual Settings</a>
-                </div>
-            </div>
             <span style="float:right"><p ng-click="logout()" class="header-item-right">Logout {{userEmail}}</p></span>
         </div>
         <!-- Page Content -->
@@ -563,12 +554,13 @@
 
                 angular.forEach($scope.catalogCourses, function(course) {
                     console.log(course.courseId);
+                    console.log($scope.majorCourseIds.length);
                     console.log($.inArray(course.courseId, $scope.majorCourseIds));
                     console.log($scope.majorCourseIds);
-                    if ($.inArray(course.courseId, $scope.majorCourseIds) >= 0) {
+                    if ($.inArray(parseInt(course.courseId), $scope.majorCourseIds) >= 0) {
                         course.educationArea = "major";
                     }
-                    else if ($.inArray(course.courseId, $scope.supportCourseIds) >= 0) {
+                    else if ($.inArray(parseInt(course.courseId), $scope.supportCourseIds) >= 0) {
                         course.educationArea = "support";
                     }
                     else {
