@@ -406,9 +406,9 @@
             }).then(function (response) {
                 console.log("user id:");
                 console.log(response.data.id);
-                $scope.userId = 1;
+                $scope.userId = response.data.id;
                 $scope.userEmail = response.data.email;
-                $scope.userMajor = 'CSC';
+                $scope.userMajor = response.data.major;
 
                 initialLoadOfCatalogAndFlowcharts($scope, $http);
             });
