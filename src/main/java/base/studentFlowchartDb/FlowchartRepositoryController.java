@@ -31,22 +31,17 @@ public class FlowchartRepositoryController {
 
     @GetMapping("student/{id}")
     public ArrayList<Flowchart> findByStudentId(@PathVariable Long id) {
-        System.out.println("get student id: " + id);
+        System.out.println("-----get student id: " + id);
         ArrayList<Flowchart> items = new ArrayList<Flowchart>();
 
         for (Flowchart item : flowchartRepository.findAll()) {
-            if (item.getStudentId().toString().equals(id.toString())) items.add(item);
+            System.out.println("---- item id: " + item.getStudentId());
+            if (item.getStudentId() != null && item.getStudentId().toString().equals(id.toString())) {
+                items.add(item);
+            }
         }
 
-        if (items.size() == 0)
-            items.add(this.create(new Flowchart(id, "Default Flowchart", new ArrayList<PlannedCourse>())));
-
         return items;
-
-        //TODO use the given student ID to get the student's major
-        //TODO then instead of returning a new, empty flowchart, we can return the default
-        //TODO flowchart for that major.
-        //TODO make change so flowchart is only created the first time when they save.
     }
 
     @GetMapping("{id}")

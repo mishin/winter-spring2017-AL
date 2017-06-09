@@ -15,14 +15,14 @@
             })
 
             // route for the login page
-            .when('/about', {
-                templateUrl : 'pages/about.html',
+            .when('/login', {
+                templateUrl : 'pages/login.html',
                 controller  : 'aboutController'
             })
 
             // route for the contact page
-            .when('/contact', {
-                templateUrl : 'pages/contact.html',
+            .when('/signUp', {
+                templateUrl : 'pages/signUp.html',
                 controller  : 'contactController'
             });
     });
@@ -30,29 +30,10 @@
     // create the controller and inject Angular's $scope
     scotchApp.controller('mainController', function($scope) {
         // create a message to display in our view
-        $scope.message = 'This page is a work in progress';
+        $scope.message = 'Welcome to SLOCHART';
     });
 
     scotchApp.controller('aboutController', function($scope, $http) {
-
-//           var postRequest = {
-//          			method: 'POST',
-//          			url:(window.location.hostname === 'localhost' ?
-//        				"http://localhost:8080/login" :
-//        				"https://slocharts.herokuapp.com/login"),
-//        			data: {
-//        				email: $scope.user.email,
-//        				password: $scope.user.password,
-//        			}
-//           }
-//          		$http(postRequest).then(function success(response) {
-//          		window.sessionStorage.token = data;
-//          	    window.location.href = "https://slocharts.herokuapp.com/student";
-//        		}, function error(response) {
-//        			console.error('error:');
-//        			console.error(response.data.message);
-//        		});
-//        }
 
      $scope.signIn = function() {
      		var postRequest = {
@@ -96,7 +77,7 @@
         			}
           		}
           		$http(postRequest).then(function success(response) {
-          	    window.location.href = "https://slocharts.herokuapp.com/student";
+          	    window.location.href = "https://slocharts.herokuapp.com/#/login";
         		}, function error(response) {
         			console.error('error:');
         			console.error(response.data.message);
