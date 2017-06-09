@@ -351,7 +351,6 @@
         var app = angular.module('AdministratorMajorsApp', ['ui.bootstrap']);
 
         function createNewFlowchart($scope, $http){
-            console.log($scope.plannedCourses);
             $http({
                 method : 'POST',
                 url : 'majorFlowchart'
@@ -365,10 +364,7 @@
             .then(function (response) {
                 $scope.majorFlowcharts = [];
 
-                console.log(response.data);
-
                 angular.forEach(response.data, function(majorInfo) {
-                    console.log(majorInfo);
                     majorInfo.defaultFlowchart.major = majorInfo.major;
                     $scope.majorFlowcharts.push(majorInfo.defaultFlowchart);
                 });
@@ -436,8 +432,6 @@
                             "quarter": (q%3) + 1,
                             "position": p
                         } );
-                        console.log("look for educationArea or ge or major in here: ");
-                        console.log(course);
                         p = p + 1;
                     });
                     q = q + 1;
@@ -530,7 +524,6 @@
                 else if(course.educationArea == "support") {
                     course.educationArea = "ge";
                 }
-                console.log(course);
             };
         });
 
