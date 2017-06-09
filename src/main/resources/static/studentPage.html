@@ -41,7 +41,7 @@
             <br>
             <div>
                 <ul id="catalog1" class="catalogTable">
-                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in catalogCourses | orderBy:['name'] | filter:searchInput">
+                    <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" data-prerequisites="{{c.prerequisites}}" ng-repeat="c in catalogCourses | orderBy:['name'] | filter:searchInput">
                         <span>{{c.name}}</span>
                         <br>
                         {{c.title}}
@@ -402,9 +402,9 @@
                     "X-Auth-Token" : token
                 }
             }).then(function (response) {
-                $scope.userId = response.data.id;
+                $scope.userId = 1;
                 $scope.userEmail = response.data.email;
-                $scope.userMajor = response.data.major;
+                $scope.userMajor = 'CSC';
 
                 initialLoadOfCatalogAndFlowcharts($scope, $http);
             });
@@ -424,7 +424,8 @@
                             catalogCourse.year = plannedCourse.year;
                             catalogCourse.quarter = plannedCourse.quarter;
                             catalogCourse.position = plannedCourse.position;
-
+                            console.log(catalogCourse.courseId);
+                            console.log(catalogCourse.prerequisites);
                             catalogCourse.isValid = "valid";
 
                             if ($.inArray(plannedCourse.courseId, $scope.majorCourseIds) >= 0) {
@@ -602,9 +603,11 @@
                             var courses = quarter.getElementsByClassName("course");
                             angular.forEach(courses, function(course) {
                                 $(course).removeClass("valid").removeClass("invalid").addClass("valid");
-                                if ($.inArray(course.dataset.id, seenCourseIds) < 0) {
-                                    $(course).removeClass("valid").addClass("invalid");
-                                }
+                                angular.forEach(course.dataset.prerequisites, function(prereq) {
+                                    if ($.inArray(prereq, seenCourseIds) < 0) {
+                                        $(course).removeClass("valid").addClass("invalid");
+                                    }
+                                });
                             });
                             angular.forEach(courses, function(course) {
                                 seenCourseIds.push(course.dataset.id);
