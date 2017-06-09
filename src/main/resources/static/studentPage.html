@@ -34,7 +34,7 @@
             <p class="header-item-left">Saved Flowcharts</p>
             <div class="dropdown-content">
                 <a href="#" data-flowchartId="{{f.id}}" ng-repeat="f in userFlowcharts" ng-click="loadPlannedCourses(f.id)">{{f.flowchartName}}</a>
-                <a href="#" style="text-align:center;font-weight:bold;">+</a>
+                <a href="#" style="text-align:center;font-weight:bold;" ng-click="createFlowchart()">+</a>
             </div>
         </div>
         <div class="dropdown">
@@ -491,6 +491,16 @@
                 url : 'catalog'
             }).then(function (response) {
                 $scope.catalogCourses = response.data;
+            });
+        }
+
+        function createFlowchart ($scope, $http) {
+            $http({
+                method : 'POST',
+                url : 'studentFlowchart'
+            }).then(function (response) {
+                $scope.selectedFlowchartId = response.data.id;
+                $scope.selectedFlowchartName = response.data.flowchartName;
             });
         }
 
