@@ -338,7 +338,7 @@
             console.log($scope.plannedCourses);
             $http({
                 method : 'POST',
-                url : 'majorFlowchart')
+                url : 'majorFlowchart'
             }).then(function (response) {
                 $scope.userFlowcharts.push(response.data);
             });
