@@ -60,7 +60,7 @@
                 <a href="#" style="text-align:center;font-weight:bold;" ng-click="addNewFlowchart()">+</a>
             </div>
         </div>
-        <a class="header-item-left" ng-click="savePlannedCourses()">Save</a>
+        <a class="header-item-left" ng-show="selectedFlowchartName != null" ng-click="savePlannedCourses()">Save</a>
         <span style="float:right">
             <a href="/administratorCatalogCourses" class="header-item-left">Edit Catalog Courses</a>
             <p class="header-item-right">Logout admin@calpoly.edu</p>
@@ -340,7 +340,7 @@
                 method : 'POST',
                 url : 'majorFlowchart'
             }).then(function (response) {
-                $scope.userFlowcharts.push(response.data);
+                $scope.majorFlowcharts.push(response.data);
             });
         };
 
@@ -373,9 +373,6 @@
                             catalogCourse.year = plannedCourse.year;
                             catalogCourse.quarter = plannedCourse.quarter;
                             catalogCourse.position = plannedCourse.position;
-
-                            console.log($scope.majorCourseIds);
-                            console.log($.inArray(parseInt(plannedCourse.courseId), $scope.majorCourseIds) >= 0);
 
                             if ($.inArray(parseInt(plannedCourse.courseId), $scope.majorCourseIds) >= 0) {
                                 catalogCourse.educationArea = "major";
