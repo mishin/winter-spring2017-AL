@@ -6,6 +6,19 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 
+.faq_question {
+     margin-left: 20px;
+     padding: 0px 0px 5px 0px;
+     display: inline-block;
+     cursor: pointer;
+     font-weight: bold;
+ }
+
+.faq_answer_container {
+    overflow: hidden;
+    margin: 5px;
+}
+
 body {
     overflow-x: hidden;
     background:#EEEEEE;
@@ -13,89 +26,6 @@ body {
 
 img {
     cursor: pointer;
-}
-
-/* Header CSS */
-
-#header {
-    padding:0px;
-    background:#bf9b30;
-    height:50px;
-}
-
-#header a:link {
-    text-decoration:none;
-    color: #EEEEEE;
-}
-
-#header a:visited {
-    text-decoration:none;
-    color: #EEEEEE;
-}
-
-#header a:hover {
-    text-decoration:none;
-    color: #EEEEEE;
-}
-
-#header a:active {
-    text-decoration:none;
-    color: #EEEEEE;
-}
-
-.header-item-left {
-    cursor: pointer;
-    text-decoration:none;
-    display:inline;
-    font-size:18px;
-    vertical-align: middle;
-    color:#EEEEEE;
-    line-height: 50px;
-    padding: 10px;
-}
-
-.header-item-right {
-    cursor: pointer;
-    text-decoration:none;
-    display:inline;
-    font-size:18px;
-    vertical-align: middle;
-    color: #EEEEEE;
-    line-height: 50px;
-    padding: 10px;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    color: black;
-    background-color: #bf9b30;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content a {
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #efce6f;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown:hover .dropbtn {
-    background-color: #3e8e41;
 }
 
 /* Flowchart Table CSS */
@@ -141,6 +71,16 @@ img {
     box-sizing: border-box;
 }
 
+.flowchartQuarter li.major {
+    background-color: #ffff99;
+}
+.flowchartQuarter li.support {
+    background-color: #ffcc99;
+}
+.flowchartQuarter li.ge {
+    background-color: #ccffcc;
+}
+
 .flowchartQuarter li span {
     font-weight: bold;
 }
@@ -178,16 +118,6 @@ img {
     z-index: 1000;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-
-.course.major {
-    background-color: #ffff99;
-}
-.course.support {
-    background-color: #ffcc99;
-}
-.course.ge {
-    background-color: #ccffcc;
 }
 
 .coursePlaceholder {
@@ -257,6 +187,90 @@ img {
 }
 
 .catalogSection input {
+}
+
+/* Header CSS */
+
+#header {
+    padding:0px;
+    background:#bf9b30;
+    height:50px;
+    z-index: 1000;
+}
+
+#header a:link {
+    text-decoration:none;
+    color: #EEEEEE;
+}
+
+#header a:visited {
+    text-decoration:none;
+    color: #EEEEEE;
+}
+
+#header a:hover {
+    text-decoration:none;
+    color: #EEEEEE;
+}
+
+#header a:active {
+    text-decoration:none;
+    color: #EEEEEE;
+}
+
+.header-item-left {
+    cursor: pointer;
+    text-decoration:none;
+    display:inline;
+    font-size:18px;
+    vertical-align: middle;
+    color:#EEEEEE;
+    line-height: 50px;
+    padding: 10px;
+}
+
+.header-item-right {
+    cursor: pointer;
+    text-decoration:none;
+    display:inline;
+    font-size:18px;
+    vertical-align: middle;
+    color: #EEEEEE;
+    line-height: 50px;
+    padding: 10px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    color: black;
+    background-color: #bf9b30;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #efce6f;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
 }
 
 /* Toggle Styles */
@@ -399,6 +413,7 @@ input {
     #page-content-wrapper {
         padding: 20px;
         position: relative;
+        z-index: 200;
     }
 
     #wrapper.toggled #page-content-wrapper {
