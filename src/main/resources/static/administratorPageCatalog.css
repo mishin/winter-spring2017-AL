@@ -6,6 +6,19 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 
+.faq_question {
+     margin-left: 20px;
+     padding: 0px 0px 5px 0px;
+     display: inline-block;
+     cursor: pointer;
+     font-weight: bold;
+ }
+
+.faq_answer_container {
+    overflow: hidden;
+    margin: 5px;
+}
+
 body {
     overflow-x: hidden;
     background:#EEEEEE;
@@ -120,6 +133,17 @@ img {
     height: 50px;
     width: 100%;
     white-space: nowrap;
+}
+
+.course {
+    z-index: 1000;
+    text-align: center;
+    border: 1px solid black;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
 }
 
 .course.major {
