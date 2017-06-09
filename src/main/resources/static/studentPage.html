@@ -27,6 +27,7 @@
 </head>
 
 <body ng-controller="StudentCtrl">
+<<<<<<< HEAD
     <div id="header">
         <a href="#menu-toggle" class="header-item-left" id="menu-toggle">Catalog</a>
         <a href="#menu-toggle" class="header-item-left" id="courses-toggle">Required Courses</a>
@@ -54,8 +55,9 @@
         </div>
         <span style="float:right"><p ng-click="logout()" class="header-item-right">Logout {{email}}</p></span>
     </div>
+=======
+>>>>>>> 9e3decd192ec5fe6692945f7d0c8c83cfa241c96
     <div id="wrapper">
-
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <h3>Course Catalog</h3>
@@ -78,18 +80,41 @@
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
-
+        <div id="header">
+            <a href="#menu-toggle" class="header-item-left" id="menu-toggle">Catalog</a>
+            <a href="#menu-toggle" class="header-item-left" id="courses-toggle">Required Courses</a>
+            <div class="dropdown">
+                <p class="header-item-left">Saved Flowcharts</p>
+                <div class="dropdown-content">
+                    <a href="#" data-flowchartId="{{f.id}}" ng-repeat="f in userFlowcharts" ng-click="loadPlannedCourses(f.id)">{{f.flowchartName}}</a>
+                    <a href="#" style="text-align:center;font-weight:bold;">+</a>
+                </div>
+            </div>
+            <a class="header-item-left" ng-click="savePlannedCourses()">Save</a>
+            <div class="dropdown">
+                <p class="header-item-left">Options</p>
+                <div class="dropdown-content">
+                    <a href="#">Change Major</a>
+                    <a href="#">Add/Change Minor</a>
+                    <a href="#">Add/Change Concentration</a>
+                    <a href="#">Visual Settings</a>
+                </div>
+            </div>
+            <span style="float:right"><p class="header-item-right">Logout {{userEmail}}</p></span>
+        </div>
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div>
-                        <h2>Editing "{{selectedFlowchartName}}"
-                            <img src="http://simpleicon.com/wp-content/uploads/pencil.png" ng-click="editFlowchartName()" style="position:relative;width:32px;height:32px;">
-                        </h2>
-                        <br>
+                        <div ng-show="selectedFlowchartName != null">
+                            <h2>Editing "{{selectedFlowchartName}}"
+                                <img src="http://simpleicon.com/wp-content/uploads/pencil.png" ng-click="editFlowchartName()" style="position:relative;width:32px;height:32px;">
+                            </h2>
+                            <br>
+                        </div>
 
-                        <div class="flowchart">
+                        <div ng-show="selectedFlowchartName != null" class="flowchart">
                             <div class="year">
                                 <h1>Freshman</h1>
                                 <div class="flowchartQuarterColumn">
@@ -361,6 +386,41 @@
     <script>
         var app = angular.module('StudentApp', ['ui.bootstrap']);
 
+        function createNewFlowchart($scope, $http, name, plannedCourses){
+            console.log($scope.plannedCourses);
+            $http({
+                method : 'POST',
+                url : 'studentFlowchart',
+                data : {
+                    "studentId": $scope.userId,
+                    "flowchartName": name,
+                    "plannedCourses": plannedCourses
+                }
+            }).then(function (response) {
+                $scope.userFlowcharts.push(response.data);
+            });
+        };
+
+        function createDefaultFlowchart($scope, $http){
+            $http.get("/majorFlowchart/major/" + $scope.userMajor)
+            .then(function (response) {
+                console.log(response.data);
+                createNewFlowchart($scope, $http, "Default Flowchart", response.data.defaultFlowchart.plannedCourses);
+            });
+        };
+
+        function loadColorInfo($scope, $http){
+            console.log("loadColorInfo()");
+            $http.get("/majorFlowchart/major/" + $scope.userMajor + "/color")
+            .then(function (response) {
+                $scope.majorCourseIds = response.data.majorCourseIds;
+                $scope.supportCourseIds = response.data.supportCourseIds;
+
+                console.log($scope.majorCourseIds);
+                console.log($scope.supportCourseIds);
+            });
+        }
+
         function loadUserInformation($scope, $http){
             console.log(window.sessionStorage.getItem("token"));
             var token = window.sessionStorage.getItem("token");
@@ -372,16 +432,28 @@
                     "X-Auth-Token" : token
                 }
             }).then(function (response) {
-                $scope.userId = 1;
                 console.log("user id:");
                 console.log(response.data.id);
-                $scope.email = response.data.email;
+                $scope.userId = response.data.id;
+                $scope.userEmail = response.data.email;
+                $scope.userMajor = response.data.major;
+
+                loadColorInfo($scope, $http);
 
                 $http.get("/studentFlowchart/student/" + $scope.userId)
                 .then(function (response) {
                     $scope.userFlowcharts = response.data;
-                    $scope.selectedFlowchartId = response.data[0].id;
-                    $scope.selectedFlowchartName = response.data[0].flowchartName;
+
+                    console.log($scope.userFlowcharts);
+                    console.log($scope.userFlowcharts.length);
+
+                    if ($scope.userFlowcharts.length == 0) {
+                        $scope.userFlowcharts = [];
+                        createDefaultFlowchart($scope, $http);
+                    }
+                    else {
+                        $scope.loadPlannedCourses($scope.selectedFlowchartId);
+                    }
                 });
 
                 console.log(response);
@@ -402,6 +474,15 @@
                             catalogCourse.year = plannedCourse.year;
                             catalogCourse.quarter = plannedCourse.quarter;
                             catalogCourse.position = plannedCourse.position;
+                            if ($.inArray(plannedCourse.courseId, $scope.majorCourseIds) >= 0) {
+                                catalogCourse.educationArea = "major";
+                            }
+                            else if ($.inArray(plannedCourse.courseId, $scope.supportCourseIds) >= 0) {
+                                catalogCourse.educationArea = "support";
+                            }
+                            else {
+                                catalogCourse.educationArea = "ge";
+                            }
 
                             $scope.plannedCourses.push(catalogCourse);
                         }
@@ -411,8 +492,8 @@
         }
 
         function setHeaderFunctions ($scope, $http) {
-            $scope.plannedCourses = [];
             $scope.loadPlannedCourses = function loadPlannedCourses(flowchartId){
+                $scope.plannedCourses = [];
                 $http.get("/studentFlowchart/" + flowchartId)
                 .then(function (response) {
                     $scope.selectedFlowchartId = response.data.id;
@@ -421,8 +502,9 @@
                 });
             }
 
-            $scope.savedCourses = [];
             $scope.savePlannedCourses = function() {
+                $scope.savedCourses = [];
+
                 var quarters = document.getElementsByClassName("flowchartQuarter");
                 var q = 0;
                 angular.forEach(quarters, function(quarter) {
@@ -440,6 +522,8 @@
                     q = q + 1;
                 });
 
+                console.log("saved courses: ");
+                console.log($scope.savedCourses);
                 $http({
                     method : 'PUT',
                     url : 'studentFlowchart/' + $scope.selectedFlowchartId,
@@ -472,10 +556,12 @@
                     }).then(function (response) {
                         if (response.status < 300) {
                             $scope.selectedFlowchartName = newName;
-                            $http.get("/studentFlowchart/student/" + 1)
+                            console.log($scope.userId);
+                            $http.get("/studentFlowchart/student/" + $scope.userId)
                             .then(function (response) {
                                 $scope.userFlowcharts = response.data;
                             });
+                            console.log($scope.userId);
                         }
                         else {
                             window.alert("There was a problem renaming your flowchart.");
@@ -497,6 +583,18 @@
                 url : 'catalog'
             }).then(function (response) {
                 $scope.catalogCourses = response.data;
+
+                angular.forEach($scope.catalogCourses, function(course) {
+                    if ($.inArray(course.courseId, $scope.majorCourseIds) >= 0) {
+                        course.educationArea = "major";
+                    }
+                    else if ($.inArray(course.courseId, $scope.supportCourseIds) >= 0) {
+                        course.educationArea = "support";
+                    }
+                    else {
+                        course.educationArea = "ge";
+                    }
+                });
             });
         }
 

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="AdministratorCatalogApp">
+    <head>
+        <title>SLOChart | Administrator</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="administratorPageCatalog.css">
+        <!-- Angular CSS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+        <script src="ui-bootstrap-tpls-0.1.0.js"></script>
+        <!-- Bootstrap Core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- JQuery CSS -->
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body ng-controller="AdministratorCatalogCtrl">
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <h3>Course Catalog</h3>
+                <br>
+                <form>
+                    <span>Name:  </span>
+                    <input type="text" ng-model="searchInput.name"/><br>
+                    <span>Title:   </span>
+                    <input type="text" ng-model="searchInput.title"/><br>
+                </form>
+                <br>
+                <div>
+                    <ul id="catalog1" class="catalogTable">
+                        <li class="course" data-courseId="{{c.courseId}}" ng-repeat="c in catalogCourses | orderBy:['name'] | filter:searchInput">
+                            <span>{{c.name}}</span>
+                            <br>
+                            {{c.title}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /#sidebar-wrapper -->
+            <div id="header">
+                <a href="#menu-toggle" class="header-item-left" id="menu-toggle">Catalog</a>
+                <span style="float:right">
+                    <a href="/administratorMajors" class="header-item-left">Edit Majors</a>
+                    <p class="header-item-right">Logout admin@calpoly.edu</p>
+                </span>
+            </div>
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="catalogSection">
+                            <form ng-submit="addCatalogCourse()">
+                                <fieldset>
+                                    <legend>Add Catalog Course</legend>
+                                    Course Id:<br>
+                                    <input type="text" ng-model="addCourseId" name="addCourseId"><br>
+                                    Prefix:<br>
+                                    <input type="text" ng-model="addPrefix" name="addPrefix"><br>
+                                    Number:<br>
+                                    <input type="text" ng-model="addNumber" name="addNumber"><br>
+                                    Title:<br>
+                                    <input type="text" ng-model="addTitle" name="addTitle"><br>
+                                    Number of Units:<br>
+                                    <input type="text" ng-model="addNumUnits" name="addNumUnits"><br><br>
+                                    <input type="submit" value="Add">
+                                    <p>{{addMessage}}</p>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <div class="catalogSection">
+                            <form ng-submit="editCatalogCourse()">
+                                <fieldset>
+                                    <legend>Edit Catalog Course</legend>
+                                    Course Id:<br>
+                                    <input type="text" ng-model="editCourseId" name="editCourseId"><br>
+                                    Prefix:<br>
+                                    <input type="text" ng-model="editPrefix" name="editPrefix"><br>
+                                    Number:<br>
+                                    <input type="text" ng-model="editNumber" name="editNumber"><br>
+                                    Title:<br>
+                                    <input type="text" ng-model="editTitle" name="editTitle"><br>
+                                    Number of Units:<br>
+                                    <input type="text" ng-model="editNumUnits" name="editNumUnits"><br><br>
+                                    <input type="submit" value="Edit">
+                                    <p>{{editMessage}}</p>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <div class="catalogSection">
+                            <form ng-submit="deleteCatalogCourse()">
+                                <fieldset>
+                                    <legend>Delete Catalog Course</legend>
+                                    Course Id:<br>
+                                    <input type="text" ng-model="deleteCourseId" name="deleteCourseId"><br><br>
+                                    <input type="submit" value="Delete">
+                                    <p>{{deleteMessage}}</p>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+        <!-- /#wrapper -->
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <!-- Menu Toggle Script -->
+        <script>
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+        </script>
+        <script>
+        var app = angular.module('AdministratorCatalogApp', []);
+
+        function loadCatalogCourses ($scope, $http){
+            $http({
+                method : 'GET',
+                url : 'catalog'
+            }).then(function (response) {
+                $scope.catalogCourses = response.data;
+            });
+        }
+
+        app.controller('AdministratorCatalogCtrl', function ($scope, $http){
+            loadCatalogCourses($scope, $http);
+
+            $scope.addMessage = "";
+            $scope.addCatalogCourse = function() {
+                console.log(this.addCourseId);
+                if ($.isNumeric(this.addNumber) && $.isNumeric(this.addNumUnits)) {
+                    $http({
+                        method : 'POST',
+                        url : 'catalog',
+                        data: {
+                            courseId: this.addCourseId,
+                            name: this.addPrefix + " " + this.addNumber,
+                            title: this.addTitle,
+                            numUnits: this.addNumUnits
+                        }
+                    }).then(function (response) {
+                        console.log("check response to see if the backend says its all cool");
+                        console.log("then give user either error or confirmation");
+                        console.log(response.status);
+                        if (response.status < 300) {
+                            loadCatalogCourses($scope, $http);
+                            $scope.addMessage = "Course successfully added.";
+                        }
+                        else {
+                            $scope.addMessage = "Problem adding course.";
+                        }
+                    });
+                }
+            }
+
+            $scope.editMessage = "";
+            $scope.editCatalogCourse = function() {
+                console.log(this.editCourseId);
+                if ($.isNumeric(this.editNumber) && $.isNumeric(this.editNumUnits)) {
+                    $http({
+                        method : 'PUT',
+                        url : 'catalog/' + this.editCourseId,
+                        data: {
+                            courseId: this.editCourseId,
+                            name: this.editPrefix + " " + this.editNumber,
+                            title: this.editTitle,
+                            numUnits: this.editNumUnits
+                        }
+                    }).then(function (response) {
+                        console.log("check response to see if the backend says its all cool");
+                        console.log("then give user either error or confirmation");
+                        console.log(response.status);
+                        if (response.status < 300) {
+                            loadCatalogCourses($scope, $http);
+                            $scope.editMessage = "Course successfully changed.";
+                        }
+                        else {
+                            $scope.editMessage = "Problem editing course.";
+                        }
+                    });
+                }
+                else {
+                    $scope.editMessage = "Please fix validation errors.";
+                }
+            }
+
+            $scope.deleteMessage = "";
+            $scope.deleteCatalogCourse = function() {
+                console.log(this.deleteCourseId);
+                $http({
+                    method : 'DELETE',
+                    url : 'catalog/' + this.deleteCourseId
+                }).then(function (response) {
+                    console.log("check response to see if the backend says its all cool");
+                    console.log("then give user either error or confirmation");
+                    console.log(response.status);
+                    if (response.status < 300) {
+                        loadCatalogCourses($scope, $http);
+                        $scope.deleteMessage = "Course successfully deleted.";
+                    }
+                    else {
+                        $scope.deleteMessage = "Problem deleting course.";
+                    }
+                });
+            }
+        });
+
+    </script>
+    </body>
+</html>
