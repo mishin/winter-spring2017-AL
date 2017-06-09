@@ -74,9 +74,10 @@ public class MajorRepositoryController {
                 .save(new MajorInformation("no specific major", new ColorInfo(), newFlowchart));
     }
 
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable String id) {
-        majorRepository.delete(id);
+    @DeleteMapping("major/{major}")
+    public void delete(@PathVariable String major) {
+        MajorInformation majorInformation = findByMajor(major);
+        majorRepository.delete(majorInformation.getId());
     }
 
     @PutMapping("major/{major}/rename/{newMajor}/{newName}")

@@ -60,7 +60,7 @@
                 <a href="#" style="text-align:center;font-weight:bold;" ng-click="addNewFlowchart()">+</a>
             </div>
         </div>
-        <a class="header-item-left" ng-click="savePlannedCourses()">Save</a>
+        <a class="header-item-left" ng-show="selectedFlowchartName != null" ng-click="savePlannedCourses()">Save</a>
         <span style="float:right">
             <a href="/administratorCatalogCourses" class="header-item-left">Edit Catalog Courses</a>
             <p class="header-item-right">Logout admin@calpoly.edu</p>
@@ -74,6 +74,7 @@
                     <div ng-show="selectedFlowchartName != null">
                         <h2>Editing "{{selectedFlowchartName}}" for {{selectedFlowchartMajor}}
                             <img src="http://simpleicon.com/wp-content/uploads/pencil.png" ng-click="editFlowchartName()" style="position:relative;width:32px;height:32px;">
+                            <img src="https://www.shareicon.net/data/2015/08/23/89587_trash_512x512.png" ng-click="deleteCurrentFlowchart()" style="position:relative;width:32px;height:32px;">
                         </h2>
                         <br>
                     </div>
@@ -355,7 +356,7 @@
                 method : 'POST',
                 url : 'majorFlowchart'
             }).then(function (response) {
-                $scope.userFlowcharts.push(response.data);
+                $scope.majorFlowcharts.push(response.data);
             });
         };
 
@@ -388,9 +389,6 @@
                             catalogCourse.year = plannedCourse.year;
                             catalogCourse.quarter = plannedCourse.quarter;
                             catalogCourse.position = plannedCourse.position;
-
-                            console.log($scope.majorCourseIds);
-                            console.log($.inArray(parseInt(plannedCourse.courseId), $scope.majorCourseIds) >= 0);
 
                             if ($.inArray(parseInt(plannedCourse.courseId), $scope.majorCourseIds) >= 0) {
                                 catalogCourse.educationArea = "major";
@@ -450,22 +448,36 @@
                     url : 'majorFlowchart/major/' + $scope.selectedFlowchartMajor,
                     data : $scope.savedCourses
                 }).then(function (response) {
-                    console.log("check response to see if the backend says its all cool");
-                    console.log("then give user either error or confirmation");
-                    console.log(response.status);
                     if (response.status < 300) {
-                        console.log("SUCCESSFUL SAVE");
+                        window.alert("Flowchart saved successfully.");
                     }
                     else {
-                        console.log("FAILURE TO SAVE");
+                        window.alert("There was a problem saving the flowchart.");
                     }
                 });
-                console.log($scope.savedCourses);
             };
 
             $scope.addNewFlowchart = function() {
                 createNewFlowchart($scope, $http);
             };
+
+            $scope.deleteCurrentFlowchart = function() {
+                $http({
+                    method : 'DELETE',
+                    url : 'majorFlowchart/major/' + $scope.selectedFlowchartMajor
+                }).then(function (response) {
+                    if (response.status < 300) {
+                        $scope.selectedFlowchartMajor = null;
+                        $scope.selectedFlowchartName = null;
+                        $scope.majorCourseIds = null;
+                        $scope.supportCourseIds = null;
+                        loadSavedFlowcharts($scope, $http);
+                    }
+                    else {
+                        window.alert("There was a problem deleting the flowchart.");
+                    }
+                });
+            }
 
             $scope.editFlowchartName = function() {
                 var oldMajor = $scope.selectedFlowchartMajor;
