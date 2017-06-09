@@ -424,8 +424,6 @@
                             catalogCourse.year = plannedCourse.year;
                             catalogCourse.quarter = plannedCourse.quarter;
                             catalogCourse.position = plannedCourse.position;
-                            console.log(catalogCourse.courseId);
-                            console.log(catalogCourse.prerequisites);
                             catalogCourse.isValid = "valid";
 
                             if ($.inArray(plannedCourse.courseId, $scope.majorCourseIds) >= 0) {
@@ -450,7 +448,11 @@
                         var courses = quarter.getElementsByClassName("course");
                         angular.forEach(courses, function(course) {
                             $(course).removeClass("valid").removeClass("invalid").addClass("valid");
+                            console.log("prerequisites");
+                            console.log(course.dataset.prerequisites);
                             angular.forEach(course.dataset.prerequisites, function(prereq) {
+                                console.log(seenCourseIds);
+                                console.log(prereq);
                                 if ($.inArray(prereq, seenCourseIds) < 0) {
                                     $(course).removeClass("valid").addClass("invalid");
                                 }
