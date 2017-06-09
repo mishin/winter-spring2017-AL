@@ -11,6 +11,10 @@ body {
     background:#EEEEEE;
 }
 
+img {
+    cursor: pointer;
+}
+
 /* Header CSS */
 
 #header {
@@ -177,13 +181,13 @@ body {
 }
 
 .course.major {
-    background-color: #ffff77;
+    background-color: #ffff99;
 }
 .course.support {
-    background-color: #ffbb99;
+    background-color: #ffcc99;
 }
 .course.ge {
-    background-color: #99ff99;
+    background-color: #ccffcc;
 }
 
 .coursePlaceholder {
