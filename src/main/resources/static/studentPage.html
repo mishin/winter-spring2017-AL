@@ -70,7 +70,7 @@
                     <a href="#">Visual Settings</a>
                 </div>
             </div>
-            <span style="float:right"><p class="header-item-right">Logout {{userEmail}}</p></span>
+            <span style="float:right"><p ng-click="logout()" class="header-item-right">Logout {{userEmail}}</p></span>
         </div>
         <!-- Page Content -->
         <div id="page-content-wrapper">
@@ -356,6 +356,12 @@
     <script>
         var app = angular.module('StudentApp', ['ui.bootstrap']);
 
+        function logout ($scope, $http) {
+            $scope.user = null;
+            delete window.sessionStorage.token;
+            window.location.href = 'https://slocharts.herokuapp.com/';
+        }
+
         function createNewFlowchart($scope, $http, name, plannedCourses){
             console.log($scope.plannedCourses);
             $http({
@@ -540,12 +546,6 @@
                 }
             };
         }
-
-        function logout ($scope, $http) {
-            $scope.user = null;
-            delete window.sessionStorage.token;
-            window.location.replace("https://slocharts.herokuapp.com/")
-        };
 
         function loadCatalogCourses ($scope, $http){
             $http({
