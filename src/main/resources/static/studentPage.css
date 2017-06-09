@@ -120,6 +120,10 @@ img {
     background-color: #ccffcc;
 }
 
+.course.invalid {
+    color: red;
+}
+
 .coursePlaceholder {
     height:100px;
     width:100px;

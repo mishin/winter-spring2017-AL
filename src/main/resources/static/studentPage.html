@@ -128,7 +128,7 @@
                                 <div class="flowchartQuarterColumn">
                                     <h1>Winter</h1>
                                     <ul id="quarter5" class="flowchartQuarter">
-                                        <li class="course {{c.educationArea}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses track by $index | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 2">
+                                        <li class="course {{c.educationArea}} {{c.isValid}}" data-courseId="{{c.courseId}}" ng-repeat="c in plannedCourses track by $index | orderBy:'position'" ng-if="c.year == 2 && c.quarter == 2">
                                             <span class="courseDeleteButton" onclick="$(this).parent().remove();">X</span>
                                             <span>{{c.name}}</span>
                                             <br>
@@ -348,7 +348,6 @@
         var app = angular.module('StudentApp', ['ui.bootstrap']);
 
         function createNewFlowchart($scope, $http, name, plannedCourses){
-            console.log($scope.plannedCourses);
             $http({
                 method : 'POST',
                 url : 'studentFlowchart',
@@ -388,16 +387,12 @@
                 $scope.majorCourseIds = response.data.majorCourseIds;
                 $scope.supportCourseIds = response.data.supportCourseIds;
 
-                console.log($scope.majorCourseIds);
-                console.log($scope.supportCourseIds);
-
                 loadSavedFlowcharts($scope, $http);
                 loadCatalogCourses($scope, $http);
             });
         };
 
         function loadUserInformation($scope, $http){
-            console.log(window.sessionStorage.getItem("token"));
             var token = window.sessionStorage.getItem("token");
 
             $http({
@@ -407,8 +402,6 @@
                     "X-Auth-Token" : token
                 }
             }).then(function (response) {
-                console.log("user id:");
-                console.log(response.data.id);
                 $scope.userId = response.data.id;
                 $scope.userEmail = response.data.email;
                 $scope.userMajor = response.data.major;
@@ -432,6 +425,8 @@
                             catalogCourse.quarter = plannedCourse.quarter;
                             catalogCourse.position = plannedCourse.position;
 
+                            catalogCourse.isValid = "valid";
+
                             if ($.inArray(plannedCourse.courseId, $scope.majorCourseIds) >= 0) {
                                 catalogCourse.educationArea = "major";
                             }
@@ -446,6 +441,23 @@
                         }
                     });
                 });
+
+                setTimeout(function() {
+                    var quarters = document.getElementsByClassName("flowchartQuarter");
+                    var seenCourseIds = [];
+                    angular.forEach(quarters, function(quarter) {
+                        var courses = quarter.getElementsByClassName("course");
+                        angular.forEach(courses, function(course) {
+                            $(course).removeClass("valid").removeClass("invalid").addClass("valid");
+                            if ($.inArray(course.dataset.id, seenCourseIds) < 0) {
+                                $(course).removeClass("valid").addClass("invalid");
+                            }
+                        });
+                        angular.forEach(courses, function(course) {
+                            seenCourseIds.push(course.dataset.id);
+                        });
+                    });
+                }, 1000);
             });
         }
 
@@ -522,18 +534,16 @@
                     console.log("cancelled prompt");
                 } else {
                     $http({
-                    method : 'PUT',
-                    url : 'studentFlowchart/' + $scope.selectedFlowchartId + '/name',
-                    data : newName
+                        method : 'PUT',
+                        url : 'studentFlowchart/' + $scope.selectedFlowchartId + '/name',
+                        data : newName
                     }).then(function (response) {
                         if (response.status < 300) {
                             $scope.selectedFlowchartName = newName;
-                            console.log($scope.userId);
                             $http.get("/studentFlowchart/student/" + $scope.userId)
                             .then(function (response) {
                                 $scope.userFlowcharts = response.data;
                             });
-                            console.log($scope.userId);
                         }
                         else {
                             window.alert("There was a problem renaming your flowchart.");
@@ -549,9 +559,6 @@
                 url : 'catalog'
             }).then(function (response) {
                 $scope.catalogCourses = response.data;
-
-                console.log($scope.majorCourseIds);
-                console.log($scope.catalogCourses);
 
                 angular.forEach($scope.catalogCourses, function(course) {
                     if ($.inArray(parseInt(course.courseId), $scope.majorCourseIds) >= 0) {
@@ -587,7 +594,20 @@
                     connectWith: ".flowchartQuarter",
                     placeholder: "coursePlaceholder",
                     update: function(event, ui) {
-                        console.log("TODO put flowchart validation here");
+                        var quarters = document.getElementsByClassName("flowchartQuarter");
+                        var seenCourseIds = [];
+                        angular.forEach(quarters, function(quarter) {
+                            var courses = quarter.getElementsByClassName("course");
+                            angular.forEach(courses, function(course) {
+                                $(course).removeClass("valid").removeClass("invalid").addClass("valid");
+                                if ($.inArray(course.dataset.id, seenCourseIds) < 0) {
+                                    $(course).removeClass("valid").addClass("invalid");
+                                }
+                            });
+                            angular.forEach(courses, function(course) {
+                                seenCourseIds.push(course.dataset.id);
+                            });
+                        });
                     },
                     stop: function(event, ui) {
                         if ($(ui.item).find(".courseDeleteButton").length == 0)
