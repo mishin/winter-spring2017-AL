@@ -386,6 +386,12 @@
     <script>
         var app = angular.module('StudentApp', ['ui.bootstrap']);
 
+        function logout ($scope, $http) {
+            $scope.user = null;
+            delete window.sessionStorage.token;
+            window.location.href = 'https://slocharts.herokuapp.com/';
+        }
+
         function createNewFlowchart($scope, $http, name, plannedCourses){
             console.log($scope.plannedCourses);
             $http({
@@ -569,12 +575,6 @@
                     });
                 }
             };
-        }
-
-        function logout ($scope, $http) {
-            $scope.user = null;
-            delete window.sessionStorage.token;
-            window.location.replace("https://slocharts.herokuapp.com/")
         }
 
         function loadCatalogCourses ($scope, $http){
