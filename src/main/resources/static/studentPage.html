@@ -480,9 +480,6 @@
                     url : 'studentFlowchart/' + $scope.selectedFlowchartId,
                     data : $scope.savedCourses
                 }).then(function (response) {
-                    console.log("check response to see if the backend says its all cool");
-                    console.log("then give user either error or confirmation");
-                    console.log(response.status);
                     if (response.status < 300) {
                         window.alert("Flowchart saved successfully.");
                     }

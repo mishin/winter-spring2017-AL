@@ -74,6 +74,7 @@
                     <div ng-show="selectedFlowchartName != null">
                         <h2>Editing "{{selectedFlowchartName}}" for {{selectedFlowchartMajor}}
                             <img src="http://simpleicon.com/wp-content/uploads/pencil.png" ng-click="editFlowchartName()" style="position:relative;width:32px;height:32px;">
+                            <img src="https://www.shareicon.net/data/2015/08/23/89587_trash_512x512.png" ng-click="deleteCurrentFlowchart()" style="position:relative;width:32px;height:32px;">
                         </h2>
                         <br>
                     </div>
@@ -432,22 +433,36 @@
                     url : 'majorFlowchart/major/' + $scope.selectedFlowchartMajor,
                     data : $scope.savedCourses
                 }).then(function (response) {
-                    console.log("check response to see if the backend says its all cool");
-                    console.log("then give user either error or confirmation");
-                    console.log(response.status);
                     if (response.status < 300) {
-                        console.log("SUCCESSFUL SAVE");
+                        window.alert("Flowchart saved successfully.");
                     }
                     else {
-                        console.log("FAILURE TO SAVE");
+                        window.alert("There was a problem saving the flowchart.");
                     }
                 });
-                console.log($scope.savedCourses);
             };
 
             $scope.addNewFlowchart = function() {
                 createNewFlowchart($scope, $http);
             };
+
+            $scope.deleteCurrentFlowchart = function() {
+                $http({
+                    method : 'DELETE',
+                    url : 'majorFlowchart/major/' + $scope.selectedFlowchartMajor
+                }).then(function (response) {
+                    if (response.status < 300) {
+                        $scope.selectedFlowchartMajor = null;
+                        $scope.selectedFlowchartName = null;
+                        $scope.majorCourseIds = null;
+                        $scope.supportCourseIds = null;
+                        loadSavedFlowcharts($scope, $http);
+                    }
+                    else {
+                        window.alert("There was a problem deleting the flowchart.");
+                    }
+                });
+            }
 
             $scope.editFlowchartName = function() {
                 var oldMajor = $scope.selectedFlowchartMajor;
