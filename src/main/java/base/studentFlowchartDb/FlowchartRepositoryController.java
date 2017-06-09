@@ -3,7 +3,9 @@ package base.studentFlowchartDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @CrossOrigin
@@ -16,6 +18,31 @@ public class FlowchartRepositoryController {
 
     public FlowchartRepositoryController(FlowchartRepository repository) {
         flowchartRepository = repository;
+    }
+
+    @GetMapping("/aggregate")
+    public List<CourseCountPair> aggregateFlowcharts() {
+        HashMap<String, Integer> map = new HashMap<String, Integer>();
+
+        for (Flowchart item : flowchartRepository.findAll()) {
+            for (PlannedCourse p : item.getPlannedCourses()) {
+                String courseInfo = "Course ID: " + p.getCourseId() + ", " +
+                                    "Year: " + p.getYear() + ", " +
+                                    "Quarter: " + p.getQuarter();
+                if (map.get(courseInfo) == null) {
+                    map.put(courseInfo, 1);
+                }
+                else {
+                    map.put(courseInfo, map.get(courseInfo) + 1);
+                }
+            }
+        }
+
+        AggregatePlannedCourseInformation agg = new AggregatePlannedCourseInformation();
+        for (String key : map.keySet()) {
+            agg.add(key, map.get(key));
+        }
+        return agg.getCourseCountPairs();
     }
 
     @GetMapping

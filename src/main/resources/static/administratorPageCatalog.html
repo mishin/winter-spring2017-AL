@@ -113,6 +113,11 @@
                 </div>
             </div>
         </div>
+        <div style="float: none;">
+            <ul>
+                <li ng-repeat="i in aggregateInfo | orderBy:['courseInfo']">{{i.courseInfo}} - {{i.count}}</li>
+            </ul>
+        </div>
         <!-- /#page-content-wrapper -->
         <!-- /#wrapper -->
 
@@ -221,6 +226,17 @@
                     }
                 });
             }
+
+            $scope.aggregateInfo = [];
+            $http({
+                method : 'GET',
+                url : 'studentFlowchart/aggregate'
+            }).then(function (response) {
+                console.log(response.data);
+                angular.forEach(response.data, function(pair) {
+                    $scope.aggregateInfo.push(pair)
+                });
+            });
         });
 
     </script>
