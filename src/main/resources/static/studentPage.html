@@ -52,7 +52,7 @@
                 <a href="#">Visual Settings</a>
             </div>
         </div>
-        <span style="float:right"><p class="header-item-right">Logout {{email}}</p></span>
+        <span style="float:right"><p ng-click="logout()" class="header-item-right">Logout {{email}}</p></span>
     </div>
     <div id="wrapper">
 
@@ -485,6 +485,12 @@
             };
         }
 
+        function logout ($scope, $http) {
+            $scope.user = null;
+            delete window.sessionStorage.token;
+            window.location.replace("https://slocharts.herokuapp.com/")
+        };
+
         function loadCatalogCourses ($scope, $http){
             $http({
                 method : 'GET',
@@ -499,6 +505,7 @@
             setHeaderFunctions($scope, $http);
             loadCatalogCourses($scope, $http);
         });
+
 
     </script>
     <script>
