@@ -386,12 +386,6 @@
     <script>
         var app = angular.module('StudentApp', ['ui.bootstrap']);
 
-        function logout ($scope, $http) {
-            $scope.user = null;
-            delete window.sessionStorage.token;
-            window.location.href = 'https://slocharts.herokuapp.com/';
-        }
-
         function createNewFlowchart($scope, $http, name, plannedCourses){
             console.log($scope.plannedCourses);
             $http({
@@ -602,6 +596,15 @@
             loadUserInformation($scope, $http);
             setHeaderFunctions($scope, $http);
             loadCatalogCourses($scope, $http);
+
+
+
+            $scope.logout = function() {
+                $scope.user = null;
+                window.sessionStorage.removeItem("token");
+                window.location.href = 'https://slocharts.herokuapp.com/';
+            };
+             
         });
 
 
