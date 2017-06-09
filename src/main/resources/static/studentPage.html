@@ -558,10 +558,6 @@
                 console.log($scope.catalogCourses);
 
                 angular.forEach($scope.catalogCourses, function(course) {
-                    console.log(course.courseId);
-                    console.log($scope.majorCourseIds.length);
-                    console.log($.inArray(course.courseId, $scope.majorCourseIds));
-                    console.log($scope.majorCourseIds);
                     if ($.inArray(parseInt(course.courseId), $scope.majorCourseIds) >= 0) {
                         course.educationArea = "major";
                     }
