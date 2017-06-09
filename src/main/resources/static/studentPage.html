@@ -601,7 +601,7 @@
                             var courses = quarter.getElementsByClassName("course");
                             angular.forEach(courses, function(course) {
                                 $(course).removeClass("valid").removeClass("invalid").addClass("valid");
-                                angular.forEach(course.dataset.prerequisites, function(prereq) {
+                                angular.forEach(JSON.parse(course.dataset.prerequisites), function(prereq) {
                                     if ($.inArray(prereq, seenCourseIds) < 0) {
                                         $(course).removeClass("valid").addClass("invalid");
                                     }
