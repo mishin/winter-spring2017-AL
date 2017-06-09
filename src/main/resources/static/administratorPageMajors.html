@@ -57,7 +57,7 @@
             <p class="header-item-left">Saved Flowcharts</p>
             <div class="dropdown-content">
                 <a href="#" data-flowchartId="{{f.major}}" ng-repeat="f in majorFlowcharts" ng-click="loadPlannedCourses(f.major)">{{f.major}} - {{f.flowchartName}}</a>
-                <a href="#" style="text-align:center;font-weight:bold;">+</a>
+                <a href="#" style="text-align:center;font-weight:bold;" ng-click="addNewFlowchart()">+</a>
             </div>
         </div>
         <a class="header-item-left" ng-click="savePlannedCourses()">Save</a>
@@ -334,6 +334,16 @@
 <script>
         var app = angular.module('AdministratorMajorsApp', ['ui.bootstrap']);
 
+        function createNewFlowchart($scope, $http){
+            console.log($scope.plannedCourses);
+            $http({
+                method : 'POST',
+                url : 'majorFlowchart')
+            }).then(function (response) {
+                $scope.userFlowcharts.push(response.data);
+            });
+        };
+
         function loadSavedFlowcharts($scope, $http){
             $http.get("/majorFlowchart")
             .then(function (response) {
@@ -436,6 +446,10 @@
                     }
                 });
                 console.log($scope.savedCourses);
+            };
+
+            $scope.addNewFlowchart = function() {
+                createNewFlowchart($scope, $http);
             };
 
             $scope.editFlowchartName = function() {
