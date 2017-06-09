@@ -402,9 +402,9 @@
                     "X-Auth-Token" : token
                 }
             }).then(function (response) {
-                $scope.userId = 1;
+                $scope.userId = response.data.id;
                 $scope.userEmail = response.data.email;
-                $scope.userMajor = 'CSC';
+                $scope.userMajor = response.data.major;
 
                 initialLoadOfCatalogAndFlowcharts($scope, $http);
             });
