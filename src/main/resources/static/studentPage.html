@@ -365,8 +365,12 @@
         function createDefaultFlowchart($scope, $http){
             $http.get("/majorFlowchart/major/" + $scope.userMajor)
             .then(function (response) {
-                console.log(response.data);
-                createNewFlowchart($scope, $http, "Default Flowchart", response.data.defaultFlowchart.plannedCourses);
+                if(response.data) {
+                    createNewFlowchart($scope, $http, "Default Flowchart", response.data.defaultFlowchart.plannedCourses);
+                }
+                else {
+                    createNewFlowchart($scope, $http, "Blank Flowchart", []);
+                }
             });
         };
 
