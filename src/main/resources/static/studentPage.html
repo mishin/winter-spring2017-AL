@@ -380,8 +380,15 @@
             });
         };
 
-        function loadColorInfo($scope, $http){
-            console.log("loadColorInfo()");
+        function loadSavedFlowcharts($scope, $http){
+            $http.get("/studentFlowchart/student/" + $scope.userId)
+            .then(function (response) {
+                $scope.userFlowcharts = response.data;
+            });
+        };
+
+        function initialLoadOfCatalogAndFlowcharts($scope, $http){
+
             $http.get("/majorFlowchart/major/" + $scope.userMajor + "/color")
             .then(function (response) {
                 $scope.majorCourseIds = response.data.majorCourseIds;
@@ -389,13 +396,9 @@
 
                 console.log($scope.majorCourseIds);
                 console.log($scope.supportCourseIds);
-            });
-        }
 
-        function loadSavedFlowcharts($scope, $http){
-            $http.get("/studentFlowchart/student/" + $scope.userId)
-            .then(function (response) {
-                $scope.userFlowcharts = response.data;
+                loadSavedFlowcharts($scope, $http);
+                loadCatalogCourses($scope, $http);
             });
         };
 
@@ -416,10 +419,7 @@
                 $scope.userEmail = response.data.email;
                 $scope.userMajor = response.data.major;
 
-                loadColorInfo($scope, $http);
-                loadSavedFlowcharts($scope, $http);
-
-                console.log(response);
+                initialLoadOfCatalogAndFlowcharts($scope, $http);
             });
         }
 
@@ -437,6 +437,7 @@
                             catalogCourse.year = plannedCourse.year;
                             catalogCourse.quarter = plannedCourse.quarter;
                             catalogCourse.position = plannedCourse.position;
+
                             if ($.inArray(plannedCourse.courseId, $scope.majorCourseIds) >= 0) {
                                 catalogCourse.educationArea = "major";
                             }
@@ -558,7 +559,13 @@
             }).then(function (response) {
                 $scope.catalogCourses = response.data;
 
+                console.log($scope.majorCourseIds);
+                console.log($scope.catalogCourses);
+
                 angular.forEach($scope.catalogCourses, function(course) {
+                    console.log(course.courseId);
+                    console.log($.inArray(course.courseId, $scope.majorCourseIds));
+                    console.log($scope.majorCourseIds);
                     if ($.inArray(course.courseId, $scope.majorCourseIds) >= 0) {
                         course.educationArea = "major";
                     }
@@ -575,9 +582,6 @@
         app.controller('StudentCtrl', function ($scope, $http) {
             loadUserInformation($scope, $http);
             setHeaderFunctions($scope, $http);
-            loadCatalogCourses($scope, $http);
-
-
 
             $scope.logout = function() {
                 $scope.user = null;
