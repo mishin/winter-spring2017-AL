@@ -45,3 +45,6 @@ There are a few things that we have accomplished well in this project.
 Overall, we consider the project a success.
 
 ## Key Learnings
+1. Understand the technologies decided upon by the team.
+2. Figure out an effective communication channel for the team early on.
+3. Software architecture patterns allow for quick understanding and identification of code, along with being a proven solution to common problems faced.
