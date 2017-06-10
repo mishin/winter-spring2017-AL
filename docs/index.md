@@ -34,6 +34,10 @@ To manually deploy:
 <img src="images/Administrator Course Edit.png" alt="hi" class="inline"/>
 <img src="images/Administrator Major Edit.png" alt="hi" class="inline"/>  
 
-## Conclusion
+## Conclusion  
+There are a few things that we have accomplished well in this project. 
+1. The flowchart design for the user and administrator closely resembles that of the flowchart design used by Cal Poly. This makes it simpler for users from Cal Poly to recognize the structure of the flowchart and how it can be used.  
+2. The administrator is capable of editing the course catalog and default flowcharts through the application. This reduces the need for an administrator to understand how to make changes to the database and she can instead focus on the main task.  
+Overall, we consider the project a success.
 
 ## Key Learnings
