@@ -1,5 +1,9 @@
 # SLO Chart - Alpha Leader
 
+## Github Page
+
+https://cpe308-309.github.io/winter-spring2017-AL/
+
 ## 1. Description
 
 Using flowcharts to introduce a dynamic and user friendly interface in order to optimize student class planning. Features will be more intuitive and numerous allowing for better schedule customization.
