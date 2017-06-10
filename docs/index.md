@@ -21,6 +21,7 @@ To manually deploy:
 ## Administrate the Project
 
 ## Visuals
+<img src="images/User\ Login.png" alt="hi" class="inline"/>
 
 ## Conclusion
 
