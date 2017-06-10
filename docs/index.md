@@ -3,6 +3,7 @@
 A flowcharting application for students of Cal Poly, San Luis Obispo. The application can be accessed at https://slocharts.herokuapp.com/.
 
 ## Class Diagrams  
+[![slochart_uml_diagram.png](https://s11.postimg.org/3vd9haj4j/slochart_uml_diagram.png)](https://postimg.org/image/n0gir1xsf/)
 
 ## Heroku Depoly Instructions
 The project is setup to allow both automatic and manual deployment of the project via Heroku.  
