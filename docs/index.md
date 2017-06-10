@@ -27,7 +27,7 @@ To manually deploy:
 <img src="images/User Login.png" alt="hi" class="inline"/>  
 
 ### Student Flowchart Edit  
-<img src="images/Sutdent Flowchart Edit.png" alt="hi" class="inline"/>  
+<img src="images/Student Flowchart Edit.png" alt="hi" class="inline"/>  
 
 ### Administrator Course and Major Edit  
 <img src="images/Administrator Course Edit.png" alt="hi" class="inline"/>
