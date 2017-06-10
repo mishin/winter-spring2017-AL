@@ -1,36 +1,15 @@
-# Alpha Leader Wiki  
+# SLO Chart
 
-This wiki contains information regarding the development of the SLOChart project.
+A flowcharting application for students of Cal Poly, San Luis Obispo.
 
-## Milestones  
-**Milestone 1:** Project tools and wiki setup  
-  
-**Milestone 2:** Requirement rough draft created  
-https://github.com/cpe308-309/winter-spring2017-AL/wiki/Milestone-2:-Requirement-Rough-Draft  
-  
-**Milestone 3:** Requirements specification document completed  
-https://github.com/cpe308-309/winter-spring2017-AL/wiki/Milestone-3:-Requirements-Specification-Document  
-  
-**Milestone 4:** Analysis models assembled  
-https://github.com/cpe308-309/winter-spring2017-AL/wiki/Milestone-4:-Analysis-Models  
-  
-**Milestone 5:** Prototype v1.0 tagged  
-https://github.com/cpe308-309/winter-spring2017-AL/releases  
+## Class Diagrams  
 
-**Milestone 6:** Prototype v2.0 tagged
+## Heroku Depoly Instructions
 
-https://github.com/cpe308-309/winter-spring2017-AL/releases/tag/v2.0  
+## Administrate the Project
 
-## Other Resources
-**SLOChart Goals:**
+## Visuals
 
-https://github.com/cpe308-309/winter-spring2017-AL/wiki/SLOChart-Goals
+## Conclusion
 
-**FAQ Page:**
-
-https://github.com/cpe308-309/winter-spring2017-AL/wiki/FAQ-Page
-
-**Github Issues Rules:**
-
-https://github.com/cpe308-309/winter-spring2017-AL/wiki/Github-Issue-Rules
-
+## Key Learnings
