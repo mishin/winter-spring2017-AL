@@ -19,7 +19,10 @@ To manually deploy:
 4. Select "Deploy Branch".
 5. Heroku will perform a deployment of the selected branch.
 
-## Administrate the Project
+## Administrate the Project  
+
+To become an administrator for the project, you will need a Github and Heroku account. Afterwards, contact one of the owners of the project. These are the Github usernames of the owners: leklein, alexbcastana, vivian46959, cevenhub, and brady-aiello.  
+If the owner approves, then you will receive two separate emails, one for accessing the project on Github and one for accessing the Heroku app. Accept the requests and you will be able to begin administraing for SLO Chart.
 
 ## Visuals  
 
