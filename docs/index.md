@@ -1,12 +1,10 @@
 # SLO Chart
 
-A flowcharting application for students of Cal Poly, San Luis Obispo.
+A flowcharting application for students of Cal Poly, San Luis Obispo. The application can be accessed at https://slocharts.herokuapp.com/.
 
 ## Class Diagrams  
 
 ## Heroku Depoly Instructions
-The application can be accessed at https://slocharts.herokuapp.com/.
-
 The project is setup to allow both automatic and manual deployment of the project via Heroku.  
 To automatically deploy:  
 1. Make a change to the project's code.
